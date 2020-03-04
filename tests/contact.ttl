@@ -5,6 +5,6 @@
           a               vcard:Organization ;
           vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
           vcard:hasOrganizationName "Digitaliseringsdirektoratet"@nb,
-                                    "Norwegian Norwegian Digitalisation Agency"@en ;
+                                    "Norwegian Digitalisation Agency"@en ;
           vcard:hasURL <https://digdir.no>
           .
