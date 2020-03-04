@@ -1,0 +1,17 @@
+{
+	"concept": {
+		"identifier": "http://example.com/concepts/1",
+		"term": {
+			"en": "concept",
+			"nb": "begrep"
+		},
+		"definition": {
+			"en": "an abstract or generic idea generalized from particular instances",
+			"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
+		},
+		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
+		"contactpoint": {
+			"email": "informasjonsforvaltning@digdir.no"
+		}
+	}
+}
