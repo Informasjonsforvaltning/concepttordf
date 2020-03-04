@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="concepttordf-stigbd",  # Replace with your own username
-    version="0.0.1",
+    version="0.0.3",
     author="Stig B. Dørmænen",
     author_email="stigbd@gmail.com",
     description="A simple library to parse openAPI specs",
