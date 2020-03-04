@@ -4,7 +4,9 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 
 ## Usage
 ### Install
-
+```
+pip install -i https://test.pypi.org/simple/ concepttordf-stigbd==0.0.1
+```
 ### Getting started
 
 ```
