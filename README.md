@@ -1,18 +1,32 @@
 # concepttordf
 
-A small Python library to work with an openAPI specification.
-
-At this moment we support all 3.0.x versions of (The OpenAPI specification)[https://github.com/OAI/OpenAPI-Specification]
-
-Roadmap:
-- a method for validating the specification  
-- properties for most useful attributes of spec such as:
-  - content types in responses
-  - server urls
-  - schema objects
+A small Python library for mapping a concept collection to the (skos-ap-no specification)[https://doc.difi.no/data/begrep-skos-ap-no/].
 
 ## Usage
-TODO
+### Install
+
+### Getting started
+
+```
+from concepttordf.concept import Concept
+
+concept = Concept()
+concept.identifier = "http://example.com/concepts/1"
+concept.term = {}
+concept.term['en'] = "concept"
+concept.term['nb'] = "begrep"
+concept.definition = {}
+concept.definition['en'] = (
+    "an abstract or generic idea generalized from particular instances"
+    )
+concept.definition['nb'] = (
+    "mental forestilling om et konkret eller abstrakt"
+    "fenomen i den virkelige verden"
+    )
+concept.publisher = "https://example.com/publishers/1"
+
+print(concept.to_rdf().decode())
+```
 
 
 ## Development
