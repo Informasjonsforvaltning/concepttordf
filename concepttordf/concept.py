@@ -12,6 +12,13 @@ DCAT = Namespace('http://www.w3.org/ns/dcat#')
 class Concept:
     """A class representing a concept"""
 
+    def __init__(self, concept: dict = None):
+        if concept is not None:
+            self._identifier = concept['identifier']
+            self._term = concept['term']
+            self._definition = concept['definition']
+            self._contactpoint = concept['contactpoint']
+
     @property
     def identifier(self) -> str:
         return self._identifier

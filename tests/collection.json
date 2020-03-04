@@ -1,0 +1,84 @@
+{
+	"collection": {
+		"identifier": "http://example.com/collections/1",
+		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/991825827",
+		"name": {
+			"nb": "Digdir sin begrepssamling",
+			"en": "The concept collection of the Norwegian Digitalisation Agency"
+		},
+		"description": {
+			"nb": "Begrepssamlingen inneholder testbegreper",
+			"en": "The collection is a set of test concepts"
+		},
+		"contactpoint": {
+			"name": {
+				"nb": "Digitaliseringsdirektoratet",
+				"en": "Norwegian Digitalisation Agency"
+			},
+			"email": "informasjonsforvaltning@digdir.no",
+			"url": "https://digdir.no"
+		},
+		"members": [
+			{
+				"identifier": "http://example.com/concepts/1",
+				"term": {
+					"en": "concept",
+					"nb": "begrep"
+				},
+				"definition": {
+					"en": "an abstract or generic idea generalized from particular instances",
+					"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
+				},
+				"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
+				"contactpoint": {
+					"name": {
+						"nb": "Digitaliseringsdirektoratet",
+						"en": "Norwegian Digitalisation Agency"
+					},
+					"email": "informasjonsforvaltning@digdir.no",
+					"url": "https://digdir.no"
+				}
+			},
+			{
+				"identifier": "http://example.com/concepts/2",
+				"term": {
+					"en": "concept",
+					"nb": "begrep"
+				},
+				"definition": {
+					"en": "an abstract or generic idea generalized from particular instances",
+					"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
+				},
+				"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
+				"contactpoint": {
+					"name": {
+						"nb": "Digitaliseringsdirektoratet",
+						"en": "Norwegian Digitalisation Agency"
+					},
+					"email": "informasjonsforvaltning@digdir.no",
+					"url": "https://digdir.no"
+				}
+			},
+			{
+				"identifier": "http://example.com/concepts/3",
+				"term": {
+					"en": "concept",
+					"nb": "begrep"
+				},
+				"definition": {
+					"en": "an abstract or generic idea generalized from particular instances",
+					"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
+				},
+				"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
+				"contactpoint": {
+					"name": {
+						"nb": "Digitaliseringsdirektoratet",
+						"en": "Norwegian Digitalisation Agency"
+					},
+					"email": "informasjonsforvaltning@digdir.no",
+					"url": "https://digdir.no"
+				}
+			}
+		]
+	}
+}
