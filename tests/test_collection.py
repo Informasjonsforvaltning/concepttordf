@@ -1,5 +1,6 @@
 from concepttordf.collection import Collection
 from concepttordf.concept import Concept
+from concepttordf.contact import Contact
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
@@ -14,7 +15,7 @@ def test_collection_to_rdf_should_return_skos_collection():
     collection.name = _collection['name']
     collection.description = _collection['description']
     collection.publisher = _collection['publisher']
-    collection.contactpoint = _collection['contactpoint']
+    collection.contactpoint = Contact(_collection['contactpoint'])
     collection.members = []
     for concept in _collection['members']:
         collection.members.append(Concept(concept))
