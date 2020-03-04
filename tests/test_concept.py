@@ -1,4 +1,4 @@
-from concepttordf.concepttordf import Concept
+from concepttordf.concept import Concept
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
