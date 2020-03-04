@@ -1,0 +1,11 @@
+{
+	"contact": {
+		"identifier": "http://example.com/contacts/1",
+		"name": {
+			"nb": "Digitaliseringsdirektoratet",
+			"en": "Norwegian Norwegian Digitalisation Agency"
+		},
+		"email": "informasjonsforvaltning@digdir.no",
+		"url": "https://digdir.no"
+	}
+}
