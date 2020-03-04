@@ -60,6 +60,8 @@ Will print the concept according to the specification:
 % cd concepttordf
 % pipenv install
 % pipenv shell
+% pipenv shell
+% pipenv install --dev -e .
 ```
 ### Run all tests
 ```
