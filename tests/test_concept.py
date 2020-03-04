@@ -1,4 +1,5 @@
 from concepttordf.concept import Concept
+from concepttordf.contact import Contact
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
@@ -13,7 +14,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.term = _concept['term']
     concept.definition = _concept['definition']
     concept.publisher = _concept['publisher']
-    concept.contactpoint = _concept['contactpoint']
+    concept.contactpoint = Contact(_concept['contactpoint'])
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')

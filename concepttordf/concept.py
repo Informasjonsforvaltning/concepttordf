@@ -44,12 +44,12 @@ class Concept:
         self._definition = definition
 
     @property
-    def contactpoint(self) -> dict:
+    def contactpoint(self) -> Contact:
         return self._contactpoint
 
     @contactpoint.setter
-    def contactpoint(self, contactpoint: dict):
-        self._contactpoint = contactpoint
+    def contactpoint(self, contact: Contact):
+        self._contactpoint = contact
 
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
@@ -97,7 +97,7 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
 
     # contactPoint
     if hasattr(concept, 'contactpoint'):
-        contact = Contact(concept.contactpoint)
+        contact = concept.contactpoint
         contactPoint = BNode()
         for s, p, o in contact.to_graph().triples((None, None, None)):
             g.add((contactPoint, p, o))
