@@ -1,6 +1,6 @@
 # concepttordf
 
-A small Python library for mapping a concept collection to the (skos-ap-no specification)[https://doc.difi.no/data/begrep-skos-ap-no/].
+A small Python library for mapping a concept collection to the [skos-ap-no specification](https://doc.difi.no/data/begrep-skos-ap-no/).
 
 ## Usage
 ### Install
