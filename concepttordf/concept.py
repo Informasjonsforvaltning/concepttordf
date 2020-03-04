@@ -1,10 +1,12 @@
 from rdflib import Graph, Literal, BNode, Namespace, RDF, RDFS, URIRef
+from .contact import Contact
 
 DCT = Namespace('http://purl.org/dc/terms/')
 SKOSXL = Namespace('http://www.w3.org/2008/05/skos-xl#')
 VCARD = Namespace('http://www.w3.org/2006/vcard/ns#')
 SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
 SKOSNO = Namespace('http://difi.no/skosno#')
+DCAT = Namespace('http://www.w3.org/ns/dcat#')
 
 
 class Concept:
@@ -61,6 +63,7 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
     g.bind('skosxl', SKOSXL)
     g.bind('vcard', VCARD)
     g.bind('skosno', SKOSNO)
+    g.bind('dcat', DCAT)
 
     g.add((URIRef(concept.identifier), RDF.type, SKOS.Concept))
 
@@ -84,5 +87,14 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
     # publisher
     g.add((URIRef(concept.identifier), DCT.publisher,
            URIRef(concept.publisher)))
+
+    # contactPoint
+    if hasattr(concept, 'contactpoint'):
+        contact = Contact(concept.contactpoint)
+        contactPoint = BNode()
+        for s, p, o in contact.to_graph().triples((None, None, None)):
+            g.add((contactPoint, p, o))
+        g.add((URIRef(concept.identifier), DCAT.contactPoint,
+               contactPoint))
 
     return g

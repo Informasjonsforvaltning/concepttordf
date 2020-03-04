@@ -11,7 +11,12 @@
 		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
 		"contactpoint": {
-			"email": "informasjonsforvaltning@digdir.no"
+			"name": {
+				"nb": "Digitaliseringsdirektoratet",
+				"en": "Norwegian Norwegian Digitalisation Agency"
+			},
+			"email": "informasjonsforvaltning@digdir.no",
+			"url": "https://digdir.no"
 		}
 	}
 }

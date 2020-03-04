@@ -10,12 +10,18 @@ SKOSNO = Namespace('http://difi.no/skosno#')
 class Contact:
     """A class representing a contact """
 
+    def __init__(self, contact: dict = None):
+        if contact is not None:
+            self._name = contact['name']
+            self._email = contact['email']
+            self._url = contact['url']
+
     @property
-    def name(self) -> str:
+    def name(self) -> dict:
         return self._name
 
     @name.setter
-    def name(self, name: str):
+    def name(self, name: dict):
         self._name = name
 
     @property
@@ -34,11 +40,15 @@ class Contact:
     def url(self, url: str):
         self._url = url
 
+    def to_graph(self) -> Graph:
+
+        return _add_contact_to_graph(self)
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the contact to rdf and returns a serialization
            as a string according to format"""
 
-        _g = _add_contact_to_graph(self)
+        _g = self.to_graph()
 
         return _g.serialize(format=format, encoding='utf-8')
 

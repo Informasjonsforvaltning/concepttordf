@@ -13,14 +13,17 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.term = _concept['term']
     concept.definition = _concept['definition']
     concept.publisher = _concept['publisher']
+    concept.contactpoint = _concept['contactpoint']
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
+    # _dump_turtle(g1)
     g2 = Graph().parse("tests/concept.ttl", format='turtle', encoding='utf-8')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
-        _dump_diff(g1, g2)
+        # _dump_diff(g1, g2)
+        pass
     assert _isomorphic
 
 
