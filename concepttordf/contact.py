@@ -12,10 +12,14 @@ class Contact:
 
     def __init__(self, contact: dict = None):
         if contact is not None:
-            self._name = contact['name']
-            self._email = contact['email']
-            self._url = contact['url']
-            self._telephone = contact['telephone']
+            if 'name' in contact:
+                self._name = contact['name']
+            if 'email' in contact:
+                self._email = contact['email']
+            if 'url' in contact:
+                self._url = contact['url']
+            if 'telephone' in contact:
+                self._telephone = contact['telephone']
 
     @property
     def name(self) -> dict:
