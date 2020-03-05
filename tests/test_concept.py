@@ -28,7 +28,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     assert _isomorphic
 
 
-def test_compolete_concept_to_rdf_should_return_skos_concept():
+def test_complete_concept_to_rdf_should_return_skos_concept():
     with open('./tests/completeconcept.json') as json_file:
         data = json.load(json_file)
         _concept = data['concept']
