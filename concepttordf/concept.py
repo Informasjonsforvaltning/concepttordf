@@ -77,6 +77,14 @@ class Concept:
     def modified(self, modified: date):
         self._modified = modified
 
+    @property
+    def example(self) -> dict:
+        return self._example
+
+    @example.setter
+    def example(self, example: dict):
+        self._example = example
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
            as a string according to format"""
@@ -151,5 +159,11 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
     if hasattr(concept, 'modified'):
         g.add((URIRef(concept.identifier), DCT.modified,
                Literal(concept.modified, datatype=XSD.date)))
+
+    # example
+    if hasattr(concept, 'example'):
+        for key in concept.example:
+            g.add((URIRef(concept.identifier), SKOS.example,
+                   Literal(concept.example[key], lang=key)))
 
     return g

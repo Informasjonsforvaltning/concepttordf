@@ -22,6 +22,11 @@
 			"nn": "termonologi"
 		},
 		"modified": "2020-03-05",
+		"example": {
+			"en": "The compleconcept's natural habitat is very seldom to find on planet earth",
+			"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
+			"nn": "Komplettomgrepet fins naturlig svært få stadar på jorda"
+		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/555111290",
 		"contactpoint": {
 			"name": {
