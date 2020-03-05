@@ -22,7 +22,7 @@ def test_collection_to_rdf_should_return_skos_collection():
 
     g1 = Graph()
     g1.parse(data=collection.to_rdf(), format='turtle')
-    _dump_turtle(g1)
+    # _dump_turtle(g1)
     g2 = Graph().parse("tests/collection.ttl",
                        format='turtle', encoding='utf-8')
 
