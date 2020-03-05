@@ -40,6 +40,7 @@ def test_compolete_concept_to_rdf_should_return_skos_concept():
     concept.contactpoint = Contact(_concept['contactpoint'])
     concept.alternativeterm = _concept['alternativeterm']
     concept.subject = _concept['subject']
+    concept.modified = _concept['modified']
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')

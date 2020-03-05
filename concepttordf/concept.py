@@ -1,4 +1,5 @@
 from rdflib import Graph, Literal, BNode, Namespace, RDF, RDFS, URIRef
+from datetime import date
 from .contact import Contact
 
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -7,6 +8,7 @@ VCARD = Namespace('http://www.w3.org/2006/vcard/ns#')
 SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
 SKOSNO = Namespace('http://difi.no/skosno#')
 DCAT = Namespace('http://www.w3.org/ns/dcat#')
+XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 
 
 class Concept:
@@ -67,6 +69,14 @@ class Concept:
     def contactpoint(self, contact: Contact):
         self._contactpoint = contact
 
+    @property
+    def modified(self) -> date:
+        return self._modified
+
+    @modified.setter
+    def modified(self, modified: date):
+        self._modified = modified
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
            as a string according to format"""
@@ -87,6 +97,7 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
     g.bind('vcard', VCARD)
     g.bind('skosno', SKOSNO)
     g.bind('dcat', DCAT)
+    g.bind('xsd', XSD)
 
     g.add((URIRef(concept.identifier), RDF.type, SKOS.Concept))
 
@@ -135,5 +146,10 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
         for key in concept.subject:
             g.add((URIRef(concept.identifier), DCT.subject,
                    Literal(concept.subject[key], lang=key)))
+
+    # modified
+    if hasattr(concept, 'modified'):
+        g.add((URIRef(concept.identifier), DCT.modified,
+               Literal(concept.modified, datatype=XSD.date)))
 
     return g
