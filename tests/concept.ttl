@@ -22,5 +22,6 @@
                                         vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
                                         vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
                                                                   "Digitaliseringsdirektoratet"@nb ;
-                                        vcard:hasURL <https://digdir.no>
+                                        vcard:hasURL <https://digdir.no> ;
+                                        vcard:hasTelephone <tel:12345678>
                                       ] .
