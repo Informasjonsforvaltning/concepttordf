@@ -33,6 +33,14 @@ class Contact:
         self._email = email
 
     @property
+    def telephone(self) -> str:
+        return self._telephone
+
+    @telephone.setter
+    def telephone(self, telephone: str):
+        self._telephone = telephone
+
+    @property
     def url(self) -> str:
         return self._url
 
@@ -77,6 +85,12 @@ def _add_contact_to_graph(contact: Contact) -> Graph:
     if hasattr(contact, 'email'):
         g.add((_contact, VCARD.hasEmail,
                URIRef('mailto:' + contact.email)))
+
+    # telephone
+    if hasattr(contact, 'telephone'):
+        g.add((_contact, VCARD.hasTelephone,
+               URIRef('tel:' + contact.telephone)))
+
     # url
     if contact.url:
         g.add((_contact, VCARD.hasURL,

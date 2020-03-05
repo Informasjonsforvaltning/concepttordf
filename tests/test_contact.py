@@ -13,6 +13,7 @@ def test_contact_to_rdf_should_return_skos_contact():
     contact.name = _contact['name']
     contact.email = _contact['email']
     contact.url = _contact['url']
+    contact.telephone = _contact['telephone']
 
     g1 = Graph()
     g1.parse(data=contact.to_rdf(), format='turtle')
@@ -33,6 +34,7 @@ def test_contact_without_id_to_rdf_should_return_skos_contact():
     contact.name = _contact['name']
     contact.email = _contact['email']
     contact.url = _contact['url']
+    contact.telephone = _contact['telephone']
 
     g1 = Graph()
     g1.parse(data=contact.to_rdf(), format='turtle')
