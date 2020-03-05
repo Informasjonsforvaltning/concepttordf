@@ -93,7 +93,7 @@ def _add_contact_to_graph(contact: Contact) -> Graph:
                URIRef('tel:' + contact.telephone)))
 
     # url
-    if contact.url:
+    if hasattr(contact, 'url'):
         g.add((_contact, VCARD.hasURL,
                URIRef(contact.url)))
 
