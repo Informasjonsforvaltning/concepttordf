@@ -15,6 +15,7 @@ class Contact:
             self._name = contact['name']
             self._email = contact['email']
             self._url = contact['url']
+            self._telephone = contact['telephone']
 
     @property
     def name(self) -> dict:
