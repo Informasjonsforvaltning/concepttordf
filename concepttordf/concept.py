@@ -85,6 +85,14 @@ class Concept:
     def example(self, example: dict):
         self._example = example
 
+    @property
+    def bruksområde(self) -> dict:
+        return self._bruksområde
+
+    @bruksområde.setter
+    def bruksområde(self, bruksområde: dict):
+        self._bruksområde = bruksområde
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
            as a string according to format"""
@@ -165,5 +173,12 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
         for key in concept.example:
             g.add((URIRef(concept.identifier), SKOS.example,
                    Literal(concept.example[key], lang=key)))
+
+    # bruksområde
+    if hasattr(concept, 'bruksområde'):
+        for key in concept.bruksområde:
+            for b in concept.bruksområde[key]:
+                g.add((URIRef(concept.identifier), SKOSNO.bruksområde,
+                       Literal(b, lang=key)))
 
     return g

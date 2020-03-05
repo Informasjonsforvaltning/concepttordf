@@ -29,7 +29,7 @@
                                                                 ] ;
                                         skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i test-sammenheng"@nb
                                       ] ;
-        skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjoner"@nn , "filosofiske diskusjoner"@nb , "catalgoing"@en ;
+        skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjonar"@nn , "filosofiske diskusjoner"@nb , "cataloging"@en ;
         dct:modified                  "2020-03-05"^^xsd:date ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/555111290> ;
         dct:subject                   "termonologi"@nb , "terminology"@en , "termonologi"@nn ;

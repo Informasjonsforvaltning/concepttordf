@@ -27,6 +27,11 @@
 			"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
 			"nn": "Komplettomgrepet fins naturlig svært få stadar på jorda"
 		},
+		"bruksområde": {
+			"en": ["cataloging", "philosophizing"],
+			"nb": ["katalogpraksis", "filosofiske diskusjoner"],
+			"nn": ["katalogpraksis", "filosofiske diskusjonar"]
+		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/555111290",
 		"contactpoint": {
 			"name": {
