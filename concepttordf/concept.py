@@ -9,6 +9,7 @@ SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
 SKOSNO = Namespace('http://difi.no/skosno#')
 DCAT = Namespace('http://www.w3.org/ns/dcat#')
 XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
+SCHEMA = Namespace('http://schema.org/')
 
 
 class Concept:
@@ -101,6 +102,16 @@ class Concept:
     def bruksområde(self, bruksområde: dict):
         self._bruksområde = bruksområde
 
+    @property
+    def validinperiod(self) -> dict:
+        return self._validinperiod
+
+    @validinperiod.setter
+    def validinperiod(self, validinperiod: dict):
+        self._validinperiod = validinperiod
+
+# ----------------------------------------------
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
            as a string according to format"""
@@ -122,6 +133,7 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
     g.bind('skosno', SKOSNO)
     g.bind('dcat', DCAT)
     g.bind('xsd', XSD)
+    g.bind('schema', SCHEMA)
 
     g.add((URIRef(concept.identifier), RDF.type, SKOS.Concept))
 
@@ -198,5 +210,19 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
             for b in concept.bruksområde[key]:
                 g.add((URIRef(concept.identifier), SKOSNO.bruksområde,
                        Literal(b, lang=key)))
+
+    # PeriodOfTime
+    if hasattr(concept, 'validinperiod'):
+        periodOfTime = BNode()
+        g.add((periodOfTime, RDF.type, DCT.PeriodOfTime))
+        if 'startdate' in concept.validinperiod:
+            g.add((periodOfTime, SCHEMA.startDate,
+                   Literal(concept.validinperiod['startdate'],
+                           datatype=XSD.date)))
+        if 'enddate' in concept.validinperiod:
+            g.add((periodOfTime, SCHEMA.endDate,
+                   Literal(concept.validinperiod['enddate'],
+                           datatype=XSD.date)))
+        g.add((URIRef(concept.identifier), DCT.temporal, periodOfTime))
 
     return g
