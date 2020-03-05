@@ -36,6 +36,22 @@ class Concept:
         self._term = term
 
     @property
+    def alternativeterm(self) -> dict:
+        return self._alternativeterm
+
+    @alternativeterm.setter
+    def alternativeterm(self, alternativeterm: dict):
+        self._alternativeterm = alternativeterm
+
+    @property
+    def subject(self) -> dict:
+        return self._subject
+
+    @subject.setter
+    def subject(self, subject: dict):
+        self._subject = subject
+
+    @property
     def definition(self) -> dict:
         return self._definition
 
@@ -103,5 +119,21 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
             g.add((contactPoint, p, o))
         g.add((URIRef(concept.identifier), DCAT.contactPoint,
                contactPoint))
+
+    # altLabel
+    if hasattr(concept, 'alternativeterm'):
+        altLabel = BNode()
+        g.add((altLabel, RDF.type, SKOSXL.Label))
+        for key in concept.alternativeterm:
+            for l in concept.alternativeterm[key]:
+                g.add((altLabel, SKOSXL.literalForm,
+                       Literal(l, lang=key)))
+        g.add((URIRef(concept.identifier), SKOSXL.altLabel, altLabel))
+
+    # subject
+    if hasattr(concept, 'subject'):
+        for key in concept.subject:
+            g.add((URIRef(concept.identifier), DCT.subject,
+                   Literal(concept.subject[key], lang=key)))
 
     return g

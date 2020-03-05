@@ -1,0 +1,35 @@
+{
+	"concept": {
+		"identifier": "http://example.com/concepts/4",
+		"term": {
+			"en": "completeconcept",
+			"nb": "komplettbegrep",
+			"nn": "komplettomgrep"
+		},
+		"alternativeterm": {
+			"en": ["superconcept", "totalconcept"],
+			"nb": ["superbegrep", "totalbegrep"],
+			"nn": ["superomgrep", "totalomgrep"]
+		},
+		"definition": {
+			"en": "a concept where all attribtues has value",
+			"nb": "et begrep som har utfylt alle felter",
+			"nn": "eit omgrep som har utfylt alle felt"
+		},
+		"subject": {
+			"en": "terminology",
+			"nb": "termonologi",
+			"nn": "termonologi"
+		},
+		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/555111290",
+		"contactpoint": {
+			"name": {
+				"nb": "Digitaliseringsdirektoratet",
+				"en": "Norwegian Digitalisation Agency"
+			},
+			"email": "sbd@example.com",
+			"url": "https://digdir.no",
+			"telephone": "12345678"
+		}
+	}
+}

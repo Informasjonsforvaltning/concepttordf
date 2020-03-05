@@ -1,0 +1,56 @@
+@prefix schema: <http://schema.org/> .
+@prefix iso:   <http://iso.org/25012/2008/dataquality/> .
+@prefix spdx:  <http://spdx.org/rdf/terms#> .
+@prefix adms:  <http://www.w3.org/ns/adms#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix skosno: <http://difi.no/skosno#> .
+@prefix dqv:   <http://www.w3.org/ns/dqv#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xkos:  <http://rdf-vocabulary.ddialliance.org/xkos#> .
+@prefix oa:    <http://www.w3.org/ns/prov#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcatno: <http://difi.no/dcatno#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+
+<http://example.com/concepts/4>
+        a                             skos:Concept ;
+        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+                                        rdfs:label              "a concept where all attribtues has value"@en , "eit omgrep som har utfylt alle felt"@nn , "et begrep som har utfylt alle felter"@nb ;
+                                        skosno:forholdTilKilde  skosno:egendefinert ;
+                                        skosno:omfang           [ rdfs:label    "begreper"@nb ;
+                                                                  rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts>
+                                                                ] ;
+                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i test-sammenheng"@nb
+                                      ] ;
+        skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjoner"@nn , "filosofiske diskusjoner"@nb , "catalgoing"@en ;
+        dct:modified                  "2020-03-05"^^xsd:date ;
+        dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/555111290> ;
+        dct:subject                   "termonologi"@nb , "terminology"@en , "termonologi"@nn ;
+        dct:temporal                  [ a                 dct:PeriodOfTime ;
+                                        schema:endDate    "9999-03-30"^^xsd:date ;
+                                        schema:startDate  "2020-03-03"^^xsd:date
+                                      ] ;
+        skos:example                  "Komplettbegrepet fins naturlig svært få steder på jorda"@nb , "Komplettomgrepet fins naturlig svært få stadar på jorda"@nn , "The compleconcept's natural habitat is very seldom to find on planet earth"@en ;
+        skosxl:altLabel               [ a                   skosxl:Label ;
+                                        skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb
+                                      ] ;
+        skosxl:hiddenLabel            [ a                   skosxl:Label ;
+                                        skosxl:literalForm  "subconcept"@en , "partconcept"@en , "subomgrep"@nn , "delvisomgrep"@nn , "subbegrep"@nb , "delvisbegrep"@nb
+                                      ] ;
+        skosxl:prefLabel              [ a                   skosxl:Label ;
+                                        skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb
+                                      ] ;
+        dcat:contactPoint             [ a               vcard:Organization ;
+                                        vcard:hasEmail  <mailto:sbd@example.com> ;
+                                        vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
+                                                                  "Digitaliseringsdirektoratet"@nb ;
+                                        vcard:hasURL <https://digdir.no> ;
+                                        vcard:hasTelephone <tel:12345678>
+                                      ] .
