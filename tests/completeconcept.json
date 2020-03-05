@@ -11,6 +11,11 @@
 			"nb": ["superbegrep", "totalbegrep"],
 			"nn": ["superomgrep", "totalomgrep"]
 		},
+		"hiddenterm": {
+			"en": ["completecocnept"],
+			"nb": ["kompletbegrep"],
+			"nn": ["kompletomgrep"]
+		},
 		"definition": {
 			"en": "a concept where all attribtues has value",
 			"nb": "et begrep som har utfylt alle felter",

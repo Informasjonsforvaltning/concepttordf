@@ -35,10 +35,11 @@ def test_compolete_concept_to_rdf_should_return_skos_concept():
     concept = Concept()
     concept.identifier = _concept['identifier']
     concept.term = _concept['term']
+    concept.alternativeterm = _concept['alternativeterm']
+    concept.hiddenterm = _concept['hiddenterm']
     concept.definition = _concept['definition']
     concept.publisher = _concept['publisher']
     concept.contactpoint = Contact(_concept['contactpoint'])
-    concept.alternativeterm = _concept['alternativeterm']
     concept.subject = _concept['subject']
     concept.modified = _concept['modified']
     concept.example = _concept['example']

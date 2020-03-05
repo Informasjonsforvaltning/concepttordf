@@ -46,6 +46,14 @@ class Concept:
         self._alternativeterm = alternativeterm
 
     @property
+    def hiddenterm(self) -> dict:
+        return self._hiddenterm
+
+    @hiddenterm.setter
+    def hiddenterm(self, hiddenterm: dict):
+        self._hiddenterm = hiddenterm
+
+    @property
     def subject(self) -> dict:
         return self._subject
 
@@ -156,6 +164,16 @@ def _add_concept_to_graph(concept: Concept) -> Graph:
                 g.add((altLabel, SKOSXL.literalForm,
                        Literal(l, lang=key)))
         g.add((URIRef(concept.identifier), SKOSXL.altLabel, altLabel))
+
+    # hiddenLabel
+    if hasattr(concept, 'hiddenterm'):
+        hiddenLabel = BNode()
+        g.add((hiddenLabel, RDF.type, SKOSXL.Label))
+        for key in concept.hiddenterm:
+            for l in concept.hiddenterm[key]:
+                g.add((hiddenLabel, SKOSXL.literalForm,
+                       Literal(l, lang=key)))
+        g.add((URIRef(concept.identifier), SKOSXL.hiddenLabel, hiddenLabel))
 
     # subject
     if hasattr(concept, 'subject'):

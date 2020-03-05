@@ -42,7 +42,7 @@
                                         skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb
                                       ] ;
         skosxl:hiddenLabel            [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "subconcept"@en , "partconcept"@en , "subomgrep"@nn , "delvisomgrep"@nn , "subbegrep"@nb , "delvisbegrep"@nb
+                                        skosxl:literalForm  "completecocnept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb
                                       ] ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb
