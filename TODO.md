@@ -1,0 +1,10 @@
+- [ ] Add option to get collection including all details of members
+- [ ] Use definition class in other classes
+- [ ] Add support for [altnerativ formulering](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_alternativformulering)
+- [ ] Add support for [see also](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_seogs%C3%A5)
+- [ ] Add support for [replaces](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstatter)
+- [ ] Add support for [replaced by](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstattesav)
+- [ ] Add support for relations:
+ - [ ] [related](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_assosiativrelasjon)
+ - [ ]  [generatlizes](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_generiskrelasjon)
+ - [ ] [hasPart](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_partitivrelasjon)
