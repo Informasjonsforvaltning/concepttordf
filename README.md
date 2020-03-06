@@ -5,7 +5,7 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 ## Usage
 ### Install
 ```
-pip install -i https://test.pypi.org/simple/ concepttordf-stigbd
+% pip install -i https://test.pypi.org/simple/ concepttordf-stigbd
 ```
 ### Getting started
 
@@ -67,9 +67,13 @@ Will print the concept according to the specification:
 ```
 ### Run all tests
 ```
-pytest -rA
+% pytest -rA
 ```
-With coverage:
+With simple coverage-report in output:
 ```
-pytest -rA --cov-report term-missing --cov=concepttordf tests/
+% pytest -rA --cov-report term-missing --cov=concepttordf tests/
+```
+Wit coverage-report to html:
+```
+% pytest -rA --cov-report html --cov=concepttordf tests/
 ```
