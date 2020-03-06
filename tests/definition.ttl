@@ -1,0 +1,20 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosno: <http://difi.no/skosno#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/definitions/1>
+        a                       skosno:Definisjon ;
+        rdfs:label              "a concept where all attribtues has value"@en , "eit omgrep som har utfylt alle felt"@nn , "et begrep som har utfylt alle felter"@nb ;
+        skosno:forholdTilKilde  skosno:basertPåKilde ;
+        dct:source              [ rdfs:label    "Stolbar kilde"@nb, "Thrustworthy source"@en, "Stolbar kilde"@nn ;
+                                  rdfs:seeAlso  <http://www.example.com/trustworthysources/1>
+                                ] ;
+        skosno:omfang           [ rdfs:label    "begrep"@nb, "concept"@en, "omgrep"@nn ;
+                                  rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4>
+                                ] ;
+        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb
+        .
