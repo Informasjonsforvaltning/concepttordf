@@ -1,6 +1,6 @@
 - [ ] Add option to get collection including all details of members
 - [ ] Add function for adding concept to collection
-- [ ] Use definition class in other classes
+- [x] Use definition class in other classes
 - [ ] Add support for [altnerativ formulering](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_alternativformulering)
 - [ ] Add support for [see also](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_seogs%C3%A5)
 - [ ] Add support for [replaces](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstatter)

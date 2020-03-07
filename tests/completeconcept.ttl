@@ -23,11 +23,14 @@
         a                             skos:Concept ;
         skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
                                         rdfs:label              "a concept where all attribtues has value"@en , "eit omgrep som har utfylt alle felt"@nn , "et begrep som har utfylt alle felter"@nb ;
-                                        skosno:forholdTilKilde  skosno:egendefinert ;
-                                        skosno:omfang           [ rdfs:label    "begreper"@nb ;
-                                                                  rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts>
+                                        skosno:forholdTilKilde  skosno:basertPåKilde ;
+                                        dct:source              [ rdfs:label    "Stolbar kilde"@nb, "Thrustworthy source"@en, "Stolbar kilde"@nn ;
+                                                                  rdfs:seeAlso  <http://www.example.com/trustworthysources/1>
                                                                 ] ;
-                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i test-sammenheng"@nb
+                                      skosno:omfang           [ rdfs:label    "begrep"@nb, "omgrep"@nn, "concept"@en ;
+                                                                  rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4>
+                                                                ] ;
+                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb
                                       ] ;
         skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjonar"@nn , "filosofiske diskusjoner"@nb , "cataloging"@en ;
         dct:modified                  "2020-03-05"^^xsd:date ;
@@ -42,7 +45,7 @@
                                         skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb
                                       ] ;
         skosxl:hiddenLabel            [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "completecocnept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb
+                                        skosxl:literalForm  "completeconcept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb
                                       ] ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb
