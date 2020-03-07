@@ -139,7 +139,7 @@ class Betydningsbeskrivelse(ABC):
                 for key in _text:
                     g.add((_scope, RDFS.label,
                            Literal(_text[key], lang=key)))
-            g.add((URIRef(_betydningsbeskrivelse), SKOSNO.omfang, _scope))
+            g.add((_betydningsbeskrivelse, SKOSNO.omfang, _scope))
 
         # relationtosource
         if hasattr(self, 'relationtosource'):
@@ -171,6 +171,6 @@ class Betydningsbeskrivelse(ABC):
                 for key in _text:
                     g.add((_source, RDFS.label,
                            Literal(_text[key], lang=key)))
-            g.add((URIRef(_betydningsbeskrivelse), DCT.source, _source))
+            g.add((_betydningsbeskrivelse, DCT.source, _source))
 
         return g
