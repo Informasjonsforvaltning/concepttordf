@@ -4,6 +4,26 @@ from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
 
 
+def test_definition_constructor_to_rdf_should_return_skos_definition():
+
+    with open('./tests/definition.json') as json_file:
+        data = json.load(json_file)
+        _definition = data['definition']
+    definition = Definition(_definition)
+
+    g1 = Graph()
+    g1.parse(data=definition.to_rdf(), format='turtle')
+    # _dump_turtle(g1)
+    g2 = Graph().parse("tests/definition.ttl",
+                       format='turtle', encoding='utf-8')
+
+    _isomorphic = isomorphic(g1, g2)
+    if not _isomorphic:
+        _dump_diff(g1, g2)
+        pass
+    assert _isomorphic
+
+
 def test_definition_to_rdf_should_return_skos_definition():
 
     with open('./tests/definition.json') as json_file:
