@@ -2,6 +2,7 @@ from rdflib import Graph, Literal, BNode, Namespace, RDF, RDFS, URIRef
 from datetime import date
 from .contact import Contact
 from .definition import Definition
+from .alternativformulering import AlternativFormulering
 from .betydningsbeskrivelse import RelationToSource
 
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -26,6 +27,9 @@ class Concept:
                 self.term = c['term']
             if 'definition' in c:
                 self.definition = Definition(c['definition'])
+            if 'alternativformulering' in c:
+                self.alternativformulering = AlternativFormulering(
+                                  c['alternativformulering'])
             if 'contactpoint' in c:
                 self.contactpoint = Contact(c['contactpoint'])
             if 'alternativeterm' in c:
@@ -95,6 +99,15 @@ class Concept:
     @definition.setter
     def definition(self, definition: Definition):
         self._definition = definition
+
+    @property
+    def alternativformulering(self) -> AlternativFormulering:
+        return self._alternativformulering
+
+    @alternativformulering.setter
+    def alternativformulering(self,
+                              alternativformulering: AlternativFormulering):
+        self._alternativformulering = alternativformulering
 
     @property
     def contactpoint(self) -> Contact:
@@ -246,7 +259,13 @@ class Concept:
                          SKOSXL.hiddenLabel, hiddenLabel))
 
         # definition
-        self._add_definition_to_concept()
+        if hasattr(self, 'definition'):
+            self._add_betydningsbeskrivelse_to_concept(self.definition)
+
+        # alternativformulering
+        if hasattr(self, 'alternativformulering'):
+            self._add_betydningsbeskrivelse_to_concept(
+                self.alternativformulering)
 
         # publisher
         if hasattr(self, 'publisher'):
@@ -321,49 +340,52 @@ class Concept:
 # ------------
 # Helper methods:
 
-    def _add_definition_to_concept(self):
+    def _add_betydningsbeskrivelse_to_concept(self, betydningsbeskrivelse):
         # ---
         _betydningsbeskrivelse = BNode()
 
-        self._g.add((_betydningsbeskrivelse, RDF.type, self.definition.type))
+        self._g.add((_betydningsbeskrivelse, RDF.type,
+                     betydningsbeskrivelse.type))
 
         # text
-        if hasattr(self.definition, 'text'):
-            for key in self.definition.text:
+        if hasattr(betydningsbeskrivelse, 'text'):
+            for key in betydningsbeskrivelse.text:
                 self._g.add((_betydningsbeskrivelse, RDFS.label,
-                            Literal(self.definition.text[key], lang=key)))
+                            Literal(betydningsbeskrivelse.text[key],
+                                    lang=key)))
 
         # remark
-        if hasattr(self.definition, 'remark'):
-            for key in self.definition.remark:
+        if hasattr(betydningsbeskrivelse, 'remark'):
+            for key in betydningsbeskrivelse.remark:
                 self._g.add((_betydningsbeskrivelse, SKOS.scopeNote,
-                            Literal(self.definition.remark[key], lang=key)))
+                            Literal(betydningsbeskrivelse.remark[key],
+                                    lang=key)))
         # scope
-        if hasattr(self.definition, 'scope'):
+        if hasattr(betydningsbeskrivelse, 'scope'):
             _scope = BNode()
-            if 'url' in self.definition.scope:
+            if 'url' in betydningsbeskrivelse.scope:
                 self._g.add((_scope, RDFS.seeAlso,
-                            URIRef(self.definition.scope['url'])))
-            if 'text' in self.definition.scope:
-                _text = self.definition.scope['text']
+                            URIRef(betydningsbeskrivelse.scope['url'])))
+            if 'text' in betydningsbeskrivelse.scope:
+                _text = betydningsbeskrivelse.scope['text']
                 for key in _text:
                     self._g.add((_scope, RDFS.label,
                                 Literal(_text[key], lang=key)))
             self._g.add((_betydningsbeskrivelse, SKOSNO.omfang, _scope))
 
         # relationtosource
-        if hasattr(self.definition, 'relationtosource'):
+        if hasattr(betydningsbeskrivelse, 'relationtosource'):
             # -
             # sitatFraKilde = "quoteFromSource"
             # basertPåKilde = "basedOnSource"
             # egendefinert = "noSource"
             #
             # -
-            if (RelationToSource(self.definition.relationtosource)
+            if (RelationToSource(betydningsbeskrivelse.relationtosource)
                is RelationToSource.sitatFraKilde):
                 self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
                             SKOSNO.sitatFraKilde))
-            elif (RelationToSource(self.definition.relationtosource)
+            elif (RelationToSource(betydningsbeskrivelse.relationtosource)
                   is RelationToSource.basertPåKilde):
                 self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
                             SKOSNO.basertPåKilde))
@@ -372,22 +394,23 @@ class Concept:
                             SKOSNO.egendefinert))
 
         # source
-        if hasattr(self.definition, 'source'):
+        if hasattr(betydningsbeskrivelse, 'source'):
             _source = BNode()
-            if 'url' in self.definition.source:
+            if 'url' in betydningsbeskrivelse.source:
                 self._g.add((_source, RDFS.seeAlso,
-                            URIRef(self.definition.source['url'])))
-            if 'text' in self.definition.source:
-                _text = self.definition.source['text']
+                            URIRef(betydningsbeskrivelse.source['url'])))
+            if 'text' in betydningsbeskrivelse.source:
+                _text = betydningsbeskrivelse.source['text']
                 for key in _text:
                     self._g.add((_source, RDFS.label,
                                 Literal(_text[key], lang=key)))
             self._g.add((_betydningsbeskrivelse, DCT.source, _source))
 
         # modified
-        if hasattr(self.definition, 'modified'):
+        if hasattr(betydningsbeskrivelse, 'modified'):
             self._g.add((_betydningsbeskrivelse, DCT.modified,
-                         Literal(self.definition.modified, datatype=XSD.date)))
+                         Literal(betydningsbeskrivelse.modified,
+                                 datatype=XSD.date)))
 
         self._g.add((URIRef(self.identifier), SKOSNO.betydningsbeskrivelse,
                     _betydningsbeskrivelse))

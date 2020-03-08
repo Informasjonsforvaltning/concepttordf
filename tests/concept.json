@@ -13,6 +13,12 @@
 				"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
 			}
 		},
+		"alternativformulering": {
+			"text": {
+				"en": "another statement of the meaning of the concept",
+				"nb": "en 'alternativ formulering' av betydningen til begrepet"
+			}
+		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",
 		"contactpoint": {
 			"name": {

@@ -1,6 +1,7 @@
 from concepttordf.concept import Concept
 from concepttordf.contact import Contact
 from concepttordf.definition import Definition
+from concepttordf.alternativformulering import AlternativFormulering
 
 import json
 from rdflib import Graph
@@ -17,6 +18,8 @@ def test_simple_concept_to_rdf_should_return_skos_concept():
     concept.identifier = _concept['identifier']
     concept.term = _concept['term']
     concept.definition = Definition(_concept['definition'])
+    concept.alternativformulering = AlternativFormulering(
+                                    _concept['alternativformulering'])
     concept.publisher = _concept['publisher']
     concept.contactpoint = Contact(_concept['contactpoint'])
 
@@ -77,6 +80,8 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.alternativeterm = _concept['alternativeterm']
     concept.hiddenterm = _concept['hiddenterm']
     concept.definition = Definition(_concept['definition'])
+    concept.alternativformulering = AlternativFormulering(
+                                    _concept['alternativformulering'])
     concept.publisher = _concept['publisher']
     concept.contactpoint = Contact(_concept['contactpoint'])
     concept.subject = _concept['subject']
@@ -104,7 +109,7 @@ def test_concept_to_rdf_should_return_skos_concept():
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
-    _dump_turtle(g1)
+    # _dump_turtle(g1)
     g2 = Graph().parse("tests/completeconcept.ttl",
                        format='turtle', encoding='utf-8')
 

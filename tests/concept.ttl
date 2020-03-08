@@ -10,9 +10,13 @@
 
 <http://example.com/concepts/1>
         a                             skos:Concept ;
-        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+        skosno:betydningsbeskrivelse             [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
+                                      ] ,
+                                      [ a                       skosno:AlternativFormulering ;
+                                        rdfs:label              "another statement of the meaning of the concept"@en,
+                                                                "en 'alternativ formulering' av betydningen til begrepet"@nb;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;

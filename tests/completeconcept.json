@@ -84,6 +84,12 @@
 			},
 			"modified": "2020-03-04"
 		},
+		"alternativformulering": {
+			"text": {
+				"en": "another statement of the meaning of the concept",
+				"nb": "en 'alternativ formulering' av betydningen til begrepet"
+			}
+		},
 		"modified": "2020-03-05",
 		"seeAlso" : ["http://example.com/concepts/3", "http://example.com/concepts/5"],
 		"replaces": ["http://example.com/concepts/2"],
