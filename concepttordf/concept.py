@@ -44,6 +44,9 @@ class Concept:
                 self.validinperiod = c['validinperiod']
             if 'publisher' in c:
                 self.publisher = c['publisher']
+        self.seeAlso = []
+        self.replaces = []
+        self.replacedBy = []
 
     @property
     def identifier(self) -> str:
@@ -142,28 +145,28 @@ class Concept:
         self._publisher = publisher
 
     @property
-    def seeAlso(self):
+    def seeAlso(self) -> list:
         return self._seeAlso
 
     @seeAlso.setter
-    def seeAlso(self, concept):
-        self._seeAlso = concept
+    def seeAlso(self, concepts: list):
+        self._seeAlso = concepts
 
     @property
-    def replaces(self):
+    def replaces(self) -> list:
         return self._replaces
 
     @replaces.setter
-    def replaces(self, concept):
-        self._replaces = concept
+    def replaces(self, concepts: list):
+        self._replaces = concepts
 
     @property
-    def replacedBy(self):
+    def replacedBy(self) -> list:
         return self._replacedBy
 
     @replacedBy.setter
-    def replacedBy(self, concept):
-        self._replacedBy = concept
+    def replacedBy(self, concepts: list):
+        self._replacedBy = concepts
 # ----------------------------------------------
 
     def to_graph(self) -> Graph:
@@ -299,18 +302,21 @@ class Concept:
 
         # seeAlso
         if hasattr(self, 'seeAlso'):
-            self._g.add((URIRef(self.identifier), RDFS.seeAlso,
-                         URIRef(self.seeAlso.identifier)))
+            for c in self.seeAlso:
+                self._g.add((URIRef(self.identifier), RDFS.seeAlso,
+                            URIRef(c.identifier)))
 
         # replaces
         if hasattr(self, 'replaces'):
-            self._g.add((URIRef(self.identifier), DCT.replaces,
-                         URIRef(self.replaces.identifier)))
+            for c in self.replaces:
+                self._g.add((URIRef(self.identifier), DCT.replaces,
+                             URIRef(c.identifier)))
 
         # replacedBy
         if hasattr(self, 'replacedBy'):
-            self._g.add((URIRef(self.identifier), DCT.replacedBy,
-                         URIRef(self.replacedBy.identifier)))
+            for c in self.replacedBy:
+                self._g.add((URIRef(self.identifier), DCT.replacedBy,
+                             URIRef(c.identifier)))
 
 # ------------
 # Helper methods:

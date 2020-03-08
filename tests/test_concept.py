@@ -39,17 +39,20 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
         _concept = data['concept']
     concept = Concept(_concept)
     # --
-    seeAlsoConcept = Concept()
-    seeAlsoConcept.identifier = _concept['seeAlso']
-    concept.seeAlso = seeAlsoConcept
+    for c in _concept['seeAlso']:
+        seeAlsoConcept = Concept()
+        seeAlsoConcept.identifier = c
+        concept.seeAlso.append(seeAlsoConcept)
     # --
-    replacesConcept = Concept()
-    replacesConcept.identifier = _concept['replaces']
-    concept.replaces = replacesConcept
+    for c in _concept['replaces']:
+        replacesConcept = Concept()
+        replacesConcept.identifier = c
+        concept.replaces.append(replacesConcept)
     # --
-    replacedByConcept = Concept()
-    replacedByConcept.identifier = _concept['replacedBy']
-    concept.replacedBy = replacedByConcept
+    for c in _concept['replacedBy']:
+        replacedByConcept = Concept()
+        replacedByConcept.identifier = c
+        concept.replacedBy.append(replacedByConcept)
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
@@ -83,21 +86,25 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.validinperiod = _concept['validinperiod']
     concept.modified = _concept['modified']
     # --
-    seeAlsoConcept = Concept()
-    seeAlsoConcept.identifier = _concept['seeAlso']
-    concept.seeAlso = seeAlsoConcept
+    for c in _concept['seeAlso']:
+        seeAlsoConcept = Concept()
+        seeAlsoConcept.identifier = c
+        concept.seeAlso.append(seeAlsoConcept)
     # --
-    replacesConcept = Concept()
-    replacesConcept.identifier = _concept['replaces']
-    concept.replaces = replacesConcept
+    for c in _concept['replaces']:
+        replacesConcept = Concept()
+        replacesConcept.identifier = c
+        concept.replaces.append(replacesConcept)
     # --
-    replacedByConcept = Concept()
-    replacedByConcept.identifier = _concept['replacedBy']
-    concept.replacedBy = replacedByConcept
+    for c in _concept['replacedBy']:
+        replacedByConcept = Concept()
+        replacedByConcept.identifier = c
+        concept.replacedBy.append(replacedByConcept)
+    # --
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
-    # _dump_turtle(g1)
+    _dump_turtle(g1)
     g2 = Graph().parse("tests/completeconcept.ttl",
                        format='turtle', encoding='utf-8')
 

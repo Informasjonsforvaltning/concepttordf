@@ -85,8 +85,8 @@
 			"modified": "2020-03-04"
 		},
 		"modified": "2020-03-05",
-		"seeAlso" : "http://example.com/concepts/3",
-		"replaces": "http://example.com/concepts/2",
-		"replacedBy": "http://example.com/concepts/1"
+		"seeAlso" : ["http://example.com/concepts/3", "http://example.com/concepts/5"],
+		"replaces": ["http://example.com/concepts/2"],
+		"replacedBy": ["http://example.com/concepts/1"]
 	}
 }

@@ -61,7 +61,7 @@
                                         vcard:hasURL <https://digdir.no> ;
                                         vcard:hasTelephone <tel:12345678> ;
                                       ] ;
-        rdfs:seeAlso                  <http://example.com/concepts/3> ;
+        rdfs:seeAlso                  <http://example.com/concepts/3>, <http://example.com/concepts/5> ;
         dct:replaces                  <http://example.com/concepts/2> ;
         dct:replacedBy                <http://example.com/concepts/1>
         .

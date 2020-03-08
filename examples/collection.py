@@ -20,11 +20,10 @@ collection.members = []
 
 c1 = Concept()
 c1.identifier = "http://example.com/concepts/1"
+collection.members.append(c1)
 
 c2 = Concept()
 c2.identifier = "http://example.com/concepts/2"
-
-collection.members.append(c1)
 collection.members.append(c2)
 
 print(collection.to_rdf().decode())
