@@ -27,7 +27,7 @@ def test_simple_concept_to_rdf_should_return_skos_concept():
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
-        _dump_diff(g1, g2)
+        # _dump_diff(g1, g2)
         pass
     assert _isomorphic
 
@@ -47,7 +47,7 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
-        _dump_diff(g1, g2)
+        # _dump_diff(g1, g2)
         pass
     assert _isomorphic
 
@@ -69,6 +69,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.example = _concept['example']
     concept.bruksområde = _concept['bruksområde']
     concept.validinperiod = _concept['validinperiod']
+    concept.modified = _concept['modified']
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
@@ -83,6 +84,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     assert _isomorphic
 
 
+# @pytest.mark.skip(reason="no way of currently testing this")
 def test_noSource_to_rdf_should_return_skos_definition():
 
     with open('./tests/definition.json') as json_file:
@@ -123,6 +125,7 @@ def test_noSource_to_rdf_should_return_skos_definition():
     assert _isomorphic
 
 
+# @pytest.mark.skip(reason="no way of currently testing this")
 def test_quoteFromSource_to_rdf_should_return_skos_definition():
 
     with open('./tests/definition.json') as json_file:

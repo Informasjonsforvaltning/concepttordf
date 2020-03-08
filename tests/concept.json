@@ -2,8 +2,10 @@
 	"concept": {
 		"identifier": "http://example.com/concepts/1",
 		"term": {
-			"en": "concept",
-			"nb": "begrep"
+			"name": {
+				"en": "concept",
+				"nb": "begrep"
+			}
 		},
 		"definition": {
 			"text": {

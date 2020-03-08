@@ -2,26 +2,34 @@
 	"concept": {
 		"identifier": "http://example.com/concepts/4",
 		"term": {
-			"en": "completeconcept",
-			"nb": "komplettbegrep",
-			"nn": "komplettomgrep"
+			"name": {
+				"en": "completeconcept",
+				"nb": "komplettbegrep",
+				"nn": "komplettomgrep"
+			},
+			"modified": "2020-03-01"
 		},
 		"alternativeterm": {
-			"en": ["superconcept", "totalconcept"],
-			"nb": ["superbegrep", "totalbegrep"],
-			"nn": ["superomgrep", "totalomgrep"]
+			"name": {
+				"en": ["superconcept", "totalconcept"],
+				"nb": ["superbegrep", "totalbegrep"],
+				"nn": ["superomgrep", "totalomgrep"]
+			},
+			"modified": "2020-03-02"
 		},
 		"hiddenterm": {
-			"en": ["completeconcept"],
-			"nb": ["kompletbegrep"],
-			"nn": ["kompletomgrep"]
+			"name": {
+				"en": ["completeconcept"],
+				"nb": ["kompletbegrep"],
+				"nn": ["kompletomgrep"]
+			},
+			"modified": "2020-03-03"
 		},
 		"subject": {
 			"en": "terminology",
 			"nb": "termonologi",
 			"nn": "termonologi"
 		},
-		"modified": "2020-03-05",
 		"example": {
 			"en": "The compleconcept's natural habitat is very seldom to find on planet earth",
 			"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
@@ -73,7 +81,9 @@
 					"nn": "Stolbar kilde"
 				},
 				"url": "http://www.example.com/trustworthysources/1"
-			}
-		}
+			},
+			"modified": "2020-03-04"
+		},
+		"modified": "2020-03-05"
 	}
 }

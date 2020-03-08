@@ -27,10 +27,11 @@
                                         dct:source              [ rdfs:label    "Stolbar kilde"@nb, "Thrustworthy source"@en, "Stolbar kilde"@nn ;
                                                                   rdfs:seeAlso  <http://www.example.com/trustworthysources/1>
                                                                 ] ;
-                                      skosno:omfang           [ rdfs:label    "begrep"@nb, "omgrep"@nn, "concept"@en ;
+                                        skosno:omfang           [ rdfs:label    "begrep"@nb, "omgrep"@nn, "concept"@en ;
                                                                   rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4>
                                                                 ] ;
-                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb
+                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb ;
+                                        dct:modified             "2020-03-04"^^xsd:date ;
                                       ] ;
         skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjonar"@nn , "filosofiske diskusjoner"@nb , "cataloging"@en ;
         dct:modified                  "2020-03-05"^^xsd:date ;
@@ -41,19 +42,22 @@
                                         schema:startDate  "2020-03-03"^^xsd:date
                                       ] ;
         skos:example                  "Komplettbegrepet fins naturlig svært få steder på jorda"@nb , "Komplettomgrepet fins naturlig svært få stadar på jorda"@nn , "The compleconcept's natural habitat is very seldom to find on planet earth"@en ;
+        skosxl:prefLabel              [ a                   skosxl:Label ;
+                                        skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb ;
+                                        dct:modified         "2020-03-01"^^xsd:date ;
+                                      ] ;
         skosxl:altLabel               [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb
+                                        skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb ;
+                                        dct:modified         "2020-03-02"^^xsd:date ;
                                       ] ;
         skosxl:hiddenLabel            [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "completeconcept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb
-                                      ] ;
-        skosxl:prefLabel              [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb
+                                        skosxl:literalForm  "completeconcept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb ;
+                                        dct:modified         "2020-03-03"^^xsd:date ;
                                       ] ;
         dcat:contactPoint             [ a               vcard:Organization ;
                                         vcard:hasEmail  <mailto:sbd@example.com> ;
                                         vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
                                                                   "Digitaliseringsdirektoratet"@nb ;
                                         vcard:hasURL <https://digdir.no> ;
-                                        vcard:hasTelephone <tel:12345678>
+                                        vcard:hasTelephone <tel:12345678> ;
                                       ] .

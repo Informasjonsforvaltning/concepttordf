@@ -22,6 +22,8 @@ class Betydningsbeskrivelse(ABC):
                 self.relationtosource = b['relationtosource']
             if 'source' in b:
                 self.source = b['source']
+            if 'modified' in b:
+                self.modified = b['modified']
 
     @property
     def type(self):
@@ -70,3 +72,11 @@ class Betydningsbeskrivelse(ABC):
     @source.setter
     def source(self, source: dict):
         self._source = source
+
+    @property
+    def modified(self) -> dict:
+        return self._modified
+
+    @modified.setter
+    def modified(self, modified: dict):
+        self._modified = modified

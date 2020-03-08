@@ -21,29 +21,29 @@ class Concept:
         self._g = Graph()
         if c is not None:
             if 'identifier' in c:
-                self._identifier = c['identifier']
+                self.identifier = c['identifier']
             if 'term' in c:
-                self._term = c['term']
+                self.term = c['term']
             if 'definition' in c:
-                self._definition = Definition(c['definition'])
+                self.definition = Definition(c['definition'])
             if 'contactpoint' in c:
-                self._contactpoint = Contact(c['contactpoint'])
+                self.contactpoint = Contact(c['contactpoint'])
             if 'alternativeterm' in c:
-                self._alternativeterm = c['alternativeterm']
+                self.alternativeterm = c['alternativeterm']
             if 'hiddenterm' in c:
-                self._hiddenterm = c['hiddenterm']
+                self.hiddenterm = c['hiddenterm']
             if 'subject' in c:
-                self._subject = c['subject']
+                self.subject = c['subject']
             if 'modified' in c:
-                self._modified = c['modified']
+                self.modified = c['modified']
             if 'example' in c:
-                self._example = c['example']
+                self.example = c['example']
             if 'bruksområde' in c:
-                self._bruksområde = c['bruksområde']
+                self.bruksområde = c['bruksområde']
             if 'validinperiod' in c:
-                self._validinperiod = c['validinperiod']
+                self.validinperiod = c['validinperiod']
             if 'publisher' in c:
-                self._publisher = c['publisher']
+                self.publisher = c['publisher']
 
     @property
     def identifier(self) -> str:
@@ -134,11 +134,11 @@ class Concept:
         self._validinperiod = validinperiod
 
     @property
-    def publisher(self) -> dict:
+    def publisher(self) -> str:
         return self._publisher
 
     @publisher.setter
-    def publisher(self, publisher: dict):
+    def publisher(self, publisher: str):
         self._publisher = publisher
 
 # ----------------------------------------------
@@ -161,10 +161,48 @@ class Concept:
         if hasattr(self, 'term'):
             label = BNode()
             self._g.add((label, RDF.type, SKOSXL.Label))
-            for key in self.term:
-                self._g.add((label, SKOSXL.literalForm,
-                             Literal(self.term[key], lang=key)))
+            if 'name' in self.term:
+                _name = self.term['name']
+                for key in _name:
+                    self._g.add((label, SKOSXL.literalForm,
+                                 Literal(_name[key], lang=key)))
+            if 'modified' in self.term:
+                self._g.add((label, DCT.modified,
+                            Literal(self.term['modified'], datatype=XSD.date)))
             self._g.add((URIRef(self.identifier), SKOSXL.prefLabel, label))
+
+        # altLabel
+        if hasattr(self, 'alternativeterm'):
+            altLabel = BNode()
+            self._g.add((altLabel, RDF.type, SKOSXL.Label))
+            if 'name' in self.alternativeterm:
+                _name = self.alternativeterm['name']
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((altLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if 'modified' in self.alternativeterm:
+                self._g.add((altLabel, DCT.modified,
+                             Literal(self.alternativeterm['modified'],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), SKOSXL.altLabel, altLabel))
+
+        # hiddenLabel
+        if hasattr(self, 'hiddenterm'):
+            hiddenLabel = BNode()
+            self._g.add((hiddenLabel, RDF.type, SKOSXL.Label))
+            if 'name' in self.hiddenterm:
+                _name = self.hiddenterm['name']
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((hiddenLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if 'modified' in self.hiddenterm:
+                self._g.add((hiddenLabel, DCT.modified,
+                             Literal(self.hiddenterm['modified'],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSXL.hiddenLabel, hiddenLabel))
 
         # definition
         self._add_definition_to_concept()
@@ -182,27 +220,6 @@ class Concept:
                 self._g.add((contactPoint, p, o))
             self._g.add((URIRef(self.identifier), DCAT.contactPoint,
                          contactPoint))
-
-        # altLabel
-        if hasattr(self, 'alternativeterm'):
-            altLabel = BNode()
-            self._g.add((altLabel, RDF.type, SKOSXL.Label))
-            for key in self.alternativeterm:
-                for l in self.alternativeterm[key]:
-                    self._g.add((altLabel, SKOSXL.literalForm,
-                                 Literal(l, lang=key)))
-            self._g.add((URIRef(self.identifier), SKOSXL.altLabel, altLabel))
-
-        # hiddenLabel
-        if hasattr(self, 'hiddenterm'):
-            hiddenLabel = BNode()
-            self._g.add((hiddenLabel, RDF.type, SKOSXL.Label))
-            for key in self.hiddenterm:
-                for l in self.hiddenterm[key]:
-                    self._g.add((hiddenLabel, SKOSXL.literalForm,
-                                 Literal(l, lang=key)))
-            self._g.add((URIRef(self.identifier),
-                         SKOSXL.hiddenLabel, hiddenLabel))
 
         # subject
         if hasattr(self, 'subject'):
@@ -243,6 +260,8 @@ class Concept:
             self._g.add((URIRef(self.identifier), DCT.temporal, periodOfTime))
 
         return self._g
+# ------------
+# Helper methods:
 
     def _add_definition_to_concept(self):
         # ---
@@ -306,6 +325,11 @@ class Concept:
                     self._g.add((_source, RDFS.label,
                                 Literal(_text[key], lang=key)))
             self._g.add((_betydningsbeskrivelse, DCT.source, _source))
+
+        # modified
+        if hasattr(self.definition, 'modified'):
+            self._g.add((_betydningsbeskrivelse, DCT.modified,
+                         Literal(self.definition.modified, datatype=XSD.date)))
 
         self._g.add((URIRef(self.identifier), SKOSNO.betydningsbeskrivelse,
                     _betydningsbeskrivelse))
