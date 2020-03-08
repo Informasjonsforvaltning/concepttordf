@@ -141,6 +141,14 @@ class Concept:
     def publisher(self, publisher: str):
         self._publisher = publisher
 
+    def to_rdf(self, format='turtle') -> str:
+        """Maps the concept to rdf and returns a serialization
+           as a string according to format"""
+
+        self._add_concept_to_graph()
+
+        return self._g.serialize(format=format, encoding='utf-8')
+
 # ----------------------------------------------
 
     def _add_concept_to_graph(self) -> Graph:
@@ -259,7 +267,6 @@ class Concept:
                                     datatype=XSD.date)))
             self._g.add((URIRef(self.identifier), DCT.temporal, periodOfTime))
 
-        return self._g
 # ------------
 # Helper methods:
 
@@ -333,13 +340,4 @@ class Concept:
 
         self._g.add((URIRef(self.identifier), SKOSNO.betydningsbeskrivelse,
                     _betydningsbeskrivelse))
-
         # ---
-
-    def to_rdf(self, format='turtle') -> str:
-        """Maps the concept to rdf and returns a serialization
-           as a string according to format"""
-
-        self._add_concept_to_graph()
-
-        return self._g.serialize(format=format, encoding='utf-8')
