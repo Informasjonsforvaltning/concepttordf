@@ -12,6 +12,9 @@ DCAT = Namespace('http://www.w3.org/ns/dcat#')
 class Collection:
     """" A class representing a concept collection"""
 
+    def __init__(self, c: dict = None):
+        self._g = Graph()
+
     @property
     def name(self) -> str:
         return self._name
@@ -56,53 +59,49 @@ class Collection:
         """Maps the collection to rdf and returns a serialization
            as a string according to format"""
 
-        _g = _add_collection_to_graph(self)
+        self._add_collection_to_graph()
 
-        return _g.serialize(format=format, encoding='utf-8')
+        return self._g.serialize(format=format, encoding='utf-8')
 
+    def _add_collection_to_graph(self) -> Graph:
+        """Adds the collection to the Graph _g"""
 
-def _add_collection_to_graph(collection: Collection) -> Graph:
-    """Adds the collection to the Graph g and returns g"""
+        self._g.bind('dct', DCT)
+        self._g.bind('skos', SKOS)
+        self._g.bind('skosxl', SKOSXL)
+        self._g.bind('vcard', VCARD)
+        self._g.bind('skosno', SKOSNO)
+        self._g.bind('dcat', DCAT)
 
-    g = Graph()
+        self._g.add((URIRef(self.identifier), RDF.type, SKOS.Collection))
 
-    g.bind('dct', DCT)
-    g.bind('skos', SKOS)
-    g.bind('skosxl', SKOSXL)
-    g.bind('vcard', VCARD)
-    g.bind('skosno', SKOSNO)
-    g.bind('dcat', DCAT)
+        # publisher
+        self._g.add((URIRef(self.identifier), DCT.publisher,
+                    URIRef(self.publisher)))
 
-    g.add((URIRef(collection.identifier), RDF.type, SKOS.Collection))
+        # name
+        if hasattr(self, 'name'):
+            for key in self.name:
+                self._g.add((URIRef(self.identifier), RDFS.label,
+                            Literal(self.name[key], lang=key)))
 
-    # publisher
-    g.add((URIRef(collection.identifier), DCT.publisher,
-           URIRef(collection.publisher)))
+        # description
+        if hasattr(self, 'description'):
+            for key in self.description:
+                self._g.add((URIRef(self.identifier), DCT.description,
+                            Literal(self.description[key], lang=key)))
 
-    # name
-    if hasattr(collection, 'name'):
-        for key in collection.name:
-            g.add((URIRef(collection.identifier), RDFS.label,
-                   Literal(collection.name[key], lang=key)))
+        # contactPoint
+        if hasattr(self, 'contactpoint'):
+            contact = self.contactpoint
+            contactPoint = BNode()
+            for s, p, o in contact.to_graph().triples((None, None, None)):
+                self._g.add((contactPoint, p, o))
+            self._g.add((URIRef(self.identifier), DCAT.contactPoint,
+                        contactPoint))
 
-    # description
-    if hasattr(collection, 'description'):
-        for key in collection.description:
-            g.add((URIRef(collection.identifier), DCT.description,
-                   Literal(collection.description[key], lang=key)))
-
-    # contactPoint
-    if hasattr(collection, 'contactpoint'):
-        contact = collection.contactpoint
-        contactPoint = BNode()
-        for s, p, o in contact.to_graph().triples((None, None, None)):
-            g.add((contactPoint, p, o))
-        g.add((URIRef(collection.identifier), DCAT.contactPoint,
-               contactPoint))
-
-    # members
-    if hasattr(collection, 'members'):
-        for concept in collection.members:
-            g.add((URIRef(collection.identifier), SKOS.member,
-                   URIRef(concept.identifier)))
-    return g
+        # members
+        if hasattr(self, 'members'):
+            for concept in self.members:
+                self._g.add((URIRef(self.identifier), SKOS.member,
+                             URIRef(concept.identifier)))
