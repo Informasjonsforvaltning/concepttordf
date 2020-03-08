@@ -55,13 +55,19 @@ class Collection:
     def members(self, members: list):
         self._members = members
 
-    def to_rdf(self, format='turtle') -> str:
+    def to_rdf(self, format='turtle', includeconcepts=True) -> str:
         """Maps the collection to rdf and returns a serialization
            as a string according to format"""
 
         self._add_collection_to_graph()
 
+        if includeconcepts:
+            for concept in self.members:
+                self._g += concept.to_graph()
+
         return self._g.serialize(format=format, encoding='utf-8')
+
+    # ---
 
     def _add_collection_to_graph(self) -> Graph:
         """Adds the collection to the Graph _g"""

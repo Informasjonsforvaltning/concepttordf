@@ -141,18 +141,23 @@ class Concept:
     def publisher(self, publisher: str):
         self._publisher = publisher
 
+    def to_graph(self) -> Graph:
+        """Adds the concept to the Graph g and returns g"""
+
+        self._add_concept_to_graph()
+
+        return self._g
+
     def to_rdf(self, format='turtle') -> str:
         """Maps the concept to rdf and returns a serialization
            as a string according to format"""
 
-        self._add_concept_to_graph()
-
-        return self._g.serialize(format=format, encoding='utf-8')
+        return self.to_graph().serialize(format=format, encoding='utf-8')
 
 # ----------------------------------------------
 
-    def _add_concept_to_graph(self) -> Graph:
-        """Adds the concept to the Graph g and returns g"""
+    def _add_concept_to_graph(self):
+        """Adds the concept to the Graph _g"""
 
         self._g.bind('dct', DCT)
         self._g.bind('skos', SKOS)

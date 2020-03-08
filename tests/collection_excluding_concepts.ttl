@@ -1,0 +1,28 @@
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix skosno: <http://difi.no/skosno#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+
+<http://example.com/collections/1>
+        a               skos:Collection ;
+        rdfs:label      "Digdir sin begrepssamling"@nb,
+                        "The concept collection of the Norwegian Digitalisation Agency"@en;
+        dct:description "Begrepssamlingen inneholder testbegreper"@nb,
+                        "The collection is a set of test concepts"@en ;
+        dct:publisher   <https://data.brreg.no/enhetsregisteret/api/enheter/991825827> ;
+        dcat:contactPoint             [ a               vcard:Organization ;
+                                        vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
+                                        vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
+                                                                  "Digitaliseringsdirektoratet"@nb ;
+                                        vcard:hasURL <https://digdir.no> ;
+                                        vcard:hasTelephone <tel:12345678>
+                                      ] ;
+        skos:member     <http://example.com/concepts/1> ,
+                        <http://example.com/concepts/2> ,
+                        <http://example.com/concepts/3>
+                        .
