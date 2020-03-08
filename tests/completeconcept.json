@@ -31,7 +31,7 @@
 			"nn": "termonologi"
 		},
 		"example": {
-			"en": "The compleconcept's natural habitat is very seldom to find on planet earth",
+			"en": "The completeconcept's natural habitat is very seldom to find on planet earth",
 			"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
 			"nn": "Komplettomgrepet fins naturlig svært få stadar på jorda"
 		},
@@ -84,6 +84,9 @@
 			},
 			"modified": "2020-03-04"
 		},
-		"modified": "2020-03-05"
+		"modified": "2020-03-05",
+		"seeAlso" : "http://example.com/concepts/3",
+		"replaces": "http://example.com/concepts/2",
+		"replacedBy": "http://example.com/concepts/1"
 	}
 }

@@ -141,6 +141,31 @@ class Concept:
     def publisher(self, publisher: str):
         self._publisher = publisher
 
+    @property
+    def seeAlso(self):
+        return self._seeAlso
+
+    @seeAlso.setter
+    def seeAlso(self, concept):
+        self._seeAlso = concept
+
+    @property
+    def replaces(self):
+        return self._replaces
+
+    @replaces.setter
+    def replaces(self, concept):
+        self._replaces = concept
+
+    @property
+    def replacedBy(self):
+        return self._replacedBy
+
+    @replacedBy.setter
+    def replacedBy(self, concept):
+        self._replacedBy = concept
+# ----------------------------------------------
+
     def to_graph(self) -> Graph:
         """Adds the concept to the Graph g and returns g"""
 
@@ -271,6 +296,21 @@ class Concept:
                             Literal(self.validinperiod['enddate'],
                                     datatype=XSD.date)))
             self._g.add((URIRef(self.identifier), DCT.temporal, periodOfTime))
+
+        # seeAlso
+        if hasattr(self, 'seeAlso'):
+            self._g.add((URIRef(self.identifier), RDFS.seeAlso,
+                         URIRef(self.seeAlso.identifier)))
+
+        # replaces
+        if hasattr(self, 'replaces'):
+            self._g.add((URIRef(self.identifier), DCT.replaces,
+                         URIRef(self.replaces.identifier)))
+
+        # replacedBy
+        if hasattr(self, 'replacedBy'):
+            self._g.add((URIRef(self.identifier), DCT.replacedBy,
+                         URIRef(self.replacedBy.identifier)))
 
 # ------------
 # Helper methods:

@@ -38,6 +38,18 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
         data = json.load(json_file)
         _concept = data['concept']
     concept = Concept(_concept)
+    # --
+    seeAlsoConcept = Concept()
+    seeAlsoConcept.identifier = _concept['seeAlso']
+    concept.seeAlso = seeAlsoConcept
+    # --
+    replacesConcept = Concept()
+    replacesConcept.identifier = _concept['replaces']
+    concept.replaces = replacesConcept
+    # --
+    replacedByConcept = Concept()
+    replacedByConcept.identifier = _concept['replacedBy']
+    concept.replacedBy = replacedByConcept
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
@@ -70,6 +82,18 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.bruksområde = _concept['bruksområde']
     concept.validinperiod = _concept['validinperiod']
     concept.modified = _concept['modified']
+    # --
+    seeAlsoConcept = Concept()
+    seeAlsoConcept.identifier = _concept['seeAlso']
+    concept.seeAlso = seeAlsoConcept
+    # --
+    replacesConcept = Concept()
+    replacesConcept.identifier = _concept['replaces']
+    concept.replaces = replacesConcept
+    # --
+    replacedByConcept = Concept()
+    replacedByConcept.identifier = _concept['replacedBy']
+    concept.replacedBy = replacedByConcept
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
