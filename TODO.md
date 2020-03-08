@@ -6,7 +6,7 @@
 - [x] Add support for [replaces](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstatter)
 - [x] Add support for [replaced by](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstattesav)
 - [ ] Add support for relations:
-  - [ ] [related](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_assosiativrelasjon)
+  - [x] [related](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_assosiativrelasjon)
   - [ ] [generatlizes](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_generiskrelasjon)
   - [ ] [hasPart](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_partitivrelasjon)
 - [ ] Document how to set up an endpoint that can be harvested

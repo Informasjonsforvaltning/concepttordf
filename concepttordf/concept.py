@@ -4,6 +4,7 @@ from .contact import Contact
 from .definition import Definition
 from .alternativformulering import AlternativFormulering
 from .betydningsbeskrivelse import RelationToSource
+from .associativerelation import AssociativeRelation
 
 DCT = Namespace('http://purl.org/dc/terms/')
 SKOSXL = Namespace('http://www.w3.org/2008/05/skos-xl#')
@@ -48,6 +49,9 @@ class Concept:
                 self.validinperiod = c['validinperiod']
             if 'publisher' in c:
                 self.publisher = c['publisher']
+            if 'related' in c:
+                self.related = c['related']
+
         self.seeAlso = []
         self.replaces = []
         self.replacedBy = []
@@ -180,6 +184,14 @@ class Concept:
     @replacedBy.setter
     def replacedBy(self, concepts: list):
         self._replacedBy = concepts
+
+    @property
+    def related(self) -> AssociativeRelation:
+        return self._related
+
+    @related.setter
+    def related(self, ar: AssociativeRelation):
+        self._related = ar
 # ----------------------------------------------
 
     def to_graph(self) -> Graph:
@@ -336,6 +348,14 @@ class Concept:
             for c in self.replacedBy:
                 self._g.add((URIRef(self.identifier), DCT.replacedBy,
                              URIRef(c.identifier)))
+
+        # related
+        if hasattr(self, 'related'):
+            _related = self.related
+            ar = BNode()
+            for s, p, o in _related.to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), SKOS.related, ar))
 
 # ------------
 # Helper methods:

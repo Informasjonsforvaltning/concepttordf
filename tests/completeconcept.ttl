@@ -42,22 +42,22 @@
         dct:modified                  "2020-03-05"^^xsd:date ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/555111290> ;
         dct:subject                   "termonologi"@nb , "terminology"@en , "termonologi"@nn ;
-        dct:temporal                  [ a                 dct:PeriodOfTime ;
-                                        schema:endDate    "9999-03-30"^^xsd:date ;
-                                        schema:startDate  "2020-03-03"^^xsd:date
+        dct:temporal                  [ a                   dct:PeriodOfTime ;
+                                        schema:endDate      "9999-03-30"^^xsd:date ;
+                                        schema:startDate    "2020-03-03"^^xsd:date
                                       ] ;
         skos:example                  "Komplettbegrepet fins naturlig svært få steder på jorda"@nb , "Komplettomgrepet fins naturlig svært få stadar på jorda"@nn , "The completeconcept's natural habitat is very seldom to find on planet earth"@en ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb ;
-                                        dct:modified         "2020-03-01"^^xsd:date ;
+                                        dct:modified        "2020-03-01"^^xsd:date ;
                                       ] ;
         skosxl:altLabel               [ a                   skosxl:Label ;
                                         skosxl:literalForm  "superconcept"@en , "totalconcept"@en , "superomgrep"@nn , "totalomgrep"@nn , "superbegrep"@nb , "totalbegrep"@nb ;
-                                        dct:modified         "2020-03-02"^^xsd:date ;
+                                        dct:modified        "2020-03-02"^^xsd:date ;
                                       ] ;
         skosxl:hiddenLabel            [ a                   skosxl:Label ;
                                         skosxl:literalForm  "completeconcept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb ;
-                                        dct:modified         "2020-03-03"^^xsd:date ;
+                                        dct:modified        "2020-03-03"^^xsd:date ;
                                       ] ;
         dcat:contactPoint             [ a               vcard:Organization ;
                                         vcard:hasEmail  <mailto:sbd@example.com> ;
@@ -68,5 +68,10 @@
                                       ] ;
         rdfs:seeAlso                  <http://example.com/concepts/3>, <http://example.com/concepts/5> ;
         dct:replaces                  <http://example.com/concepts/2> ;
-        dct:replacedBy                <http://example.com/concepts/1>
+        dct:replacedBy                <http://example.com/concepts/1> ;
+        skos:related                  [ a                       skosno:AssosiativRelasjon ;
+                                        dct:modified            "2020-01-01"^^xsd:date ;
+                                        dct:description         "hf!"@nb , "wtf!"@en , "kf!"@nn ;
+                                        skosno:assosiertBegrep  <http://example.com/concepts/44>, <http://example.com/concepts/54>
+                                      ]
         .

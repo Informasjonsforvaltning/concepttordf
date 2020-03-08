@@ -93,6 +93,15 @@
 		"modified": "2020-03-05",
 		"seeAlso" : ["http://example.com/concepts/3", "http://example.com/concepts/5"],
 		"replaces": ["http://example.com/concepts/2"],
-		"replacedBy": ["http://example.com/concepts/1"]
+		"replacedBy": ["http://example.com/concepts/1"],
+		"related": {
+			"description": {
+				"en": "wtf!",
+				"nb": "hf!",
+				"nn": "kf!"
+			},
+			"modified": "2020-01-01",
+			"assoicatedconcepts": ["http://example.com/concepts/44", "http://example.com/concepts/54"]
+		}
 	}
 }

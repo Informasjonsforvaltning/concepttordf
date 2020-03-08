@@ -2,11 +2,12 @@ from concepttordf.concept import Concept
 from concepttordf.contact import Contact
 from concepttordf.definition import Definition
 from concepttordf.alternativformulering import AlternativFormulering
+from concepttordf.associativerelation import AssociativeRelation
 
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
-# import pytest
+import pytest
 
 
 # @pytest.mark.skip(reason="no way of currently testing this")
@@ -41,6 +42,10 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
         data = json.load(json_file)
         _concept = data['concept']
     concept = Concept(_concept)
+    # --
+    concept.related = AssociativeRelation(_concept['related'])
+    for ac in _concept['related']['assoicatedconcepts']:
+        concept.related.associatedconcepts.append(ac)
     # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()
@@ -90,6 +95,10 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.bruksområde = _concept['bruksområde']
     concept.validinperiod = _concept['validinperiod']
     concept.modified = _concept['modified']
+    # --
+    concept.related = AssociativeRelation(_concept['related'])
+    for ac in _concept['related']['assoicatedconcepts']:
+        concept.related.associatedconcepts.append(ac)
     # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()
