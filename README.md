@@ -77,3 +77,9 @@ Wit coverage-report to html:
 ```
 % pytest -rA --cov-report html --cov=concepttordf tests/
 ```
+### Debugging
+You can enter into [Pdb](https://docs.python.org/3/library/pdb.html) by passing `--pdb` to pytest:
+```
+pytest --pdb -rA --cov-report term-missing --cov=concepttordf tests/
+```
+You can set breakpoints directly in code by using the function `breakpoint()`.
