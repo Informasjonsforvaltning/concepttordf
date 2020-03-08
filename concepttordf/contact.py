@@ -11,6 +11,7 @@ class Contact:
     """A class representing a contact """
 
     def __init__(self, contact: dict = None):
+        self._g = Graph()
         if contact is not None:
             if 'name' in contact:
                 self._name = contact['name']
@@ -55,50 +56,47 @@ class Contact:
 
     def to_graph(self) -> Graph:
 
-        return _add_contact_to_graph(self)
+        self._add_contact_to_graph()
+
+        return self._g
 
     def to_rdf(self, format='turtle') -> str:
         """Maps the contact to rdf and returns a serialization
            as a string according to format"""
 
-        _g = self.to_graph()
+        return self.to_graph().serialize(format=format, encoding='utf-8')
 
-        return _g.serialize(format=format, encoding='utf-8')
+    # -----
 
+    def _add_contact_to_graph(self):
+        """Adds the concept to the Graph _g"""
 
-def _add_contact_to_graph(contact: Contact) -> Graph:
-    """Adds the concept to the Graph g and returns g"""
+        self._g.bind('vcard', VCARD)
 
-    g = Graph()
+        if hasattr(self, 'identifier'):
+            _self = URIRef(self.identifier)
+        else:
+            _self = BNode()
 
-    g.bind('vcard', VCARD)
+        self._g.add((_self, RDF.type, VCARD.Organization))
 
-    if hasattr(contact, 'identifier'):
-        _contact = URIRef(contact.identifier)
-    else:
-        _contact = BNode()
+        # name
+        if hasattr(self, 'name'):
+            for key in self.name:
+                self._g.add((_self, VCARD.hasOrganizationName,
+                            Literal(self.name[key], lang=key)))
 
-    g.add((_contact, RDF.type, VCARD.Organization))
+        # email
+        if hasattr(self, 'email'):
+            self._g.add((_self, VCARD.hasEmail,
+                        URIRef('mailto:' + self.email)))
 
-    # name
-    if hasattr(contact, 'name'):
-        for key in contact.name:
-            g.add((_contact, VCARD.hasOrganizationName,
-                   Literal(contact.name[key], lang=key)))
+        # telephone
+        if hasattr(self, 'telephone'):
+            self._g.add((_self, VCARD.hasTelephone,
+                        URIRef('tel:' + self.telephone)))
 
-    # email
-    if hasattr(contact, 'email'):
-        g.add((_contact, VCARD.hasEmail,
-               URIRef('mailto:' + contact.email)))
-
-    # telephone
-    if hasattr(contact, 'telephone'):
-        g.add((_contact, VCARD.hasTelephone,
-               URIRef('tel:' + contact.telephone)))
-
-    # url
-    if hasattr(contact, 'url'):
-        g.add((_contact, VCARD.hasURL,
-               URIRef(contact.url)))
-
-    return g
+        # url
+        if hasattr(self, 'url'):
+            self._g.add((_self, VCARD.hasURL,
+                        URIRef(self.url)))
