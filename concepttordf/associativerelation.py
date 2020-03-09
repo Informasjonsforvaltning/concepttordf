@@ -1,5 +1,5 @@
 from .conceptrelation import ConceptRelation
-from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
+from rdflib import Graph, Literal, Namespace, RDF, URIRef
 
 SKOSNO = Namespace('http://difi.no/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -9,7 +9,6 @@ XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 class AssociativeRelation(ConceptRelation):
 
     def __init__(self, ar: dict = None):
-        self._g = Graph()
         self._associatedconcepts = []
         if ar is not None:
             if 'description' in ar:
@@ -36,6 +35,8 @@ class AssociativeRelation(ConceptRelation):
     def associatedconcepts(self, acs: list):
         self._associatedconcepts
 
+# ---
+
     def to_graph(self) -> Graph:
 
         self._add_relation_to_graph()
@@ -45,28 +46,19 @@ class AssociativeRelation(ConceptRelation):
 # ---
     def _add_relation_to_graph(self):
 
-        self._g.bind('skosno', SKOSNO)
-        self._g.bind('dct', DCT)
-        self._g.bind('xsd', XSD)
+        super(AssociativeRelation, self)._add_relation_to_graph()
 
-        _relation = BNode()
-
-        self._g.add((_relation, RDF.type, SKOSNO.AssosiativRelasjon))
+        self._g.add((self._relation, RDF.type, SKOSNO.AssosiativRelasjon))
 
         # description
         if hasattr(self, 'description'):
             for key in self.description:
-                self._g.add((_relation, DCT.description,
+                self._g.add((self._relation, DCT.description,
                             Literal(self.description[key], lang=key)))
 
-        # modified
-        if hasattr(self, 'modified'):
-            self._g.add((_relation, DCT.modified,
-                         Literal(self.modified, datatype=XSD.date)))
-
-        # modified
+        # associatedconcepts
         if hasattr(self, 'associatedconcepts'):
             # breakpoint()
             for ac in self.associatedconcepts:
-                self._g.add((_relation, SKOSNO.assosiertBegrep,
+                self._g.add((self._relation, SKOSNO.assosiertBegrep,
                             URIRef(ac)))
