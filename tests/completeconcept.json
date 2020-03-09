@@ -101,7 +101,7 @@
 				"nn": "kf!"
 			},
 			"modified": "2020-01-01",
-			"assoicatedconcepts": ["http://example.com/concepts/44", "http://example.com/concepts/54"]
+			"associatedconcepts": ["http://example.com/concepts/44", "http://example.com/concepts/54"]
 		}
 	}
 }

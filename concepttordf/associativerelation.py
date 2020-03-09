@@ -15,8 +15,8 @@ class AssociativeRelation(ConceptRelation):
                 self.description = ar['description']
             if 'description' in ar:
                 self.description = ar['description']
-            if 'assoicatedconcepts' in ar:
-                self.associatedconcepts = ar['assoicatedconcepts']
+            if 'associatedconcepts' in ar:
+                self.associatedconcepts = ar['associatedconcepts']
         super().__init__(ar)
 
     @property

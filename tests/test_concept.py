@@ -44,7 +44,7 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
     concept = Concept(_concept)
     # --
     concept.related = AssociativeRelation(_concept['related'])
-    for ac in _concept['related']['assoicatedconcepts']:
+    for ac in _concept['related']['associatedconcepts']:
         concept.related.associatedconcepts.append(ac)
     # --
     for c in _concept['seeAlso']:
@@ -97,7 +97,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.modified = _concept['modified']
     # --
     concept.related = AssociativeRelation(_concept['related'])
-    for ac in _concept['related']['assoicatedconcepts']:
+    for ac in _concept['related']['associatedconcepts']:
         concept.related.associatedconcepts.append(ac)
     # --
     for c in _concept['seeAlso']:
