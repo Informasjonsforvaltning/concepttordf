@@ -78,5 +78,10 @@
                                         dct:modified            "2020-01-02"^^xsd:date ;
                                         skosno:inndelingskriterium  "inndelingskriterium generisk"@nb , "criterium generic"@en , "inndelingskriterium generisk"@nn ;
                                         skosno:overordnetBegrep  <http://example.com/concepts/64>, <http://example.com/concepts/74>
+                                      ] ;
+        xkos:hasPart                  [ a                       skosno:PartitivRelasjon ;
+                                        dct:modified            "2020-01-03"^^xsd:date ;
+                                        skosno:inndelingskriterium  "inndelingskriterium partitiv"@nb , "criterium partitiv"@en , "inndelingskriterium partitiv"@nn ;
+                                        skosno:underordnetBegrep  <http://example.com/concepts/84>, <http://example.com/concepts/94>
                                       ]
         .

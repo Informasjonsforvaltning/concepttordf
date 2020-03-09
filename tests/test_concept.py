@@ -4,11 +4,12 @@ from concepttordf.definition import Definition
 from concepttordf.alternativformulering import AlternativFormulering
 from concepttordf.associativerelation import AssociativeRelation
 from concepttordf.genericrelation import GenericRelation
+from concepttordf.partitiverelation import PartitiveRelation
 
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
-# import pytest
+import pytest
 
 
 # @pytest.mark.skip(reason="no way of currently testing this")
@@ -51,6 +52,11 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
     concept.generalizes = GenericRelation(_concept['generalizes'])
     for gc in _concept['generalizes']['genericconcepts']:
         concept.generalizes.genericconcepts.append(gc)
+    # --
+    concept.hasPart = PartitiveRelation(_concept['hasPart'])
+    for pc in _concept['hasPart']['partconcepts']:
+        concept.hasPart.partconcepts.append(pc)
+    # --
     # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()
@@ -109,6 +115,10 @@ def test_concept_to_rdf_should_return_skos_concept():
     for gc in _concept['generalizes']['genericconcepts']:
         concept.generalizes.genericconcepts.append(gc)
     # --
+    concept.hasPart = PartitiveRelation(_concept['hasPart'])
+    for pc in _concept['hasPart']['partconcepts']:
+        concept.hasPart.partconcepts.append(pc)
+    # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()
         seeAlsoConcept.identifier = c
@@ -127,7 +137,7 @@ def test_concept_to_rdf_should_return_skos_concept():
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
-    # _dump_turtle(g1)
+    _dump_turtle(g1)
     g2 = Graph().parse("tests/completeconcept.ttl",
                        format='turtle', encoding='utf-8')
 

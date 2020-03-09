@@ -5,8 +5,9 @@
 - [x] Add support for [see also](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_seogs%C3%A5)
 - [x] Add support for [replaces](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstatter)
 - [x] Add support for [replaced by](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_erstattesav)
-- [ ] Add support for relations:
+- [x] Add support for relations:
   - [x] [related](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_assosiativrelasjon)
   - [x] [generalizes](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_generiskrelasjon)
-  - [ ] [hasPart](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_partitivrelasjon)
+  - [x] [hasPart](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_partitivrelasjon)
 - [ ] Document how to set up an endpoint that can be harvested
+- [ ] Consider refactor tests to test one attribute at a time

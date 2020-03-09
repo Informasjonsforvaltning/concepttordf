@@ -111,6 +111,15 @@
 			},
 			"modified": "2020-01-02",
 			"genericconcepts": ["http://example.com/concepts/64", "http://example.com/concepts/74"]
+		},
+		"hasPart": {
+			"criterium": {
+				"en": "criterium partitiv",
+				"nb": "inndelingskriterium partitiv",
+				"nn": "inndelingskriterium partitiv"
+			},
+			"modified": "2020-01-03",
+			"partconcepts": ["http://example.com/concepts/84", "http://example.com/concepts/94"]
 		}
 	}
 }

@@ -6,6 +6,8 @@ from .alternativformulering import AlternativFormulering
 from .betydningsbeskrivelse import RelationToSource
 from .associativerelation import AssociativeRelation
 from .genericrelation import GenericRelation
+from .partitiverelation import PartitiveRelation
+
 
 DCT = Namespace('http://purl.org/dc/terms/')
 SKOSXL = Namespace('http://www.w3.org/2008/05/skos-xl#')
@@ -55,6 +57,8 @@ class Concept:
                 self.related = c['related']
             if 'generalizes' in c:
                 self.generalizes = c['generalizes']
+            if 'hasPart' in c:
+                self.hasPart = c['hasPart']
 
         self.seeAlso = []
         self.replaces = []
@@ -204,6 +208,14 @@ class Concept:
     @generalizes.setter
     def generalizes(self, gr: GenericRelation):
         self._generalizes = gr
+
+    @property
+    def hasPart(self) -> PartitiveRelation:
+        return self._hasPart
+
+    @hasPart.setter
+    def hasPart(self, gr: PartitiveRelation):
+        self._hasPart = gr
 # ----------------------------------------------
 
     def to_graph(self) -> Graph:
@@ -377,6 +389,14 @@ class Concept:
             for s, p, o in _generalizes.to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
             self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
+
+        # hasPart
+        if hasattr(self, 'hasPart'):
+            _hasPart = self.hasPart
+            ar = BNode()
+            for s, p, o in _hasPart.to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.hasPart, ar))
 
 # ------------
 # Helper methods:
