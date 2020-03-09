@@ -102,6 +102,15 @@
 			},
 			"modified": "2020-01-01",
 			"associatedconcepts": ["http://example.com/concepts/44", "http://example.com/concepts/54"]
+		},
+		"generalizes": {
+			"criterium": {
+				"en": "criterium generic",
+				"nb": "inndelingskriterium generisk",
+				"nn": "inndelingskriterium generisk"
+			},
+			"modified": "2020-01-02",
+			"genericconcepts": ["http://example.com/concepts/64", "http://example.com/concepts/74"]
 		}
 	}
 }

@@ -73,5 +73,10 @@
                                         dct:modified            "2020-01-01"^^xsd:date ;
                                         dct:description         "hf!"@nb , "wtf!"@en , "kf!"@nn ;
                                         skosno:assosiertBegrep  <http://example.com/concepts/44>, <http://example.com/concepts/54>
+                                      ] ;
+        xkos:generalizes              [ a                       skosno:GeneriskRelasjon ;
+                                        dct:modified            "2020-01-02"^^xsd:date ;
+                                        skosno:inndelingskriterium  "inndelingskriterium generisk"@nb , "criterium generic"@en , "inndelingskriterium generisk"@nn ;
+                                        skosno:overordnetBegrep  <http://example.com/concepts/64>, <http://example.com/concepts/74>
                                       ]
         .

@@ -3,11 +3,12 @@ from concepttordf.contact import Contact
 from concepttordf.definition import Definition
 from concepttordf.alternativformulering import AlternativFormulering
 from concepttordf.associativerelation import AssociativeRelation
+from concepttordf.genericrelation import GenericRelation
 
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
-import pytest
+# import pytest
 
 
 # @pytest.mark.skip(reason="no way of currently testing this")
@@ -46,6 +47,10 @@ def test_concept_constructor_to_rdf_should_return_skos_concept():
     concept.related = AssociativeRelation(_concept['related'])
     for ac in _concept['related']['associatedconcepts']:
         concept.related.associatedconcepts.append(ac)
+    # --
+    concept.generalizes = GenericRelation(_concept['generalizes'])
+    for gc in _concept['generalizes']['genericconcepts']:
+        concept.generalizes.genericconcepts.append(gc)
     # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()
@@ -99,6 +104,10 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.related = AssociativeRelation(_concept['related'])
     for ac in _concept['related']['associatedconcepts']:
         concept.related.associatedconcepts.append(ac)
+    # --
+    concept.generalizes = GenericRelation(_concept['generalizes'])
+    for gc in _concept['generalizes']['genericconcepts']:
+        concept.generalizes.genericconcepts.append(gc)
     # --
     for c in _concept['seeAlso']:
         seeAlsoConcept = Concept()

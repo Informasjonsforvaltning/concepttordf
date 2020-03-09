@@ -5,6 +5,7 @@ from .definition import Definition
 from .alternativformulering import AlternativFormulering
 from .betydningsbeskrivelse import RelationToSource
 from .associativerelation import AssociativeRelation
+from .genericrelation import GenericRelation
 
 DCT = Namespace('http://purl.org/dc/terms/')
 SKOSXL = Namespace('http://www.w3.org/2008/05/skos-xl#')
@@ -14,6 +15,7 @@ SKOSNO = Namespace('http://difi.no/skosno#')
 DCAT = Namespace('http://www.w3.org/ns/dcat#')
 XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 SCHEMA = Namespace('http://schema.org/')
+XKOS = Namespace('http://rdf-vocabulary.ddialliance.org/xkos#')
 
 
 class Concept:
@@ -51,6 +53,8 @@ class Concept:
                 self.publisher = c['publisher']
             if 'related' in c:
                 self.related = c['related']
+            if 'generalizes' in c:
+                self.generalizes = c['generalizes']
 
         self.seeAlso = []
         self.replaces = []
@@ -192,6 +196,14 @@ class Concept:
     @related.setter
     def related(self, ar: AssociativeRelation):
         self._related = ar
+
+    @property
+    def generalizes(self) -> GenericRelation:
+        return self._generalizes
+
+    @generalizes.setter
+    def generalizes(self, gr: GenericRelation):
+        self._generalizes = gr
 # ----------------------------------------------
 
     def to_graph(self) -> Graph:
@@ -220,6 +232,7 @@ class Concept:
         self._g.bind('dcat', DCAT)
         self._g.bind('xsd', XSD)
         self._g.bind('schema', SCHEMA)
+        self._g.bind('xkos', XKOS)
 
         self._g.add((URIRef(self.identifier), RDF.type, SKOS.Concept))
 
@@ -356,6 +369,14 @@ class Concept:
             for s, p, o in _related.to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
             self._g.add((URIRef(self.identifier), SKOS.related, ar))
+
+        # generalizes
+        if hasattr(self, 'generalizes'):
+            _generalizes = self.generalizes
+            ar = BNode()
+            for s, p, o in _generalizes.to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
 
 # ------------
 # Helper methods:
