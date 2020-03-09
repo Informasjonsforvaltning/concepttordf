@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="concepttordf-stigbd",
-    version="0.1.1",
+    version="0.1.2",
     author="Stig B. Dørmænen",
     author_email="stigbd@gmail.com",
     description=(
@@ -16,6 +16,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Informasjonsforvaltning/concepttordf",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'rdflib',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
