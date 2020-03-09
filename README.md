@@ -41,25 +41,29 @@ Will print the concept according to the specification:
 ```
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix ns1: <http://difi.no/skosno#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix skosno: <http://difi.no/skosno#> .
+@prefix skosno: <http://difi.no/skosno> .
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix xkos: <http://rdf-vocabulary.ddialliance.org/xkos#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://example.com/concepts/1> a skos:Concept ;
-    skosno:betydningsbeskrivelse [ a skosno:Definisjon ;
-            rdfs:label "an abstract or generic idea generalized fromparticular instances"@en,
-                "mental forestilling om et konkret eller abstraktfenomen i den virkelige verden"@nb ] ;
+<http://example.com/collections/1> a skos:Collection ;
+    rdfs:label "En begrepssamling"@nb ;
     dct:publisher <https://example.com/publishers/1> ;
+    skos:member <http://example.com/concepts/1> .
+
+<http://example.com/concepts/1> a skos:Concept ;
+    ns1:betydningsbeskrivelse [ a ns1:Definisjon ;
+            rdfs:label "something you want more of"@en,
+                "ting man skulle hatt mer av"@nb ] ;
     skosxl:prefLabel [ a skosxl:Label ;
-            skosxl:literalForm "concept"@en,
-                "begrep"@nb ] .
+            skosxl:literalForm "income"@en,
+                "inntekt"@nb ] .
+
 ```
 
 ## Development
