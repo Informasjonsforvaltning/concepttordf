@@ -440,7 +440,6 @@ class Concept:
             # sitatFraKilde = "quoteFromSource"
             # basertPåKilde = "basedOnSource"
             # egendefinert = "noSource"
-            #
             # -
             if (RelationToSource(betydningsbeskrivelse.relationtosource)
                is RelationToSource.sitatFraKilde):

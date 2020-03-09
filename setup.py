@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="concepttordf-stigbd",
-    version="0.0.5",
+    version="0.1.1",
     author="Stig B. Dørmænen",
     author_email="stigbd@gmail.com",
     description=(
