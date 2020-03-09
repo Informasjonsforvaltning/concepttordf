@@ -14,6 +14,7 @@ class Collection:
 
     def __init__(self, c: dict = None):
         self._g = Graph()
+        self._members = []
 
     @property
     def name(self) -> str:

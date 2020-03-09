@@ -8,32 +8,33 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 % pip install -i https://test.pypi.org/simple/ concepttordf-stigbd
 ```
 ### Getting started
-
+To create a SKOS-AP-NO concept collection:
 ```
+from concepttordf.collection import Collection
 from concepttordf.concept import Concept
 from concepttordf.definition import Definition
 
-# create a concept
-concept = Concept()
-# set identifier
-concept.identifier = "http://example.com/concepts/1"
-# set term
-concept.term = {"name": {"nb": "begrep", "en": "concept"}}
-# set definition
+# Create collection object
+collection = Collection()
+collection.identifier = "http://example.com/collections/1"
+collection.name = {"en": "A concept collection"}
+collection.name = {"nb": "En begrepssamling"}
+collection.publisher = "https://example.com/publishers/1"
+
+# Create a concept:
+c = Concept()
+c.identifier = "http://example.com/concepts/1"
+c.term = {"name": {"nb": "inntekt", "en": "income"}}
 definition = Definition()
-definition.text = {"nb":
-                   ("mental forestilling om et konkret eller abstrakt"
-                    "fenomen i den virkelige verden"),
-                   "en":
-                   ("an abstract or generic idea generalized from"
-                    "particular instances")
-                   }
-concept.definition = definition
-# set publisher
-concept.publisher = "https://example.com/publishers/1"
+definition.text = {"nb": "ting man skulle hatt mer av",
+                   "en": "something you want more of"}
+c.definition = definition
+
+# Add concept to collection:
+collection.members.append(c)
 
 # get rdf representation in turtle (default)
-rdf = concept.to_rdf()
+rdf = collection.to_rdf()
 print(rdf.decode())
 ```
 Will print the concept according to the specification:
