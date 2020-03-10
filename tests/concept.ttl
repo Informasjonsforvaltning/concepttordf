@@ -1,5 +1,5 @@
 @prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
-@prefix skosno: <http://difi.no/skosno#> .
+@prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
@@ -11,12 +11,13 @@
 <http://example.com/concepts/1>
         a                             skos:Concept ;
         skosno:betydningsbeskrivelse             [ a                       skosno:Definisjon ;
-                                        rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
-                                                                "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
+                                        rdfs:label              "unit of knowledge created by a unique combination of characteristics"@en,
+                                                                "kunnskapsenhet som er dannet gjennom en unik kombinasjon av kjennetegn"@nb,
+                                                                "kunnskapseining som er danna gjennom ein unik kombinasjon av kjenneteikn"@nn;
                                       ] ,
                                       [ a                       skosno:AlternativFormulering ;
-                                        rdfs:label              "another statement of the meaning of the concept"@en,
-                                                                "en 'alternativ formulering' av betydningen til begrepet"@nb;
+                                        rdfs:label              "abstract or generic idea about a phenomenon"@en,
+                                                                "mental forestilling om et fenomen"@nb;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
