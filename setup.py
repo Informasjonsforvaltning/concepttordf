@@ -4,10 +4,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="concepttordf-stigbd",
-    version="0.1.4",
+    name="concepttordf",
+    version="1.0.0.rc1",
     author="Stig B. Dørmænen",
-    author_email="stigbd@gmail.com",
+    author_email="sbd@digdir.no",
     description=(
                  "A small Python library for mapping a concept collection"
                  "to the skos-ap-no specification"

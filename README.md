@@ -5,7 +5,7 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 ## Usage
 ### Install
 ```
-% pip install -i https://test.pypi.org/simple/ concepttordf-stigbd
+% pip install -i concepttordf
 ```
 ### Getting started
 To create a SKOS-AP-NO concept collection:
@@ -76,7 +76,6 @@ Will print the concept according to the specification:
 % git clone https://github.com/Informasjonsforvaltning/concepttordf.git
 % cd concepttordf
 % pipenv install
-% pipenv shell
 % pipenv shell
 % pipenv install --dev -e .
 ```
