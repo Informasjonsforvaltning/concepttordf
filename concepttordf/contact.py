@@ -4,7 +4,7 @@ DCT = Namespace('http://purl.org/dc/terms/')
 SKOSXL = Namespace('http://www.w3.org/2008/05/skos-xl#')
 VCARD = Namespace('http://www.w3.org/2006/vcard/ns#')
 SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
-SKOSNO = Namespace('http://difi.no/skosno#')
+SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 
 
 class Contact:

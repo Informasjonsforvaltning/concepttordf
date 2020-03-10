@@ -10,7 +10,7 @@ setuptools.setup(
     author_email="sbd@digdir.no",
     description=(
                  "A small Python library for mapping a concept collection"
-                 "to the skos-ap-no specification"
+                 " to the skos-ap-no specification"
                  ),
     long_description=long_description,
     long_description_content_type="text/markdown",

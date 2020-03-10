@@ -1,7 +1,7 @@
 from .conceptrelation import ConceptRelation
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
 
-SKOSNO = Namespace('http://difi.no/skosno#')
+SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
 XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 

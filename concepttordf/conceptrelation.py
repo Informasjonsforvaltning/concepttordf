@@ -2,7 +2,7 @@ from abc import ABC
 from datetime import date
 from rdflib import Graph, Literal, BNode, Namespace
 
-SKOSNO = Namespace('http://difi.no/skosno#')
+SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
 XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 

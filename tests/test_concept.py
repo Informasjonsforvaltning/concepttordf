@@ -171,7 +171,7 @@ def test_noSource_to_rdf_should_return_skos_definition():
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-    @prefix skosno: <http://difi.no/skosno#> .
+    @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
     @prefix xml: <http://www.w3.org/XML/1998/namespace> .
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -213,7 +213,7 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition():
     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
     @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-    @prefix skosno: <http://difi.no/skosno#> .
+    @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
     @prefix xml: <http://www.w3.org/XML/1998/namespace> .
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 

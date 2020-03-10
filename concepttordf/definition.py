@@ -1,7 +1,7 @@
 from .betydningsbeskrivelse import Betydningsbeskrivelse
 from rdflib import Namespace
 
-SKOSNO = Namespace('http://difi.no/skosno#')
+SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 
 
 class Definition(Betydningsbeskrivelse):
