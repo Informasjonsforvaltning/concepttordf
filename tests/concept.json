@@ -4,19 +4,22 @@
 		"term": {
 			"name": {
 				"en": "concept",
-				"nb": "begrep"
+				"nb": "begrep",
+				"nn": "omgrep"
 			}
 		},
 		"definition": {
 			"text": {
-				"en": "an abstract or generic idea generalized from particular instances",
-				"nb": "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"
+				"en": "unit of knowledge created by a unique combination of characteristics",
+				"nb": "kunnskapsenhet som er dannet gjennom en unik kombinasjon av kjennetegn",
+				"nn": "kunnskapseining som er danna gjennom ein unik kombinasjon av kjenneteikn"
 			}
 		},
 		"alternativformulering": {
 			"text": {
-				"en": "another statement of the meaning of the concept",
-				"nb": "en 'alternativ formulering' av betydningen til begrepet"
+				"en": "abstract or generic idea about a phenomenon",
+				"nb": "mental forestilling om et fenomen",
+				"nn": "mental førestilling om eit fenomen"
 			}
 		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399",

@@ -11,16 +11,18 @@
 <http://example.com/concepts/1>
         a                             skos:Concept ;
         skosno:betydningsbeskrivelse             [ a                       skosno:Definisjon ;
-                                        rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
-                                                                "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
+                                        rdfs:label              "unit of knowledge created by a unique combination of characteristics"@en,
+                                                                "kunnskapsenhet som er dannet gjennom en unik kombinasjon av kjennetegn"@nb,
+                                                                "kunnskapseining som er danna gjennom ein unik kombinasjon av kjenneteikn"@nn ;
                                       ] ,
                                       [ a                       skosno:AlternativFormulering ;
-                                        rdfs:label              "another statement of the meaning of the concept"@en,
-                                                                "en 'alternativ formulering' av betydningen til begrepet"@nb;
+                                        rdfs:label              "abstract or generic idea about a phenomenon"@en,
+                                                                "mental forestilling om et fenomen"@nb,
+                                                                "mental førestilling om eit fenomen"@nn ;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
-                                        skosxl:literalForm  "concept"@en, "begrep"@nb
+                                        skosxl:literalForm  "concept"@en, "begrep"@nb, "omgrep"@nn ;
                                       ] ;
         dcat:contactPoint             [ a               vcard:Organization ;
                                         vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
