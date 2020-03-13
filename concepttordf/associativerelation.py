@@ -27,7 +27,7 @@ class AssociativeRelation(ConceptRelation):
 
 # ---
 
-    def to_graph(self) -> Graph:
+    def _to_graph(self) -> Graph:
 
         self._add_relation_to_graph()
 

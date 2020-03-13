@@ -21,7 +21,24 @@ XKOS = Namespace('http://rdf-vocabulary.ddialliance.org/xkos#')
 
 
 class Concept:
-    """A class representing a concept"""
+    """A class representing a concept
+
+
+    Attributes:
+        identifier: the uri identifying the concept
+        term: a dictionary describing the
+            [anbefaltterm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_anbefaltterm)
+            , e.g.\n
+            ```
+            {"name": {"en": "concept"}, "modified":"2020-01-01"}
+            ```
+        alternativeterm: a dictionary describing the
+            [tillattTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_tillattterm)
+
+        hiddenterm: a dictionary describing the
+            [frarådetTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_frar%C3%A5detterm)
+
+    """
 
     def __init__(self):
         self._g = Graph()
@@ -53,6 +70,14 @@ class Concept:
     @alternativeterm.setter
     def alternativeterm(self, alternativeterm: dict):
         self._alternativeterm = alternativeterm
+
+    @property
+    def hiddenterm(self) -> dict:
+        return self._hiddenterm
+
+    @hiddenterm.setter
+    def hiddenterm(self, hiddenterm: dict):
+        self._hiddenterm = hiddenterm
 
     @property
     def datastrukturterm(self) -> dict:
@@ -176,18 +201,49 @@ class Concept:
         self._hasPart = gr
 # ----------------------------------------------
 
-    def to_graph(self) -> Graph:
-        """Adds the concept to the Graph g and returns g"""
+    def _to_graph(self) -> Graph:
+        """Transforms the concept to an rdf graph
+
+        Returns:
+            An RDF [graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#graph) representing the concept.
+        """
 
         self._add_concept_to_graph()
 
         return self._g
 
-    def to_rdf(self, format='turtle') -> str:
+    def to_rdf(self, format='text/turtle') -> str:
         """Maps the concept to rdf and returns a serialization
-           as a string according to format"""
+           as a string according to format
 
-        return self.to_graph().serialize(format=format, encoding='utf-8')
+        Args:
+            format: a valid serialization format\n
+                 - `text/turtle` (default)
+                 - `application/rdf+xml`
+                 - `application/ld+json`
+                 - `application/n-triples`
+                 - `text/n3`
+
+        Returns:
+            A serialization of the RDF graph, for example:
+            ```
+            @prefix dct: <http://purl.org/dc/terms/> .
+            @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+            @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+            @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+            @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
+            @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+            @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+            <http://example.com/concepts/1> a skos:Concept ;
+                    skosno:definisjon [ a skosno:Definisjon ;
+                    skosno:forholdTilKilde skosno:egendefinert ]
+                    .
+            ```
+
+           """
+
+        return self._to_graph().serialize(format=format)
 
 # ----------------------------------------------
 
@@ -287,7 +343,7 @@ class Concept:
         if hasattr(self, 'contactpoint'):
             contact = self.contactpoint
             contactPoint = BNode()
-            for s, p, o in contact.to_graph().triples((None, None, None)):
+            for s, p, o in contact._to_graph().triples((None, None, None)):
                 self._g.add((contactPoint, p, o))
             self._g.add((URIRef(self.identifier), DCAT.contactPoint,
                          contactPoint))
@@ -346,7 +402,7 @@ class Concept:
         if hasattr(self, 'related'):
             _related = self.related
             ar = BNode()
-            for s, p, o in _related.to_graph().triples((None, None, None)):
+            for s, p, o in _related._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
             self._g.add((URIRef(self.identifier), SKOS.related, ar))
 
@@ -354,7 +410,7 @@ class Concept:
         if hasattr(self, 'generalizes'):
             _generalizes = self.generalizes
             ar = BNode()
-            for s, p, o in _generalizes.to_graph().triples((None, None, None)):
+            for s, p, o in _generalizes._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
             self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
 
@@ -362,7 +418,7 @@ class Concept:
         if hasattr(self, 'hasPart'):
             _hasPart = self.hasPart
             ar = BNode()
-            for s, p, o in _hasPart.to_graph().triples((None, None, None)):
+            for s, p, o in _hasPart._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
             self._g.add((URIRef(self.identifier), XKOS.hasPart, ar))
 

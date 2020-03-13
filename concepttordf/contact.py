@@ -45,17 +45,17 @@ class Contact:
     def url(self, url: str):
         self._url = url
 
-    def to_graph(self) -> Graph:
+    def _to_graph(self) -> Graph:
 
         self._add_contact_to_graph()
 
         return self._g
 
-    def to_rdf(self, format='turtle') -> str:
+    def to_rdf(self, format='text/turtle') -> str:
         """Maps the contact to rdf and returns a serialization
            as a string according to format"""
 
-        return self.to_graph().serialize(format=format, encoding='utf-8')
+        return self._to_graph().serialize(format=format)
 
     # -----
 

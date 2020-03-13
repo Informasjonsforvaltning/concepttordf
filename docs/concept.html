@@ -1,0 +1,1432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.5" />
+<title>concepttordf.concept API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>concepttordf.concept</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from rdflib import Graph, Literal, BNode, Namespace, RDF, RDFS, URIRef
+from datetime import date
+from .contact import Contact
+from .definition import Definition
+from .alternativformulering import AlternativFormulering
+from .betydningsbeskrivelse import RelationToSource
+from .associativerelation import AssociativeRelation
+from .genericrelation import GenericRelation
+from .partitiverelation import PartitiveRelation
+
+
+DCT = Namespace(&#39;http://purl.org/dc/terms/&#39;)
+SKOSXL = Namespace(&#39;http://www.w3.org/2008/05/skos-xl#&#39;)
+VCARD = Namespace(&#39;http://www.w3.org/2006/vcard/ns#&#39;)
+SKOS = Namespace(&#39;http://www.w3.org/2004/02/skos/core#&#39;)
+SKOSNO = Namespace(&#39;https://data.norge.no/vocabulary/skosno#&#39;)
+DCAT = Namespace(&#39;http://www.w3.org/ns/dcat#&#39;)
+XSD = Namespace(&#39;http://www.w3.org/2001/XMLSchema#&#39;)
+SCHEMA = Namespace(&#39;http://schema.org/&#39;)
+XKOS = Namespace(&#39;http://rdf-vocabulary.ddialliance.org/xkos#&#39;)
+
+
+class Concept:
+    &#34;&#34;&#34;A class representing a concept
+
+
+    Attributes:
+        identifier: the uri identifying the concept
+        term: a dictionary describing the
+            [anbefaltterm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_anbefaltterm)
+            , e.g.\n
+            ```
+            {&#34;name&#34;: {&#34;en&#34;: &#34;concept&#34;}, &#34;modified&#34;:&#34;2020-01-01&#34;}
+            ```
+        alternativeterm: a dictionary describing the
+            [tillattTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_tillattterm)
+
+        hiddenterm: a dictionary describing the
+            [frarådetTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_frar%C3%A5detterm)
+
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self._g = Graph()
+
+        self.seeAlso = []
+        self.replaces = []
+        self.replacedBy = []
+
+    @property
+    def identifier(self) -&gt; str:
+        return self._identifier
+
+    @identifier.setter
+    def identifier(self, uri: str):
+        self._identifier = uri
+
+    @property
+    def term(self) -&gt; dict:
+        return self._term
+
+    @term.setter
+    def term(self, term: dict):
+        self._term = term
+
+    @property
+    def alternativeterm(self) -&gt; dict:
+        return self._alternativeterm
+
+    @alternativeterm.setter
+    def alternativeterm(self, alternativeterm: dict):
+        self._alternativeterm = alternativeterm
+
+    @property
+    def hiddenterm(self) -&gt; dict:
+        return self._hiddenterm
+
+    @hiddenterm.setter
+    def hiddenterm(self, hiddenterm: dict):
+        self._hiddenterm = hiddenterm
+
+    @property
+    def datastrukturterm(self) -&gt; dict:
+        return self._datastrukturterm
+
+    @datastrukturterm.setter
+    def datastrukturterm(self, datastrukturterm: dict):
+        self._datastrukturterm = datastrukturterm
+
+    @property
+    def subject(self) -&gt; dict:
+        return self._subject
+
+    @subject.setter
+    def subject(self, subject: dict):
+        self._subject = subject
+
+    @property
+    def definition(self) -&gt; Definition:
+        return self._definition
+
+    @definition.setter
+    def definition(self, definition: Definition):
+        self._definition = definition
+
+    @property
+    def alternativformulering(self) -&gt; AlternativFormulering:
+        return self._alternativformulering
+
+    @alternativformulering.setter
+    def alternativformulering(self,
+                              alternativformulering: AlternativFormulering):
+        self._alternativformulering = alternativformulering
+
+    @property
+    def contactpoint(self) -&gt; Contact:
+        return self._contactpoint
+
+    @contactpoint.setter
+    def contactpoint(self, contact: Contact):
+        self._contactpoint = contact
+
+    @property
+    def modified(self) -&gt; date:
+        return self._modified
+
+    @modified.setter
+    def modified(self, modified: date):
+        self._modified = modified
+
+    @property
+    def bruksområde(self) -&gt; dict:
+        return self._bruksområde
+
+    @bruksområde.setter
+    def bruksområde(self, bruksområde: dict):
+        self._bruksområde = bruksområde
+
+    @property
+    def validinperiod(self) -&gt; dict:
+        return self._validinperiod
+
+    @validinperiod.setter
+    def validinperiod(self, validinperiod: dict):
+        self._validinperiod = validinperiod
+
+    @property
+    def publisher(self) -&gt; str:
+        return self._publisher
+
+    @publisher.setter
+    def publisher(self, publisher: str):
+        self._publisher = publisher
+
+    @property
+    def seeAlso(self) -&gt; list:
+        return self._seeAlso
+
+    @seeAlso.setter
+    def seeAlso(self, concepts: list):
+        self._seeAlso = concepts
+
+    @property
+    def replaces(self) -&gt; list:
+        return self._replaces
+
+    @replaces.setter
+    def replaces(self, concepts: list):
+        self._replaces = concepts
+
+    @property
+    def replacedBy(self) -&gt; list:
+        return self._replacedBy
+
+    @replacedBy.setter
+    def replacedBy(self, concepts: list):
+        self._replacedBy = concepts
+
+    @property
+    def related(self) -&gt; AssociativeRelation:
+        return self._related
+
+    @related.setter
+    def related(self, ar: AssociativeRelation):
+        self._related = ar
+
+    @property
+    def generalizes(self) -&gt; GenericRelation:
+        return self._generalizes
+
+    @generalizes.setter
+    def generalizes(self, gr: GenericRelation):
+        self._generalizes = gr
+
+    @property
+    def hasPart(self) -&gt; PartitiveRelation:
+        return self._hasPart
+
+    @hasPart.setter
+    def hasPart(self, gr: PartitiveRelation):
+        self._hasPart = gr
+# ----------------------------------------------
+
+    def _to_graph(self) -&gt; Graph:
+        &#34;&#34;&#34;Transforms the concept to an rdf graph
+
+        Returns:
+            An RDF [graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#graph) representing the concept.
+        &#34;&#34;&#34;
+
+        self._add_concept_to_graph()
+
+        return self._g
+
+    def to_rdf(self, format=&#39;text/turtle&#39;) -&gt; str:
+        &#34;&#34;&#34;Maps the concept to rdf and returns a serialization
+           as a string according to format
+
+        Args:
+            format: a valid serialization format\n
+                 - `text/turtle` (default)
+                 - `application/rdf+xml`
+                 - `application/ld+json`
+                 - `application/n-triples`
+                 - `text/n3`
+
+        Returns:
+            A serialization of the RDF graph, for example:
+            ```
+            @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+            @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+            @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+            @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+            @prefix skosno: &lt;https://data.norge.no/vocabulary/skosno#&gt; .
+            @prefix xml: &lt;http://www.w3.org/XML/1998/namespace&gt; .
+            @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+            &lt;http://example.com/concepts/1&gt; a skos:Concept ;
+                    skosno:definisjon [ a skosno:Definisjon ;
+                    skosno:forholdTilKilde skosno:egendefinert ]
+                    .
+            ```
+
+           &#34;&#34;&#34;
+
+        return self._to_graph().serialize(format=format)
+
+# ----------------------------------------------
+
+    def _add_concept_to_graph(self):
+        &#34;&#34;&#34;Adds the concept to the Graph _g&#34;&#34;&#34;
+
+        self._g.bind(&#39;dct&#39;, DCT)
+        self._g.bind(&#39;skos&#39;, SKOS)
+        self._g.bind(&#39;skosxl&#39;, SKOSXL)
+        self._g.bind(&#39;vcard&#39;, VCARD)
+        self._g.bind(&#39;skosno&#39;, SKOSNO)
+        self._g.bind(&#39;dcat&#39;, DCAT)
+        self._g.bind(&#39;xsd&#39;, XSD)
+        self._g.bind(&#39;schema&#39;, SCHEMA)
+        self._g.bind(&#39;xkos&#39;, XKOS)
+
+        self._g.add((URIRef(self.identifier), RDF.type, SKOS.Concept))
+
+        # prefLabel
+        if hasattr(self, &#39;term&#39;):
+            label = BNode()
+            self._g.add((label, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.term:
+                _name = self.term[&#39;name&#39;]
+                for key in _name:
+                    self._g.add((label, SKOSXL.literalForm,
+                                 Literal(_name[key], lang=key)))
+            if &#39;modified&#39; in self.term:
+                self._g.add((label, DCT.modified,
+                            Literal(self.term[&#39;modified&#39;], datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), SKOSXL.prefLabel, label))
+
+        # altLabel
+        if hasattr(self, &#39;alternativeterm&#39;):
+            altLabel = BNode()
+            self._g.add((altLabel, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.alternativeterm:
+                _name = self.alternativeterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((altLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.alternativeterm:
+                self._g.add((altLabel, DCT.modified,
+                             Literal(self.alternativeterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), SKOSXL.altLabel, altLabel))
+
+        # hiddenLabel
+        if hasattr(self, &#39;hiddenterm&#39;):
+            hiddenLabel = BNode()
+            self._g.add((hiddenLabel, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.hiddenterm:
+                _name = self.hiddenterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((hiddenLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.hiddenterm:
+                self._g.add((hiddenLabel, DCT.modified,
+                             Literal(self.hiddenterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSXL.hiddenLabel, hiddenLabel))
+
+        # datastrukturterm
+        if hasattr(self, &#39;datastrukturterm&#39;):
+            datastrukturterm = BNode()
+            self._g.add((datastrukturterm, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.datastrukturterm:
+                _name = self.datastrukturterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((datastrukturterm, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.datastrukturterm:
+                self._g.add((datastrukturterm, DCT.modified,
+                             Literal(self.datastrukturterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSNO.datastrukturterm, datastrukturterm))
+        # definition
+        if hasattr(self, &#39;definition&#39;):
+            self._add_betydningsbeskrivelse_to_concept(self.definition)
+
+        # alternativformulering
+        if hasattr(self, &#39;alternativformulering&#39;):
+            self._add_betydningsbeskrivelse_to_concept(
+                self.alternativformulering)
+
+        # publisher
+        if hasattr(self, &#39;publisher&#39;):
+            self._g.add((URIRef(self.identifier), DCT.publisher,
+                         URIRef(self.publisher)))
+
+        # contactPoint
+        if hasattr(self, &#39;contactpoint&#39;):
+            contact = self.contactpoint
+            contactPoint = BNode()
+            for s, p, o in contact._to_graph().triples((None, None, None)):
+                self._g.add((contactPoint, p, o))
+            self._g.add((URIRef(self.identifier), DCAT.contactPoint,
+                         contactPoint))
+
+        # subject
+        if hasattr(self, &#39;subject&#39;):
+            for key in self.subject:
+                self._g.add((URIRef(self.identifier), DCT.subject,
+                             Literal(self.subject[key], lang=key)))
+
+        # modified
+        if hasattr(self, &#39;modified&#39;):
+            self._g.add((URIRef(self.identifier), DCT.modified,
+                         Literal(self.modified, datatype=XSD.date)))
+
+        # bruksområde
+        if hasattr(self, &#39;bruksområde&#39;):
+            for key in self.bruksområde:
+                for b in self.bruksområde[key]:
+                    self._g.add((URIRef(self.identifier), SKOSNO.bruksområde,
+                                 Literal(b, lang=key)))
+
+        # PeriodOfTime
+        if hasattr(self, &#39;validinperiod&#39;):
+            periodOfTime = BNode()
+            self._g.add((periodOfTime, RDF.type, DCT.PeriodOfTime))
+            if &#39;startdate&#39; in self.validinperiod:
+                self._g.add((periodOfTime, SCHEMA.startDate,
+                            Literal(self.validinperiod[&#39;startdate&#39;],
+                                    datatype=XSD.date)))
+            if &#39;enddate&#39; in self.validinperiod:
+                self._g.add((periodOfTime, SCHEMA.endDate,
+                            Literal(self.validinperiod[&#39;enddate&#39;],
+                                    datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), DCT.temporal, periodOfTime))
+
+        # seeAlso
+        if hasattr(self, &#39;seeAlso&#39;):
+            for c in self.seeAlso:
+                self._g.add((URIRef(self.identifier), RDFS.seeAlso,
+                            URIRef(c.identifier)))
+
+        # replaces
+        if hasattr(self, &#39;replaces&#39;):
+            for c in self.replaces:
+                self._g.add((URIRef(self.identifier), DCT.replaces,
+                             URIRef(c.identifier)))
+
+        # replacedBy
+        if hasattr(self, &#39;replacedBy&#39;):
+            for c in self.replacedBy:
+                self._g.add((URIRef(self.identifier), DCT.replacedBy,
+                             URIRef(c.identifier)))
+
+        # related
+        if hasattr(self, &#39;related&#39;):
+            _related = self.related
+            ar = BNode()
+            for s, p, o in _related._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), SKOS.related, ar))
+
+        # generalizes
+        if hasattr(self, &#39;generalizes&#39;):
+            _generalizes = self.generalizes
+            ar = BNode()
+            for s, p, o in _generalizes._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
+
+        # hasPart
+        if hasattr(self, &#39;hasPart&#39;):
+            _hasPart = self.hasPart
+            ar = BNode()
+            for s, p, o in _hasPart._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.hasPart, ar))
+
+# ------------
+# Helper methods:
+
+    def _add_betydningsbeskrivelse_to_concept(self, betydningsbeskrivelse):
+        # ---
+        _betydningsbeskrivelse = BNode()
+
+        self._g.add((_betydningsbeskrivelse, RDF.type,
+                     betydningsbeskrivelse.type))
+
+        # text
+        if hasattr(betydningsbeskrivelse, &#39;text&#39;):
+            for key in betydningsbeskrivelse.text:
+                self._g.add((_betydningsbeskrivelse, RDFS.label,
+                            Literal(betydningsbeskrivelse.text[key],
+                                    lang=key)))
+
+        # remark
+        if hasattr(betydningsbeskrivelse, &#39;remark&#39;):
+            for key in betydningsbeskrivelse.remark:
+                self._g.add((_betydningsbeskrivelse, SKOS.scopeNote,
+                            Literal(betydningsbeskrivelse.remark[key],
+                                    lang=key)))
+        # scope
+        if hasattr(betydningsbeskrivelse, &#39;scope&#39;):
+            _scope = BNode()
+            if &#39;url&#39; in betydningsbeskrivelse.scope:
+                self._g.add((_scope, RDFS.seeAlso,
+                            URIRef(betydningsbeskrivelse.scope[&#39;url&#39;])))
+            if &#39;text&#39; in betydningsbeskrivelse.scope:
+                _text = betydningsbeskrivelse.scope[&#39;text&#39;]
+                for key in _text:
+                    self._g.add((_scope, RDFS.label,
+                                Literal(_text[key], lang=key)))
+            self._g.add((_betydningsbeskrivelse, SKOSNO.omfang, _scope))
+
+        # relationtosource
+        if hasattr(betydningsbeskrivelse, &#39;relationtosource&#39;):
+            # -
+            # sitatFraKilde = &#34;quoteFromSource&#34;
+            # basertPåKilde = &#34;basedOnSource&#34;
+            # egendefinert = &#34;noSource&#34;
+            # -
+            if (RelationToSource(betydningsbeskrivelse.relationtosource)
+               is RelationToSource.sitatFraKilde):
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.sitatFraKilde))
+            elif (RelationToSource(betydningsbeskrivelse.relationtosource)
+                  is RelationToSource.basertPåKilde):
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.basertPåKilde))
+            else:
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.egendefinert))
+
+        # source
+        if hasattr(betydningsbeskrivelse, &#39;source&#39;):
+            _source = BNode()
+            if &#39;url&#39; in betydningsbeskrivelse.source:
+                self._g.add((_source, RDFS.seeAlso,
+                            URIRef(betydningsbeskrivelse.source[&#39;url&#39;])))
+            if &#39;text&#39; in betydningsbeskrivelse.source:
+                _text = betydningsbeskrivelse.source[&#39;text&#39;]
+                for key in _text:
+                    self._g.add((_source, RDFS.label,
+                                Literal(_text[key], lang=key)))
+            self._g.add((_betydningsbeskrivelse, DCT.source, _source))
+
+        # modified
+        if hasattr(betydningsbeskrivelse, &#39;modified&#39;):
+            self._g.add((_betydningsbeskrivelse, DCT.modified,
+                         Literal(betydningsbeskrivelse.modified,
+                                 datatype=XSD.date)))
+
+        # example
+        if hasattr(betydningsbeskrivelse, &#39;example&#39;):
+            for key in betydningsbeskrivelse.example:
+                self._g.add((_betydningsbeskrivelse, SKOS.example,
+                             Literal(betydningsbeskrivelse.example[key],
+                                     lang=key)))
+
+        # Check type, and set correct property
+        if isinstance(betydningsbeskrivelse, Definition):
+            self._g.add((URIRef(self.identifier), SKOSNO.definisjon,
+                        _betydningsbeskrivelse))
+        else:
+            self._g.add((URIRef(self.identifier), SKOSNO.alternativFormulering,
+                        _betydningsbeskrivelse))
+        # ---</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="concepttordf.concept.Concept"><code class="flex name class">
+<span>class <span class="ident">Concept</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>A class representing a concept</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>identifier</code></strong></dt>
+<dd>the uri identifying the concept</dd>
+<dt><strong><code>term</code></strong></dt>
+<dd>
+<p>a dictionary describing the
+<a href="https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_anbefaltterm">anbefaltterm</a>
+, e.g.</p>
+<p><code>{"name": {"en": "concept"}, "modified":"2020-01-01"}</code></p>
+</dd>
+<dt><strong><code>alternativeterm</code></strong></dt>
+<dd>a dictionary describing the
+<a href="https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_tillattterm">tillattTerm</a></dd>
+<dt><strong><code>hiddenterm</code></strong></dt>
+<dd>a dictionary describing the
+<a href="https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_frar%C3%A5detterm">frarådetTerm</a></dd>
+</dl></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Concept:
+    &#34;&#34;&#34;A class representing a concept
+
+
+    Attributes:
+        identifier: the uri identifying the concept
+        term: a dictionary describing the
+            [anbefaltterm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_anbefaltterm)
+            , e.g.\n
+            ```
+            {&#34;name&#34;: {&#34;en&#34;: &#34;concept&#34;}, &#34;modified&#34;:&#34;2020-01-01&#34;}
+            ```
+        alternativeterm: a dictionary describing the
+            [tillattTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_tillattterm)
+
+        hiddenterm: a dictionary describing the
+            [frarådetTerm](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_frar%C3%A5detterm)
+
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self._g = Graph()
+
+        self.seeAlso = []
+        self.replaces = []
+        self.replacedBy = []
+
+    @property
+    def identifier(self) -&gt; str:
+        return self._identifier
+
+    @identifier.setter
+    def identifier(self, uri: str):
+        self._identifier = uri
+
+    @property
+    def term(self) -&gt; dict:
+        return self._term
+
+    @term.setter
+    def term(self, term: dict):
+        self._term = term
+
+    @property
+    def alternativeterm(self) -&gt; dict:
+        return self._alternativeterm
+
+    @alternativeterm.setter
+    def alternativeterm(self, alternativeterm: dict):
+        self._alternativeterm = alternativeterm
+
+    @property
+    def hiddenterm(self) -&gt; dict:
+        return self._hiddenterm
+
+    @hiddenterm.setter
+    def hiddenterm(self, hiddenterm: dict):
+        self._hiddenterm = hiddenterm
+
+    @property
+    def datastrukturterm(self) -&gt; dict:
+        return self._datastrukturterm
+
+    @datastrukturterm.setter
+    def datastrukturterm(self, datastrukturterm: dict):
+        self._datastrukturterm = datastrukturterm
+
+    @property
+    def subject(self) -&gt; dict:
+        return self._subject
+
+    @subject.setter
+    def subject(self, subject: dict):
+        self._subject = subject
+
+    @property
+    def definition(self) -&gt; Definition:
+        return self._definition
+
+    @definition.setter
+    def definition(self, definition: Definition):
+        self._definition = definition
+
+    @property
+    def alternativformulering(self) -&gt; AlternativFormulering:
+        return self._alternativformulering
+
+    @alternativformulering.setter
+    def alternativformulering(self,
+                              alternativformulering: AlternativFormulering):
+        self._alternativformulering = alternativformulering
+
+    @property
+    def contactpoint(self) -&gt; Contact:
+        return self._contactpoint
+
+    @contactpoint.setter
+    def contactpoint(self, contact: Contact):
+        self._contactpoint = contact
+
+    @property
+    def modified(self) -&gt; date:
+        return self._modified
+
+    @modified.setter
+    def modified(self, modified: date):
+        self._modified = modified
+
+    @property
+    def bruksområde(self) -&gt; dict:
+        return self._bruksområde
+
+    @bruksområde.setter
+    def bruksområde(self, bruksområde: dict):
+        self._bruksområde = bruksområde
+
+    @property
+    def validinperiod(self) -&gt; dict:
+        return self._validinperiod
+
+    @validinperiod.setter
+    def validinperiod(self, validinperiod: dict):
+        self._validinperiod = validinperiod
+
+    @property
+    def publisher(self) -&gt; str:
+        return self._publisher
+
+    @publisher.setter
+    def publisher(self, publisher: str):
+        self._publisher = publisher
+
+    @property
+    def seeAlso(self) -&gt; list:
+        return self._seeAlso
+
+    @seeAlso.setter
+    def seeAlso(self, concepts: list):
+        self._seeAlso = concepts
+
+    @property
+    def replaces(self) -&gt; list:
+        return self._replaces
+
+    @replaces.setter
+    def replaces(self, concepts: list):
+        self._replaces = concepts
+
+    @property
+    def replacedBy(self) -&gt; list:
+        return self._replacedBy
+
+    @replacedBy.setter
+    def replacedBy(self, concepts: list):
+        self._replacedBy = concepts
+
+    @property
+    def related(self) -&gt; AssociativeRelation:
+        return self._related
+
+    @related.setter
+    def related(self, ar: AssociativeRelation):
+        self._related = ar
+
+    @property
+    def generalizes(self) -&gt; GenericRelation:
+        return self._generalizes
+
+    @generalizes.setter
+    def generalizes(self, gr: GenericRelation):
+        self._generalizes = gr
+
+    @property
+    def hasPart(self) -&gt; PartitiveRelation:
+        return self._hasPart
+
+    @hasPart.setter
+    def hasPart(self, gr: PartitiveRelation):
+        self._hasPart = gr
+# ----------------------------------------------
+
+    def _to_graph(self) -&gt; Graph:
+        &#34;&#34;&#34;Transforms the concept to an rdf graph
+
+        Returns:
+            An RDF [graph](https://rdflib.readthedocs.io/en/stable/apidocs/rdflib.html#graph) representing the concept.
+        &#34;&#34;&#34;
+
+        self._add_concept_to_graph()
+
+        return self._g
+
+    def to_rdf(self, format=&#39;text/turtle&#39;) -&gt; str:
+        &#34;&#34;&#34;Maps the concept to rdf and returns a serialization
+           as a string according to format
+
+        Args:
+            format: a valid serialization format\n
+                 - `text/turtle` (default)
+                 - `application/rdf+xml`
+                 - `application/ld+json`
+                 - `application/n-triples`
+                 - `text/n3`
+
+        Returns:
+            A serialization of the RDF graph, for example:
+            ```
+            @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+            @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+            @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+            @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+            @prefix skosno: &lt;https://data.norge.no/vocabulary/skosno#&gt; .
+            @prefix xml: &lt;http://www.w3.org/XML/1998/namespace&gt; .
+            @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+            &lt;http://example.com/concepts/1&gt; a skos:Concept ;
+                    skosno:definisjon [ a skosno:Definisjon ;
+                    skosno:forholdTilKilde skosno:egendefinert ]
+                    .
+            ```
+
+           &#34;&#34;&#34;
+
+        return self._to_graph().serialize(format=format)
+
+# ----------------------------------------------
+
+    def _add_concept_to_graph(self):
+        &#34;&#34;&#34;Adds the concept to the Graph _g&#34;&#34;&#34;
+
+        self._g.bind(&#39;dct&#39;, DCT)
+        self._g.bind(&#39;skos&#39;, SKOS)
+        self._g.bind(&#39;skosxl&#39;, SKOSXL)
+        self._g.bind(&#39;vcard&#39;, VCARD)
+        self._g.bind(&#39;skosno&#39;, SKOSNO)
+        self._g.bind(&#39;dcat&#39;, DCAT)
+        self._g.bind(&#39;xsd&#39;, XSD)
+        self._g.bind(&#39;schema&#39;, SCHEMA)
+        self._g.bind(&#39;xkos&#39;, XKOS)
+
+        self._g.add((URIRef(self.identifier), RDF.type, SKOS.Concept))
+
+        # prefLabel
+        if hasattr(self, &#39;term&#39;):
+            label = BNode()
+            self._g.add((label, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.term:
+                _name = self.term[&#39;name&#39;]
+                for key in _name:
+                    self._g.add((label, SKOSXL.literalForm,
+                                 Literal(_name[key], lang=key)))
+            if &#39;modified&#39; in self.term:
+                self._g.add((label, DCT.modified,
+                            Literal(self.term[&#39;modified&#39;], datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), SKOSXL.prefLabel, label))
+
+        # altLabel
+        if hasattr(self, &#39;alternativeterm&#39;):
+            altLabel = BNode()
+            self._g.add((altLabel, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.alternativeterm:
+                _name = self.alternativeterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((altLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.alternativeterm:
+                self._g.add((altLabel, DCT.modified,
+                             Literal(self.alternativeterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), SKOSXL.altLabel, altLabel))
+
+        # hiddenLabel
+        if hasattr(self, &#39;hiddenterm&#39;):
+            hiddenLabel = BNode()
+            self._g.add((hiddenLabel, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.hiddenterm:
+                _name = self.hiddenterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((hiddenLabel, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.hiddenterm:
+                self._g.add((hiddenLabel, DCT.modified,
+                             Literal(self.hiddenterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSXL.hiddenLabel, hiddenLabel))
+
+        # datastrukturterm
+        if hasattr(self, &#39;datastrukturterm&#39;):
+            datastrukturterm = BNode()
+            self._g.add((datastrukturterm, RDF.type, SKOSXL.Label))
+            if &#39;name&#39; in self.datastrukturterm:
+                _name = self.datastrukturterm[&#39;name&#39;]
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((datastrukturterm, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if &#39;modified&#39; in self.datastrukturterm:
+                self._g.add((datastrukturterm, DCT.modified,
+                             Literal(self.datastrukturterm[&#39;modified&#39;],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSNO.datastrukturterm, datastrukturterm))
+        # definition
+        if hasattr(self, &#39;definition&#39;):
+            self._add_betydningsbeskrivelse_to_concept(self.definition)
+
+        # alternativformulering
+        if hasattr(self, &#39;alternativformulering&#39;):
+            self._add_betydningsbeskrivelse_to_concept(
+                self.alternativformulering)
+
+        # publisher
+        if hasattr(self, &#39;publisher&#39;):
+            self._g.add((URIRef(self.identifier), DCT.publisher,
+                         URIRef(self.publisher)))
+
+        # contactPoint
+        if hasattr(self, &#39;contactpoint&#39;):
+            contact = self.contactpoint
+            contactPoint = BNode()
+            for s, p, o in contact._to_graph().triples((None, None, None)):
+                self._g.add((contactPoint, p, o))
+            self._g.add((URIRef(self.identifier), DCAT.contactPoint,
+                         contactPoint))
+
+        # subject
+        if hasattr(self, &#39;subject&#39;):
+            for key in self.subject:
+                self._g.add((URIRef(self.identifier), DCT.subject,
+                             Literal(self.subject[key], lang=key)))
+
+        # modified
+        if hasattr(self, &#39;modified&#39;):
+            self._g.add((URIRef(self.identifier), DCT.modified,
+                         Literal(self.modified, datatype=XSD.date)))
+
+        # bruksområde
+        if hasattr(self, &#39;bruksområde&#39;):
+            for key in self.bruksområde:
+                for b in self.bruksområde[key]:
+                    self._g.add((URIRef(self.identifier), SKOSNO.bruksområde,
+                                 Literal(b, lang=key)))
+
+        # PeriodOfTime
+        if hasattr(self, &#39;validinperiod&#39;):
+            periodOfTime = BNode()
+            self._g.add((periodOfTime, RDF.type, DCT.PeriodOfTime))
+            if &#39;startdate&#39; in self.validinperiod:
+                self._g.add((periodOfTime, SCHEMA.startDate,
+                            Literal(self.validinperiod[&#39;startdate&#39;],
+                                    datatype=XSD.date)))
+            if &#39;enddate&#39; in self.validinperiod:
+                self._g.add((periodOfTime, SCHEMA.endDate,
+                            Literal(self.validinperiod[&#39;enddate&#39;],
+                                    datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier), DCT.temporal, periodOfTime))
+
+        # seeAlso
+        if hasattr(self, &#39;seeAlso&#39;):
+            for c in self.seeAlso:
+                self._g.add((URIRef(self.identifier), RDFS.seeAlso,
+                            URIRef(c.identifier)))
+
+        # replaces
+        if hasattr(self, &#39;replaces&#39;):
+            for c in self.replaces:
+                self._g.add((URIRef(self.identifier), DCT.replaces,
+                             URIRef(c.identifier)))
+
+        # replacedBy
+        if hasattr(self, &#39;replacedBy&#39;):
+            for c in self.replacedBy:
+                self._g.add((URIRef(self.identifier), DCT.replacedBy,
+                             URIRef(c.identifier)))
+
+        # related
+        if hasattr(self, &#39;related&#39;):
+            _related = self.related
+            ar = BNode()
+            for s, p, o in _related._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), SKOS.related, ar))
+
+        # generalizes
+        if hasattr(self, &#39;generalizes&#39;):
+            _generalizes = self.generalizes
+            ar = BNode()
+            for s, p, o in _generalizes._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
+
+        # hasPart
+        if hasattr(self, &#39;hasPart&#39;):
+            _hasPart = self.hasPart
+            ar = BNode()
+            for s, p, o in _hasPart._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), XKOS.hasPart, ar))
+
+# ------------
+# Helper methods:
+
+    def _add_betydningsbeskrivelse_to_concept(self, betydningsbeskrivelse):
+        # ---
+        _betydningsbeskrivelse = BNode()
+
+        self._g.add((_betydningsbeskrivelse, RDF.type,
+                     betydningsbeskrivelse.type))
+
+        # text
+        if hasattr(betydningsbeskrivelse, &#39;text&#39;):
+            for key in betydningsbeskrivelse.text:
+                self._g.add((_betydningsbeskrivelse, RDFS.label,
+                            Literal(betydningsbeskrivelse.text[key],
+                                    lang=key)))
+
+        # remark
+        if hasattr(betydningsbeskrivelse, &#39;remark&#39;):
+            for key in betydningsbeskrivelse.remark:
+                self._g.add((_betydningsbeskrivelse, SKOS.scopeNote,
+                            Literal(betydningsbeskrivelse.remark[key],
+                                    lang=key)))
+        # scope
+        if hasattr(betydningsbeskrivelse, &#39;scope&#39;):
+            _scope = BNode()
+            if &#39;url&#39; in betydningsbeskrivelse.scope:
+                self._g.add((_scope, RDFS.seeAlso,
+                            URIRef(betydningsbeskrivelse.scope[&#39;url&#39;])))
+            if &#39;text&#39; in betydningsbeskrivelse.scope:
+                _text = betydningsbeskrivelse.scope[&#39;text&#39;]
+                for key in _text:
+                    self._g.add((_scope, RDFS.label,
+                                Literal(_text[key], lang=key)))
+            self._g.add((_betydningsbeskrivelse, SKOSNO.omfang, _scope))
+
+        # relationtosource
+        if hasattr(betydningsbeskrivelse, &#39;relationtosource&#39;):
+            # -
+            # sitatFraKilde = &#34;quoteFromSource&#34;
+            # basertPåKilde = &#34;basedOnSource&#34;
+            # egendefinert = &#34;noSource&#34;
+            # -
+            if (RelationToSource(betydningsbeskrivelse.relationtosource)
+               is RelationToSource.sitatFraKilde):
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.sitatFraKilde))
+            elif (RelationToSource(betydningsbeskrivelse.relationtosource)
+                  is RelationToSource.basertPåKilde):
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.basertPåKilde))
+            else:
+                self._g.add((_betydningsbeskrivelse, SKOSNO.forholdTilKilde,
+                            SKOSNO.egendefinert))
+
+        # source
+        if hasattr(betydningsbeskrivelse, &#39;source&#39;):
+            _source = BNode()
+            if &#39;url&#39; in betydningsbeskrivelse.source:
+                self._g.add((_source, RDFS.seeAlso,
+                            URIRef(betydningsbeskrivelse.source[&#39;url&#39;])))
+            if &#39;text&#39; in betydningsbeskrivelse.source:
+                _text = betydningsbeskrivelse.source[&#39;text&#39;]
+                for key in _text:
+                    self._g.add((_source, RDFS.label,
+                                Literal(_text[key], lang=key)))
+            self._g.add((_betydningsbeskrivelse, DCT.source, _source))
+
+        # modified
+        if hasattr(betydningsbeskrivelse, &#39;modified&#39;):
+            self._g.add((_betydningsbeskrivelse, DCT.modified,
+                         Literal(betydningsbeskrivelse.modified,
+                                 datatype=XSD.date)))
+
+        # example
+        if hasattr(betydningsbeskrivelse, &#39;example&#39;):
+            for key in betydningsbeskrivelse.example:
+                self._g.add((_betydningsbeskrivelse, SKOS.example,
+                             Literal(betydningsbeskrivelse.example[key],
+                                     lang=key)))
+
+        # Check type, and set correct property
+        if isinstance(betydningsbeskrivelse, Definition):
+            self._g.add((URIRef(self.identifier), SKOSNO.definisjon,
+                        _betydningsbeskrivelse))
+        else:
+            self._g.add((URIRef(self.identifier), SKOSNO.alternativFormulering,
+                        _betydningsbeskrivelse))</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="concepttordf.concept.Concept.alternativeterm"><code class="name">var <span class="ident">alternativeterm</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def alternativeterm(self) -&gt; dict:
+    return self._alternativeterm</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.alternativformulering"><code class="name">var <span class="ident">alternativformulering</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def alternativformulering(self) -&gt; AlternativFormulering:
+    return self._alternativformulering</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.bruksområde"><code class="name">var <span class="ident">bruksområde</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def bruksområde(self) -&gt; dict:
+    return self._bruksområde</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.contactpoint"><code class="name">var <span class="ident">contactpoint</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def contactpoint(self) -&gt; Contact:
+    return self._contactpoint</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.datastrukturterm"><code class="name">var <span class="ident">datastrukturterm</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def datastrukturterm(self) -&gt; dict:
+    return self._datastrukturterm</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.definition"><code class="name">var <span class="ident">definition</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def definition(self) -&gt; Definition:
+    return self._definition</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.generalizes"><code class="name">var <span class="ident">generalizes</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def generalizes(self) -&gt; GenericRelation:
+    return self._generalizes</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.hasPart"><code class="name">var <span class="ident">hasPart</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hasPart(self) -&gt; PartitiveRelation:
+    return self._hasPart</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.hiddenterm"><code class="name">var <span class="ident">hiddenterm</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def hiddenterm(self) -&gt; dict:
+    return self._hiddenterm</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.identifier"><code class="name">var <span class="ident">identifier</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def identifier(self) -&gt; str:
+    return self._identifier</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.modified"><code class="name">var <span class="ident">modified</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def modified(self) -&gt; date:
+    return self._modified</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.publisher"><code class="name">var <span class="ident">publisher</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def publisher(self) -&gt; str:
+    return self._publisher</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.related"><code class="name">var <span class="ident">related</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def related(self) -&gt; AssociativeRelation:
+    return self._related</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.replacedBy"><code class="name">var <span class="ident">replacedBy</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def replacedBy(self) -&gt; list:
+    return self._replacedBy</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.replaces"><code class="name">var <span class="ident">replaces</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def replaces(self) -&gt; list:
+    return self._replaces</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.seeAlso"><code class="name">var <span class="ident">seeAlso</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def seeAlso(self) -&gt; list:
+    return self._seeAlso</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.subject"><code class="name">var <span class="ident">subject</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def subject(self) -&gt; dict:
+    return self._subject</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.term"><code class="name">var <span class="ident">term</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def term(self) -&gt; dict:
+    return self._term</code></pre>
+</details>
+</dd>
+<dt id="concepttordf.concept.Concept.validinperiod"><code class="name">var <span class="ident">validinperiod</span></code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def validinperiod(self) -&gt; dict:
+    return self._validinperiod</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="concepttordf.concept.Concept.to_rdf"><code class="name flex">
+<span>def <span class="ident">to_rdf</span></span>(<span>self, format='text/turtle')</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Maps the concept to rdf and returns a serialization
+as a string according to format</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>format</code></strong></dt>
+<dd>
+<p>a valid serialization format</p>
+<ul>
+<li><code>text/turtle</code> (default)</li>
+<li><code>application/rdf+xml</code></li>
+<li><code>application/ld+json</code></li>
+<li><code>application/n-triples</code></li>
+<li><code>text/n3</code></li>
+</ul>
+</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>A</code> <code>serialization</code> of <code>the</code> <code>RDF</code> <code>graph</code>, <code>for</code> <code>example</code>:</dt>
+<dd>&nbsp;</dd>
+</dl>
+<pre><code>@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix skosno: &lt;https://data.norge.no/vocabulary/skosno#&gt; .
+@prefix xml: &lt;http://www.w3.org/XML/1998/namespace&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;http://example.com/concepts/1&gt; a skos:Concept ;
+        skosno:definisjon [ a skosno:Definisjon ;
+        skosno:forholdTilKilde skosno:egendefinert ]
+        .
+</code></pre></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_rdf(self, format=&#39;text/turtle&#39;) -&gt; str:
+    &#34;&#34;&#34;Maps the concept to rdf and returns a serialization
+       as a string according to format
+
+    Args:
+        format: a valid serialization format\n
+             - `text/turtle` (default)
+             - `application/rdf+xml`
+             - `application/ld+json`
+             - `application/n-triples`
+             - `text/n3`
+
+    Returns:
+        A serialization of the RDF graph, for example:
+        ```
+        @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+        @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+        @prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+        @prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+        @prefix skosno: &lt;https://data.norge.no/vocabulary/skosno#&gt; .
+        @prefix xml: &lt;http://www.w3.org/XML/1998/namespace&gt; .
+        @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+        &lt;http://example.com/concepts/1&gt; a skos:Concept ;
+                skosno:definisjon [ a skosno:Definisjon ;
+                skosno:forholdTilKilde skosno:egendefinert ]
+                .
+        ```
+
+       &#34;&#34;&#34;
+
+    return self._to_graph().serialize(format=format)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="concepttordf" href="index.html">concepttordf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="concepttordf.concept.Concept" href="#concepttordf.concept.Concept">Concept</a></code></h4>
+<ul class="">
+<li><code><a title="concepttordf.concept.Concept.alternativeterm" href="#concepttordf.concept.Concept.alternativeterm">alternativeterm</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.alternativformulering" href="#concepttordf.concept.Concept.alternativformulering">alternativformulering</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.bruksområde" href="#concepttordf.concept.Concept.bruksområde">bruksområde</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.contactpoint" href="#concepttordf.concept.Concept.contactpoint">contactpoint</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.datastrukturterm" href="#concepttordf.concept.Concept.datastrukturterm">datastrukturterm</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.definition" href="#concepttordf.concept.Concept.definition">definition</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.generalizes" href="#concepttordf.concept.Concept.generalizes">generalizes</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.hasPart" href="#concepttordf.concept.Concept.hasPart">hasPart</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.hiddenterm" href="#concepttordf.concept.Concept.hiddenterm">hiddenterm</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.identifier" href="#concepttordf.concept.Concept.identifier">identifier</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.modified" href="#concepttordf.concept.Concept.modified">modified</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.publisher" href="#concepttordf.concept.Concept.publisher">publisher</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.related" href="#concepttordf.concept.Concept.related">related</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.replacedBy" href="#concepttordf.concept.Concept.replacedBy">replacedBy</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.replaces" href="#concepttordf.concept.Concept.replaces">replaces</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.seeAlso" href="#concepttordf.concept.Concept.seeAlso">seeAlso</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.subject" href="#concepttordf.concept.Concept.subject">subject</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.term" href="#concepttordf.concept.Concept.term">term</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.to_rdf" href="#concepttordf.concept.Concept.to_rdf">to_rdf</a></code></li>
+<li><code><a title="concepttordf.concept.Concept.validinperiod" href="#concepttordf.concept.Concept.validinperiod">validinperiod</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

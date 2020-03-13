@@ -7,7 +7,8 @@ from concepttordf.concept import (
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
-# import pytest
+from rdflib.plugin import PluginException
+import pytest
 
 
 # @pytest.mark.skip(reason="no way of currently testing this")
@@ -33,9 +34,9 @@ def test_simple_concept_to_rdf_should_return_skos_concept():
     concept.contactpoint = contact
 
     g1 = Graph()
-    g1.parse(data=concept.to_rdf(), format='turtle')
+    g1.parse(data=concept.to_rdf(), format='text/turtle')
     # _dump_turtle(g1)
-    g2 = Graph().parse("tests/concept.ttl", format='turtle', encoding='utf-8')
+    g2 = Graph().parse("tests/concept.ttl", format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -128,10 +129,10 @@ def test_concept_to_rdf_should_return_skos_concept():
     # --
 
     g1 = Graph()
-    g1.parse(data=concept.to_rdf(), format='turtle')
+    g1.parse(data=concept.to_rdf(), format='text/turtle')
     # _dump_turtle(g1)
     g2 = Graph().parse("tests/completeconcept.ttl",
-                       format='turtle', encoding='utf-8')
+                       format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -155,7 +156,7 @@ def test_noSource_to_rdf_should_return_skos_definition():
     concept.definition = definition
 
     g1 = Graph()
-    g1.parse(data=concept.to_rdf(), format='turtle')
+    g1.parse(data=concept.to_rdf(), format='text/turtle')
     # _dump_turtle(g1)
     # -
     src = '''
@@ -172,7 +173,7 @@ def test_noSource_to_rdf_should_return_skos_definition():
             skosno:forholdTilKilde skosno:egendefinert ] .
     '''
     # -
-    g2 = Graph().parse(data=src, format='turtle', encoding='utf-8')
+    g2 = Graph().parse(data=src, format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -197,7 +198,7 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition():
     concept.definition = definition
 
     g1 = Graph()
-    g1.parse(data=concept.to_rdf(), format='turtle')
+    g1.parse(data=concept.to_rdf(), format='text/turtle')
     # _dump_turtle(g1)
     # -
     src = '''
@@ -219,13 +220,40 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition():
                 ] .
     '''
     # -
-    g2 = Graph().parse(data=src, format='turtle', encoding='utf-8')
+    g2 = Graph().parse(data=src, format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
         _dump_diff(g1, g2)
         pass
     assert _isomorphic
+
+
+def test_serialization_formats_that_should_work():
+    concept = Concept()
+    concept.identifier = 'http://example.com/concepts/1'
+    TURTLE = 'text/turtle'
+    XML = 'application/rdf+xml'
+    JSONLD = 'application/ld+json'
+    NT = 'application/n-triples'
+    N3 = 'text/n3'
+
+    _g = Graph()
+    _g.parse(data=concept.to_rdf(format=TURTLE), format=TURTLE)
+    _g.parse(data=concept.to_rdf(format=XML), format=XML)
+    _g.parse(data=concept.to_rdf(format=JSONLD), format=JSONLD)
+    _g.parse(data=concept.to_rdf(format=NT), format=NT)
+    _g.parse(data=concept.to_rdf(format=N3), format=N3)
+
+
+def test_serialization_format_that_should_fail():
+    concept = Concept()
+    concept.identifier = 'http://example.com/concepts/1'
+
+    _g = Graph()
+    with pytest.raises(PluginException):
+        _g.parse(data=concept.to_rdf(format='should_fail'))
+
 
 # ---------------------------------------------------------------------- #
 # Utils for displaying debug information
@@ -242,12 +270,12 @@ def _dump_diff(g1, g2):
 
 
 def _dump_turtle_sorted(g):
-    for l in sorted(g.serialize(format='turtle').splitlines()):
+    for l in sorted(g.serialize(format='text/turtle').splitlines()):
         if l:
             print(l.decode())
 
 
 def _dump_turtle(g):
-    for l in g.serialize(format='turtle').splitlines():
+    for l in g.serialize(format='text/turtle').splitlines():
         if l:
             print(l.decode())

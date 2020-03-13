@@ -40,10 +40,10 @@ def test_collection_to_rdf_should_return_skos_collection():
 
     # Test
     g1 = Graph()
-    g1.parse(data=data, format='turtle')
+    g1.parse(data=data, format='text/turtle')
     # _dump_turtle(g1)
     g2 = Graph().parse("tests/collection.ttl",
-                       format='turtle', encoding='utf-8')
+                       format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -83,10 +83,10 @@ def test_collection_to_rdf_should_return_skos_collection_with_no_concepts():
 
     # Test
     g1 = Graph()
-    g1.parse(data=data, format='turtle')
+    g1.parse(data=data, format='text/turtle')
     # _dump_turtle(g1)
     g2 = Graph().parse("tests/collection_excluding_concepts.ttl",
-                       format='turtle', encoding='utf-8')
+                       format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -109,12 +109,12 @@ def _dump_diff(g1, g2):
 
 
 def _dump_turtle_sorted(g):
-    for l in sorted(g.serialize(format='turtle').splitlines()):
+    for l in sorted(g.serialize(format='text/turtle').splitlines()):
         if l:
             print(l.decode())
 
 
 def _dump_turtle(g):
-    for l in g.serialize(format='turtle').splitlines():
+    for l in g.serialize(format='text/turtle').splitlines():
         if l:
             print(l.decode())

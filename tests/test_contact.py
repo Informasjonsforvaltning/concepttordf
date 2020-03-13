@@ -16,8 +16,8 @@ def test_contact_to_rdf_should_return_skos_contact():
     contact.telephone = _contact['telephone']
 
     g1 = Graph()
-    g1.parse(data=contact.to_rdf(), format='turtle')
-    g2 = Graph().parse("tests/contact.ttl", format='turtle', encoding='utf-8')
+    g1.parse(data=contact.to_rdf(), format='text/turtle')
+    g2 = Graph().parse("tests/contact.ttl", format='text/turtle')
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -37,8 +37,8 @@ def test_contact_without_id_to_rdf_should_return_skos_contact():
     contact.telephone = _contact['telephone']
 
     g1 = Graph()
-    g1.parse(data=contact.to_rdf(), format='turtle')
-    g2 = Graph().parse("tests/contact.ttl", format='turtle', encoding='utf-8')
+    g1.parse(data=contact.to_rdf(), format='text/turtle')
+    g2 = Graph().parse("tests/contact.ttl", format='text/turtle')
 
     assert len(g1) == len(g2)
 
@@ -57,12 +57,12 @@ def _dump_diff(g1, g2):
 
 
 def _dump_turtle_sorted(g):
-    for l in sorted(g.serialize(format='turtle').splitlines()):
+    for l in sorted(g.serialize(format='text/turtle').splitlines()):
         if l:
             print(l.decode())
 
 
 def _dump_turtle(g):
-    for l in g.serialize(format='turtle').splitlines():
+    for l in g.serialize(format='text/turtle').splitlines():
         if l:
             print(l.decode())

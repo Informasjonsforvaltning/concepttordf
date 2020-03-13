@@ -11,10 +11,7 @@ rdflib-jsonld = "*"
 pytest = "*"
 flake8 = "*"
 pytest-cov = "*"
+pdoc3 = "*"
 
 [requires]
 python_version = "3.8"
-
-[dev-packages.e1839a8]
-path = "."
-editable = true

@@ -56,7 +56,7 @@ class Collection:
     def members(self, members: list):
         self._members = members
 
-    def to_rdf(self, format='turtle', includeconcepts=True) -> str:
+    def to_rdf(self, format='text/turtle', includeconcepts=True) -> str:
         """Maps the collection to rdf and returns a serialization
            as a string according to format"""
 
@@ -64,9 +64,9 @@ class Collection:
 
         if includeconcepts:
             for concept in self.members:
-                self._g += concept.to_graph()
+                self._g += concept._to_graph()
 
-        return self._g.serialize(format=format, encoding='utf-8')
+        return self._g.serialize(format=format)
 
     # ---
 
@@ -102,7 +102,7 @@ class Collection:
         if hasattr(self, 'contactpoint'):
             contact = self.contactpoint
             contactPoint = BNode()
-            for s, p, o in contact.to_graph().triples((None, None, None)):
+            for s, p, o in contact._to_graph().triples((None, None, None)):
                 self._g.add((contactPoint, p, o))
             self._g.add((URIRef(self.identifier), DCAT.contactPoint,
                         contactPoint))
