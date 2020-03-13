@@ -1,6 +1,4 @@
-from concepttordf.collection import Collection
-from concepttordf.concept import Concept
-from concepttordf.definition import Definition
+from concepttordf import Collection, Concept, Definition
 
 # Create collection object
 collection = Collection()

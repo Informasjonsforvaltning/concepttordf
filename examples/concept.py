@@ -1,5 +1,4 @@
-from concepttordf.concept import Concept
-from concepttordf.definition import Definition
+from concepttordf import Concept, Definition
 
 # create a concept
 concept = Concept()

@@ -10,9 +10,7 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 ### Getting started
 To create a SKOS-AP-NO concept collection:
 ```
-from concepttordf.collection import Collection
-from concepttordf.concept import Concept
-from concepttordf.definition import Definition
+from concepttordf import Collection, Concept, Definition
 
 # Create collection object
 collection = Collection()
