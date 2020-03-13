@@ -10,17 +10,8 @@ SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 class Contact:
     """A class representing a contact """
 
-    def __init__(self, contact: dict = None):
+    def __init__(self):
         self._g = Graph()
-        if contact is not None:
-            if 'name' in contact:
-                self._name = contact['name']
-            if 'email' in contact:
-                self._email = contact['email']
-            if 'url' in contact:
-                self._url = contact['url']
-            if 'telephone' in contact:
-                self._telephone = contact['telephone']
 
     @property
     def name(self) -> dict:

@@ -1,15 +1,13 @@
-from concepttordf.concept import Concept
-from concepttordf.contact import Contact
-from concepttordf.definition import Definition
-from concepttordf.alternativformulering import AlternativFormulering
-from concepttordf.associativerelation import AssociativeRelation
-from concepttordf.genericrelation import GenericRelation
-from concepttordf.partitiverelation import PartitiveRelation
+from concepttordf.concept import (
+                                  Concept, Contact, Definition,
+                                  AlternativFormulering, AssociativeRelation,
+                                  GenericRelation, PartitiveRelation
+                                  )
 
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
-import pytest
+# import pytest
 
 
 # @pytest.mark.skip(reason="no way of currently testing this")
@@ -20,11 +18,19 @@ def test_simple_concept_to_rdf_should_return_skos_concept():
     concept = Concept()
     concept.identifier = _concept['identifier']
     concept.term = _concept['term']
-    concept.definition = Definition(_concept['definition'])
-    concept.alternativformulering = AlternativFormulering(
-                                    _concept['alternativformulering'])
+    # Definition
+    definition = Definition()
+    definition.text = _concept['definition']['text']
+    concept.definition = definition
+    # AlternativFormulering
+    alternativformulering = AlternativFormulering()
+    alternativformulering.text = _concept['alternativformulering']['text']
+    concept.alternativformulering = alternativformulering
     concept.publisher = _concept['publisher']
-    concept.contactpoint = Contact(_concept['contactpoint'])
+    # Contactpoint
+    contact = Contact()
+    contact.name = _concept['contactpoint']['name']
+    concept.contactpoint = contact
 
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format='turtle')
@@ -38,54 +44,6 @@ def test_simple_concept_to_rdf_should_return_skos_concept():
     assert _isomorphic
 
 
-# @pytest.mark.skip(reason="no way of currently testing this")
-def test_concept_constructor_to_rdf_should_return_skos_concept():
-    with open('./tests/completeconcept.json') as json_file:
-        data = json.load(json_file)
-        _concept = data['concept']
-    concept = Concept(_concept)
-    # --
-    concept.related = AssociativeRelation(_concept['related'])
-    for ac in _concept['related']['associatedconcepts']:
-        concept.related.associatedconcepts.append(ac)
-    # --
-    concept.generalizes = GenericRelation(_concept['generalizes'])
-    for gc in _concept['generalizes']['genericconcepts']:
-        concept.generalizes.genericconcepts.append(gc)
-    # --
-    concept.hasPart = PartitiveRelation(_concept['hasPart'])
-    for pc in _concept['hasPart']['partconcepts']:
-        concept.hasPart.partconcepts.append(pc)
-    # --
-    # --
-    for c in _concept['seeAlso']:
-        seeAlsoConcept = Concept()
-        seeAlsoConcept.identifier = c
-        concept.seeAlso.append(seeAlsoConcept)
-    # --
-    for c in _concept['replaces']:
-        replacesConcept = Concept()
-        replacesConcept.identifier = c
-        concept.replaces.append(replacesConcept)
-    # --
-    for c in _concept['replacedBy']:
-        replacedByConcept = Concept()
-        replacedByConcept.identifier = c
-        concept.replacedBy.append(replacedByConcept)
-
-    g1 = Graph()
-    g1.parse(data=concept.to_rdf(), format='turtle')
-    # _dump_turtle(g1)
-    g2 = Graph().parse("tests/completeconcept.ttl",
-                       format='turtle', encoding='utf-8')
-
-    _isomorphic = isomorphic(g1, g2)
-    if not _isomorphic:
-        # _dump_diff(g1, g2)
-        pass
-    assert _isomorphic
-
-
 def test_concept_to_rdf_should_return_skos_concept():
     with open('./tests/completeconcept.json') as json_file:
         data = json.load(json_file)
@@ -95,11 +53,34 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.term = _concept['term']
     concept.alternativeterm = _concept['alternativeterm']
     concept.hiddenterm = _concept['hiddenterm']
-    concept.definition = Definition(_concept['definition'])
-    concept.alternativformulering = AlternativFormulering(
-                                    _concept['alternativformulering'])
+    # Definisjon
+    definition = Definition()
+    definition.text = _concept['definition']['text']
+    definition.remark = _concept['definition']['remark']
+    definition.scope = _concept['definition']['scope']
+    definition.relationtosource = _concept['definition']['relationtosource']
+    definition.source = _concept['definition']['source']
+    definition.modified = _concept['definition']['modified']
+    concept.definition = definition
+    # AlternativFormulering
+    af = AlternativFormulering()
+    af.text = _concept['alternativformulering']['text']
+    af.remark = _concept['alternativformulering']['remark']
+    af.scope = _concept['alternativformulering']['scope']
+    af.relationtosource = _concept['alternativformulering']['relationtosource']
+    af.source = _concept['alternativformulering']['source']
+    af.modified = _concept['alternativformulering']['modified']
+
+    concept.alternativformulering = af
     concept.publisher = _concept['publisher']
-    concept.contactpoint = Contact(_concept['contactpoint'])
+    # Contact
+    contact = Contact()
+    contact.name = _concept['contactpoint']['name']
+    contact.email = _concept['contactpoint']['email']
+    contact.url = _concept['contactpoint']['url']
+    contact.telephone = _concept['contactpoint']['telephone']
+    concept.contactpoint = contact
+    #
     concept.subject = _concept['subject']
     concept.modified = _concept['modified']
     concept.example = _concept['example']
@@ -107,15 +88,24 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.validinperiod = _concept['validinperiod']
     concept.modified = _concept['modified']
     # --
-    concept.related = AssociativeRelation(_concept['related'])
+    related = AssociativeRelation()
+    related.description = _concept['related']['description']
+    related.modified = _concept['related']['modified']
+    concept.related = related
     for ac in _concept['related']['associatedconcepts']:
         concept.related.associatedconcepts.append(ac)
     # --
-    concept.generalizes = GenericRelation(_concept['generalizes'])
+    generic = GenericRelation()
+    generic.criterium = _concept['generalizes']['criterium']
+    generic.modified = _concept['generalizes']['modified']
+    concept.generalizes = generic
     for gc in _concept['generalizes']['genericconcepts']:
         concept.generalizes.genericconcepts.append(gc)
     # --
-    concept.hasPart = PartitiveRelation(_concept['hasPart'])
+    part = PartitiveRelation()
+    part.criterium = _concept['hasPart']['criterium']
+    part.modified = _concept['hasPart']['modified']
+    concept.hasPart = part
     for pc in _concept['hasPart']['partconcepts']:
         concept.hasPart.partconcepts.append(pc)
     # --
@@ -176,7 +166,7 @@ def test_noSource_to_rdf_should_return_skos_definition():
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
     <http://example.com/concepts/1> a skos:Concept ;
-    skosno:betydningsbeskrivelse [ a skosno:Definisjon ;
+    skosno:definisjon [ a skosno:Definisjon ;
             skosno:forholdTilKilde skosno:egendefinert ] .
     '''
     # -
@@ -218,7 +208,7 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition():
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
     <http://example.com/concepts/1> a skos:Concept ;
-            skosno:betydningsbeskrivelse [ a skosno:Definisjon ;
+            skosno:definisjon [ a skosno:Definisjon ;
             skosno:forholdTilKilde skosno:sitatFraKilde ;
             dct:source [ rdfs:label "Thrustworthy source"@en,
                 "Stolbar kilde"@nb,

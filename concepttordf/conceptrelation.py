@@ -9,16 +9,12 @@ XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 
 class ConceptRelation(ABC):
 
-    def __init__(self, cr: dict = None):
+    def __init__(self):
         self._g = Graph()
         self._relation = BNode()
         self._g.bind('skosno', SKOSNO)
         self._g.bind('dct', DCT)
         self._g.bind('xsd', XSD)
-
-        if cr is not None:
-            if 'modified' in cr:
-                self.modified = cr['modified']
 
     @property
     def modified(self) -> date:

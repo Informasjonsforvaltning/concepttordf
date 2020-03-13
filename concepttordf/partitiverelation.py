@@ -1,5 +1,6 @@
 from .conceptrelation import ConceptRelation
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
+from typing import List
 
 SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -8,14 +9,9 @@ XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 
 class PartitiveRelation(ConceptRelation):
 
-    def __init__(self, ar: dict = None):
+    def __init__(self):
         self._partconcepts = []
-        if ar is not None:
-            if 'criterium' in ar:
-                self.criterium = ar['criterium']
-            if 'partconcepts' in ar:
-                self.partconcepts = ar['partconcepts']
-        super().__init__(ar)
+        super().__init__()
 
     @property
     def criterium(self) -> dict:
@@ -26,13 +22,8 @@ class PartitiveRelation(ConceptRelation):
         self._criterium = criterium
 
     @property
-    def partconcepts(self) -> list:
+    def partconcepts(self) -> List:
         return self._partconcepts
-
-    @partconcepts.setter
-    def partconcepts(self, acs: list):
-        self._partconcepts
-
 # ---
 
     def to_graph(self) -> Graph:

@@ -1,5 +1,6 @@
 from .conceptrelation import ConceptRelation
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
+from typing import List
 
 SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -8,16 +9,9 @@ XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 
 class AssociativeRelation(ConceptRelation):
 
-    def __init__(self, ar: dict = None):
-        self._associatedconcepts = []
-        if ar is not None:
-            if 'description' in ar:
-                self.description = ar['description']
-            if 'description' in ar:
-                self.description = ar['description']
-            if 'associatedconcepts' in ar:
-                self.associatedconcepts = ar['associatedconcepts']
-        super().__init__(ar)
+    def __init__(self):
+        self._associatedconcepts = list()
+        super().__init__()
 
     @property
     def description(self) -> dict:
@@ -28,12 +22,8 @@ class AssociativeRelation(ConceptRelation):
         self._description = description
 
     @property
-    def associatedconcepts(self) -> list:
+    def associatedconcepts(self) -> List:
         return self._associatedconcepts
-
-    @associatedconcepts.setter
-    def associatedconcepts(self, acs: list):
-        self._associatedconcepts
 
 # ---
 

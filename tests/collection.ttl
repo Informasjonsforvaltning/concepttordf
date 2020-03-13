@@ -28,52 +28,34 @@
                         .
 <http://example.com/concepts/1>
         a                             skos:Concept ;
-        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+        skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "concept_1"@en, "begrep_1"@nb
-                                      ] ;
-        dcat:contactPoint             [ a               vcard:Organization ;
-                                        vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
-                                        vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
-                                                                  "Digitaliseringsdirektoratet"@nb ;
-                                        vcard:hasURL <https://digdir.no> ;
-                                        vcard:hasTelephone <tel:12345678>
-                                      ] .
+                                      ]
+                                      .
 <http://example.com/concepts/2>
         a                             skos:Concept ;
-        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+        skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "concept_2"@en, "begrep_2"@nb
-                                      ] ;
-        dcat:contactPoint             [ a               vcard:Organization ;
-                                        vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
-                                        vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
-                                                                  "Digitaliseringsdirektoratet"@nb ;
-                                        vcard:hasURL <https://digdir.no> ;
-                                        vcard:hasTelephone <tel:12345678>
-                                      ] .
+                                      ]
+                                      .
 <http://example.com/concepts/3>
         a                             skos:Concept ;
-        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+        skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
                                       ] ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/961181399> ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "concept_3"@en, "begrep_3"@nb
-                                      ] ;
-        dcat:contactPoint             [ a               vcard:Organization ;
-                                        vcard:hasEmail  <mailto:informasjonsforvaltning@digdir.no> ;
-                                        vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,
-                                                                  "Digitaliseringsdirektoratet"@nb ;
-                                        vcard:hasURL <https://digdir.no> ;
-                                        vcard:hasTelephone <tel:12345678>
-                                      ] .
+                                      ]
+                                      .

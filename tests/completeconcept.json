@@ -86,9 +86,33 @@
 		},
 		"alternativformulering": {
 			"text": {
-				"en": "another statement of the meaning of the concept",
-				"nb": "en 'alternativ formulering' av betydningen til begrepet"
-			}
+				"en": "abstract or generic idea about a phenomenon",
+				"nb": "mental forestilling om et fenomen",
+				"nn": "mental førestilling om eit fenomen"
+			},
+			"remark": {
+				"en": "a concept used for testing",
+				"nb": "et begrep brukt i testsammenheng",
+				"nn": "eit omgrep brukt i testsamanheng"
+			},
+			"scope": {
+				"text": {
+					"en": "concept",
+					"nb": "begrep",
+					"nn": "omgrep"
+				},
+				"url": "https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4"
+			},
+			"relationtosource": "quoteFromSource",
+			"source" : {
+				"text": {
+					"en": "Thrustworthy source",
+					"nb": "Stolbar kilde",
+					"nn": "Stolbar kilde"
+				},
+				"url": "http://www.example.com/trustworthysources/1"
+			},
+			"modified": "2020-03-04"
 		},
 		"modified": "2020-03-05",
 		"seeAlso" : ["http://example.com/concepts/3", "http://example.com/concepts/5"],

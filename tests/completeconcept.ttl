@@ -21,7 +21,7 @@
 
 <http://example.com/concepts/4>
         a                             skos:Concept ;
-        skosno:betydningsbeskrivelse  [ a                       skosno:Definisjon ;
+        skosno:definisjon             [ a                       skosno:Definisjon ;
                                         rdfs:label              "a concept where all attribtues has value"@en , "eit omgrep som har utfylt alle felt"@nn , "et begrep som har utfylt alle felter"@nb ;
                                         skosno:forholdTilKilde  skosno:basertPåKilde ;
                                         dct:source              [ rdfs:label    "Stolbar kilde"@nb, "Thrustworthy source"@en, "Stolbar kilde"@nn ;
@@ -32,12 +32,21 @@
                                                                 ] ;
                                         skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb ;
                                         dct:modified             "2020-03-04"^^xsd:date ;
-                                      ] ,
-                                      [ a                       skosno:AlternativFormulering ;
-                                        rdfs:label              "another statement of the meaning of the concept"@en,
-                                                                "en 'alternativ formulering' av betydningen til begrepet"@nb;
                                       ] ;
-
+        skosno:alternativFormulering  [ a                       skosno:AlternativFormulering ;
+                                        rdfs:label              "abstract or generic idea about a phenomenon"@en,
+                                                                "mental forestilling om et fenomen"@nb,
+                                                                "mental førestilling om eit fenomen"@nn ;
+                                        skosno:forholdTilKilde  skosno:sitatFraKilde ;
+                                        dct:source              [ rdfs:label    "Stolbar kilde"@nb, "Thrustworthy source"@en, "Stolbar kilde"@nn ;
+                                                                  rdfs:seeAlso  <http://www.example.com/trustworthysources/1>
+                                                                ] ;
+                                        skosno:omfang           [ rdfs:label    "begrep"@nb, "omgrep"@nn, "concept"@en ;
+                                                                  rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4>
+                                                                ] ;
+                                        skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb ;
+                                        dct:modified             "2020-03-04"^^xsd:date ;
+                                      ] ;
         skosno:bruksområde            "katalogpraksis"@nn , "katalogpraksis"@nb , "philosophizing"@en , "filosofiske diskusjonar"@nn , "filosofiske diskusjoner"@nb , "cataloging"@en ;
         dct:modified                  "2020-03-05"^^xsd:date ;
         dct:publisher                 <https://data.brreg.no/enhetsregisteret/api/enheter/555111290> ;

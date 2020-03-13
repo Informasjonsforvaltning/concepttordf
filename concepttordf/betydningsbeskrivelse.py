@@ -10,20 +10,8 @@ class RelationToSource(Enum):
 
 class Betydningsbeskrivelse(ABC):
 
-    def __init__(self, b: dict = None):
-        if b is not None:
-            if 'text' in b:
-                self.text = b['text']
-            if 'remark' in b:
-                self.remark = b['remark']
-            if 'scope' in b:
-                self.scope = b['scope']
-            if 'relationtosource' in b:
-                self.relationtosource = b['relationtosource']
-            if 'source' in b:
-                self.source = b['source']
-            if 'modified' in b:
-                self.modified = b['modified']
+    def __init__(self):
+        pass
 
     @property
     def type(self):

@@ -1,6 +1,4 @@
-from concepttordf.collection import Collection
-from concepttordf.concept import Concept
-from concepttordf.contact import Contact
+from concepttordf import Collection, Concept, Contact, Definition
 import json
 from rdflib import Graph
 from rdflib.compare import isomorphic, graph_diff
@@ -17,12 +15,25 @@ def test_collection_to_rdf_should_return_skos_collection():
     collection.name = _collection['name']
     collection.description = _collection['description']
     collection.publisher = _collection['publisher']
-    collection.contactpoint = Contact(_collection['contactpoint'])
+
+    contact = Contact()
+    contact.name = _collection['contactpoint']['name']
+    contact.email = _collection['contactpoint']['email']
+    contact.telephone = _collection['contactpoint']['telephone']
+    contact.url = _collection['contactpoint']['url']
+    collection.contactpoint = contact
 
     # Add members:
     collection.members = []
-    for concept in _collection['members']:
-        collection.members.append(Concept(concept))
+    for _concept in _collection['members']:
+        concept = Concept()
+        concept.identifier = _concept['identifier']
+        concept.term = _concept['term']
+        concept.publisher = _concept['publisher']
+        definition = Definition()
+        definition.text = _concept['definition']['text']
+        concept.definition = definition
+        collection.members.append(concept)
 
     # Get the collection as rdf:
     data = collection.to_rdf()
@@ -52,12 +63,20 @@ def test_collection_to_rdf_should_return_skos_collection_with_no_concepts():
     collection.name = _collection['name']
     collection.description = _collection['description']
     collection.publisher = _collection['publisher']
-    collection.contactpoint = Contact(_collection['contactpoint'])
+    # Contact
+    contact = Contact()
+    contact.name = _collection['contactpoint']['name']
+    contact.email = _collection['contactpoint']['email']
+    contact.url = _collection['contactpoint']['url']
+    contact.telephone = _collection['contactpoint']['telephone']
+    collection.contactpoint = contact
 
     # Add members:
     collection.members = []
-    for concept in _collection['members']:
-        collection.members.append(Concept(concept))
+    for _concept in _collection['members']:
+        concept = Concept()
+        concept.identifier = _concept['identifier']
+        collection.members.append(concept)
 
     # Get the collection as rdf:
     data = collection.to_rdf(includeconcepts=False)

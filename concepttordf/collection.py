@@ -12,7 +12,7 @@ DCAT = Namespace('http://www.w3.org/ns/dcat#')
 class Collection:
     """" A class representing a concept collection"""
 
-    def __init__(self, c: dict = None):
+    def __init__(self):
         self._g = Graph()
         self._members = []
 

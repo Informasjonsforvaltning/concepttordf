@@ -6,6 +6,6 @@ SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 
 class Definition(Betydningsbeskrivelse):
 
-    def __init__(self, definition: dict = None):
-        super().__init__(definition)
+    def __init__(self):
+        super().__init__()
         self.type = SKOSNO.Definisjon

@@ -23,42 +23,8 @@ XKOS = Namespace('http://rdf-vocabulary.ddialliance.org/xkos#')
 class Concept:
     """A class representing a concept"""
 
-    def __init__(self, c: dict = None):
+    def __init__(self):
         self._g = Graph()
-        if c is not None:
-            if 'identifier' in c:
-                self.identifier = c['identifier']
-            if 'term' in c:
-                self.term = c['term']
-            if 'definition' in c:
-                self.definition = Definition(c['definition'])
-            if 'alternativformulering' in c:
-                self.alternativformulering = AlternativFormulering(
-                                  c['alternativformulering'])
-            if 'contactpoint' in c:
-                self.contactpoint = Contact(c['contactpoint'])
-            if 'alternativeterm' in c:
-                self.alternativeterm = c['alternativeterm']
-            if 'hiddenterm' in c:
-                self.hiddenterm = c['hiddenterm']
-            if 'subject' in c:
-                self.subject = c['subject']
-            if 'modified' in c:
-                self.modified = c['modified']
-            if 'example' in c:
-                self.example = c['example']
-            if 'bruksområde' in c:
-                self.bruksområde = c['bruksområde']
-            if 'validinperiod' in c:
-                self.validinperiod = c['validinperiod']
-            if 'publisher' in c:
-                self.publisher = c['publisher']
-            if 'related' in c:
-                self.related = c['related']
-            if 'generalizes' in c:
-                self.generalizes = c['generalizes']
-            if 'hasPart' in c:
-                self.hasPart = c['hasPart']
 
         self.seeAlso = []
         self.replaces = []
@@ -472,6 +438,11 @@ class Concept:
                          Literal(betydningsbeskrivelse.modified,
                                  datatype=XSD.date)))
 
-        self._g.add((URIRef(self.identifier), SKOSNO.betydningsbeskrivelse,
-                    _betydningsbeskrivelse))
+        # TODO: check type, and set correct property
+        if isinstance(betydningsbeskrivelse, Definition):
+            self._g.add((URIRef(self.identifier), SKOSNO.definisjon,
+                        _betydningsbeskrivelse))
+        else:
+            self._g.add((URIRef(self.identifier), SKOSNO.alternativFormulering,
+                        _betydningsbeskrivelse))
         # ---

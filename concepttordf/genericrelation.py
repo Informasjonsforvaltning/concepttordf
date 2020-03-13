@@ -1,5 +1,6 @@
 from .conceptrelation import ConceptRelation
 from rdflib import Graph, Literal, Namespace, RDF, URIRef
+from typing import List
 
 SKOSNO = Namespace('https://data.norge.no/vocabulary/skosno#')
 DCT = Namespace('http://purl.org/dc/terms/')
@@ -8,14 +9,9 @@ XSD = Namespace('http://www.w3.org/2001/XMLSchema#')
 
 class GenericRelation(ConceptRelation):
 
-    def __init__(self, ar: dict = None):
+    def __init__(self):
         self._genericconcepts = []
-        if ar is not None:
-            if 'criterium' in ar:
-                self.criterium = ar['criterium']
-            if 'genericconcepts' in ar:
-                self.genericconcepts = ar['genericconcepts']
-        super().__init__(ar)
+        super().__init__()
 
     @property
     def criterium(self) -> dict:
@@ -26,13 +22,8 @@ class GenericRelation(ConceptRelation):
         self._criterium = criterium
 
     @property
-    def genericconcepts(self) -> list:
+    def genericconcepts(self) -> List:
         return self._genericconcepts
-
-    @genericconcepts.setter
-    def genericconcepts(self, acs: list):
-        self._genericconcepts
-
 # ---
 
     def to_graph(self) -> Graph:
