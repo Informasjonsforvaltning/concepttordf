@@ -30,11 +30,6 @@
 			"nb": "termonologi",
 			"nn": "termonologi"
 		},
-		"example": {
-			"en": "The completeconcept's natural habitat is very seldom to find on planet earth",
-			"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
-			"nn": "Komplettomgrepet fins naturlig svært få stadar på jorda"
-		},
 		"bruksområde": {
 			"en": ["cataloging", "philosophizing"],
 			"nb": ["katalogpraksis", "filosofiske diskusjoner"],
@@ -82,7 +77,12 @@
 				},
 				"url": "http://www.example.com/trustworthysources/1"
 			},
-			"modified": "2020-03-04"
+			"modified": "2020-03-04",
+			"example": {
+				"en": "The completeconcept's natural habitat is very seldom to find on planet earth",
+				"nb": "Komplettbegrepet fins naturlig svært få steder på jorda",
+				"nn": "Komplettomgrepet fins naturlig svært få stadar på jorda"
+			}
 		},
 		"alternativformulering": {
 			"text": {

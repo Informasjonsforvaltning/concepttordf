@@ -61,6 +61,8 @@ def test_concept_to_rdf_should_return_skos_concept():
     definition.relationtosource = _concept['definition']['relationtosource']
     definition.source = _concept['definition']['source']
     definition.modified = _concept['definition']['modified']
+    definition.example = _concept['definition']['example']
+
     concept.definition = definition
     # AlternativFormulering
     af = AlternativFormulering()
@@ -83,7 +85,6 @@ def test_concept_to_rdf_should_return_skos_concept():
     #
     concept.subject = _concept['subject']
     concept.modified = _concept['modified']
-    concept.example = _concept['example']
     concept.bruksområde = _concept['bruksområde']
     concept.validinperiod = _concept['validinperiod']
     concept.modified = _concept['modified']

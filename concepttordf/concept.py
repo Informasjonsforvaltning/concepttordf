@@ -104,14 +104,6 @@ class Concept:
         self._modified = modified
 
     @property
-    def example(self) -> dict:
-        return self._example
-
-    @example.setter
-    def example(self, example: dict):
-        self._example = example
-
-    @property
     def bruksområde(self) -> dict:
         return self._bruksområde
 
@@ -295,12 +287,6 @@ class Concept:
             self._g.add((URIRef(self.identifier), DCT.modified,
                          Literal(self.modified, datatype=XSD.date)))
 
-        # example
-        if hasattr(self, 'example'):
-            for key in self.example:
-                self._g.add((URIRef(self.identifier), SKOS.example,
-                             Literal(self.example[key], lang=key)))
-
         # bruksområde
         if hasattr(self, 'bruksområde'):
             for key in self.bruksområde:
@@ -438,7 +424,14 @@ class Concept:
                          Literal(betydningsbeskrivelse.modified,
                                  datatype=XSD.date)))
 
-        # TODO: check type, and set correct property
+        # example
+        if hasattr(betydningsbeskrivelse, 'example'):
+            for key in betydningsbeskrivelse.example:
+                self._g.add((_betydningsbeskrivelse, SKOS.example,
+                             Literal(betydningsbeskrivelse.example[key],
+                                     lang=key)))
+
+        # Check type, and set correct property
         if isinstance(betydningsbeskrivelse, Definition):
             self._g.add((URIRef(self.identifier), SKOSNO.definisjon,
                         _betydningsbeskrivelse))

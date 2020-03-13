@@ -68,3 +68,11 @@ class Betydningsbeskrivelse(ABC):
     @modified.setter
     def modified(self, modified: dict):
         self._modified = modified
+
+    @property
+    def example(self) -> dict:
+        return self._example
+
+    @example.setter
+    def example(self, example: dict):
+        self._example = example

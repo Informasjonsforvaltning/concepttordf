@@ -31,7 +31,8 @@
                                                                   rdfs:seeAlso  <https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4>
                                                                 ] ;
                                         skos:scopeNote          "a concept used for testing"@en , "eit omgrep brukt i testsamanheng"@nn , "et begrep brukt i testsammenheng"@nb ;
-                                        dct:modified             "2020-03-04"^^xsd:date ;
+                                        dct:modified            "2020-03-04"^^xsd:date ;
+                                        skos:example            "Komplettbegrepet fins naturlig svært få steder på jorda"@nb , "Komplettomgrepet fins naturlig svært få stadar på jorda"@nn , "The completeconcept's natural habitat is very seldom to find on planet earth"@en ;
                                       ] ;
         skosno:alternativFormulering  [ a                       skosno:AlternativFormulering ;
                                         rdfs:label              "abstract or generic idea about a phenomenon"@en,
@@ -55,7 +56,6 @@
                                         schema:endDate      "9999-03-30"^^xsd:date ;
                                         schema:startDate    "2020-03-03"^^xsd:date
                                       ] ;
-        skos:example                  "Komplettbegrepet fins naturlig svært få steder på jorda"@nb , "Komplettomgrepet fins naturlig svært få stadar på jorda"@nn , "The completeconcept's natural habitat is very seldom to find on planet earth"@en ;
         skosxl:prefLabel              [ a                   skosxl:Label ;
                                         skosxl:literalForm  "completeconcept"@en , "komplettomgrep"@nn , "komplettbegrep"@nb ;
                                         dct:modified        "2020-03-01"^^xsd:date ;
