@@ -68,6 +68,10 @@
                                         skosxl:literalForm  "completeconcept"@en , "kompletomgrep"@nn , "kompletbegrep"@nb ;
                                         dct:modified        "2020-03-03"^^xsd:date ;
                                       ] ;
+        skosno:datastrukturterm       [ a                   skosxl:Label ;
+                                        skosxl:literalForm  "completeConcept"@en ;
+                                        dct:modified        "2020-03-13"^^xsd:date ;
+                                      ] ;
         dcat:contactPoint             [ a               vcard:Organization ;
                                         vcard:hasEmail  <mailto:sbd@example.com> ;
                                         vcard:hasOrganizationName "Norwegian Digitalisation Agency"@en,

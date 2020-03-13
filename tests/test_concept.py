@@ -53,6 +53,7 @@ def test_concept_to_rdf_should_return_skos_concept():
     concept.term = _concept['term']
     concept.alternativeterm = _concept['alternativeterm']
     concept.hiddenterm = _concept['hiddenterm']
+    concept.datastrukturterm = _concept['datastrukturterm']
     # Definisjon
     definition = Definition()
     definition.text = _concept['definition']['text']

@@ -55,12 +55,12 @@ class Concept:
         self._alternativeterm = alternativeterm
 
     @property
-    def hiddenterm(self) -> dict:
-        return self._hiddenterm
+    def datastrukturterm(self) -> dict:
+        return self._datastrukturterm
 
-    @hiddenterm.setter
-    def hiddenterm(self, hiddenterm: dict):
-        self._hiddenterm = hiddenterm
+    @datastrukturterm.setter
+    def datastrukturterm(self, datastrukturterm: dict):
+        self._datastrukturterm = datastrukturterm
 
     @property
     def subject(self) -> dict:
@@ -253,6 +253,22 @@ class Concept:
             self._g.add((URIRef(self.identifier),
                          SKOSXL.hiddenLabel, hiddenLabel))
 
+        # datastrukturterm
+        if hasattr(self, 'datastrukturterm'):
+            datastrukturterm = BNode()
+            self._g.add((datastrukturterm, RDF.type, SKOSXL.Label))
+            if 'name' in self.datastrukturterm:
+                _name = self.datastrukturterm['name']
+                for key in _name:
+                    for l in _name[key]:
+                        self._g.add((datastrukturterm, SKOSXL.literalForm,
+                                     Literal(l, lang=key)))
+            if 'modified' in self.datastrukturterm:
+                self._g.add((datastrukturterm, DCT.modified,
+                             Literal(self.datastrukturterm['modified'],
+                                     datatype=XSD.date)))
+            self._g.add((URIRef(self.identifier),
+                         SKOSNO.datastrukturterm, datastrukturterm))
         # definition
         if hasattr(self, 'definition'):
             self._add_betydningsbeskrivelse_to_concept(self.definition)

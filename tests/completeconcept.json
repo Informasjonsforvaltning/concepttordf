@@ -25,6 +25,12 @@
 			},
 			"modified": "2020-03-03"
 		},
+		"datastrukturterm": {
+			"name": {
+				"en": ["completeConcept"]
+			},
+			"modified": "2020-03-13"
+		},
 		"subject": {
 			"en": "terminology",
 			"nb": "termonologi",
