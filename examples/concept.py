@@ -1,3 +1,4 @@
+"""Example module for use of Concept."""
 from concepttordf import Concept, Definition
 
 # create a concept
@@ -8,13 +9,13 @@ concept.identifier = "http://example.com/concepts/1"
 concept.term = {"name": {"nb": "begrep", "en": "concept"}}
 # set definition
 definition = Definition()
-definition.text = {"nb":
-                   ("mental forestilling om et konkret eller abstrakt"
-                    "fenomen i den virkelige verden"),
-                   "en":
-                   ("an abstract or generic idea generalized from"
-                    "particular instances")
-                   }
+definition.text = {
+    "nb": (
+        "mental forestilling om et konkret eller abstrakt"
+        "fenomen i den virkelige verden"
+    ),
+    "en": ("an abstract or generic idea generalized from" "particular instances"),
+}
 concept.definition = definition
 # set publisher
 concept.publisher = "https://example.com/publishers/1"
@@ -24,5 +25,5 @@ rdf = concept.to_rdf()
 print(rdf.decode())
 
 # get rdf representation in xml
-rdf = concept.to_rdf(format='xml')
+rdf = concept.to_rdf(format="xml")
 print(rdf.decode())

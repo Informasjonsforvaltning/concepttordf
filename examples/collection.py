@@ -1,3 +1,4 @@
+"""Example module for use of Collection."""
 from concepttordf import Collection, Concept, Definition
 
 # Create collection object
@@ -12,8 +13,10 @@ c = Concept()
 c.identifier = "http://example.com/concepts/1"
 c.term = {"name": {"nb": "inntekt", "en": "income"}}
 definition = Definition()
-definition.text = {"nb": "ting man skulle hatt mer av",
-                   "en": "something you want more of"}
+definition.text = {
+    "nb": "ting man skulle hatt mer av",
+    "en": "something you want more of",
+}
 c.definition = definition
 
 # Add concept to collection:

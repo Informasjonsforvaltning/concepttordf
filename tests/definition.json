@@ -1,6 +1,5 @@
 {
 	"definition": {
-		"identifier": "http://example.com/definitions/1",
 		"text": {
 			"en": "a concept where all attribtues has value",
 			"nb": "et begrep som har utfylt alle felter",

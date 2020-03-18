@@ -1,3 +1,7 @@
+![Tests](https://github.com/Informasjonsforvaltning/concepttordf/workflows/Tests/badge.svg)
+[![codecov](https://codecov.io/gh/Informasjonsforvaltning/concepttordf/branch/master/graph/badge.svg)](https://codecov.io/gh/Informasjonsforvaltning/concepttordf)
+[![PyPI](https://img.shields.io/pypi/v/concepttordf.svg)](https://pypi.org/project/concepttordf/)
+[![Read the Docs](https://readthedocs.org/projects/concepttordf/badge/)](https://concepttordf.readthedocs.io/)
 # concepttordf
 
 A small Python library for mapping a concept collection to the [skos-ap-no specification](https://doc.difi.no/data/begrep-skos-ap-no/).
@@ -66,32 +70,30 @@ Will print the concept according to the specification:
 
 ## Development
 ### Requirements
-- python3
-- pipenv
+- [pyenv](https://github.com/pyenv/pyenv) (recommended)
+- [poetry](https://python-poetry.org/)
+- [nox](https://nox.thea.codes/en/stable/)
 
 ### Install
 ```
 % git clone https://github.com/Informasjonsforvaltning/concepttordf.git
 % cd concepttordf
-% pipenv install
-% pipenv shell
-% pipenv install --dev -e .
+% pyenv install 3.8.2
+% pyenv install 3.7.6
+% pyenv local 3.8.2 3.7.6
+% poetry install
 ```
 ### Run all tests
 ```
-% pytest -rA
+% nox
 ```
-With simple coverage-report in output:
+### Run all tests with coverage reporting
 ```
-% pytest -rA --cov-report term-missing --cov=concepttordf tests/
-```
-Wit coverage-report to html:
-```
-% pytest -rA --cov-report html --cov=concepttordf tests/
+% nox -rs tests
 ```
 ### Debugging
 You can enter into [Pdb](https://docs.python.org/3/library/pdb.html) by passing `--pdb` to pytest:
 ```
-pytest --pdb -rA --cov-report term-missing --cov=concepttordf tests/
+nox -rs tests -- --pdb
 ```
 You can set breakpoints directly in code by using the function `breakpoint()`.
