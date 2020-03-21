@@ -11,3 +11,6 @@
   - [x] [hasPart](https://doc.difi.no/data/begrep-skos-ap-no/#_begrep_partitivrelasjon)
 - [ ] Document how to set up an endpoint that can be harvested
 - [ ] Consider refactor tests to test one attribute at a time
+- [ ] Add docs to Read the docs
+- [ ] single source version
+- [ ] Add coverage to codecov
