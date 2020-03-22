@@ -13,4 +13,4 @@
 - [ ] Consider refactor tests to test one attribute at a time
 - [ ] Add docs to Read the docs
 - [ ] single source version
-- [ ] Add coverage to codecov
+- [x] Add coverage to codecov
