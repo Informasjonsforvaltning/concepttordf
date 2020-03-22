@@ -9,7 +9,7 @@ A small Python library for mapping a concept collection to the [skos-ap-no speci
 ## Usage
 ### Install
 ```
-% pip install -i concepttordf
+% pip install concepttordf
 ```
 ### Getting started
 To create a SKOS-AP-NO concept collection:
