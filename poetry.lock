@@ -679,15 +679,18 @@ description = "RDFLib is a Python library for working with RDF, a simple yet pow
 name = "rdflib"
 optional = false
 python-versions = "*"
-version = "4.2.2"
+version = "5.0.0"
 
 [package.dependencies]
 isodate = "*"
 pyparsing = "*"
+six = "*"
 
 [package.extras]
+docs = ["sphinx (<3)", "sphinxcontrib-apidoc"]
 html = ["html5lib"]
-sparql = ["sparqlwrapper"]
+sparql = ["requests"]
+tests = ["html5lib", "networkx", "nose", "doctest-ignore-unicode"]
 
 [[package]]
 category = "main"
@@ -695,10 +698,10 @@ description = "rdflib extension adding JSON-LD parser and serializer"
 name = "rdflib-jsonld"
 optional = false
 python-versions = "*"
-version = "0.4.0"
+version = "0.5.0"
 
 [package.dependencies]
-rdflib = ">=4.2"
+rdflib = ">=4.2.2"
 
 [[package]]
 category = "dev"
@@ -1019,7 +1022,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "6a4b046f032a958c5b65e5e39b609989d0d60600b3c641b9f867c12c3aeb6b6f"
+content-hash = "6258fe7889c0033821606e1501c2468e0593cfa023fbf3b3d7707bdec1e52446"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1346,11 +1349,11 @@ pyyaml = [
     {file = "PyYAML-5.3.1.tar.gz", hash = "sha256:b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"},
 ]
 rdflib = [
-    {file = "rdflib-4.2.2-py3-none-any.whl", hash = "sha256:58d5994610105a457cff7fdfe3d683d87786c5028a45ae032982498a7e913d6f"},
-    {file = "rdflib-4.2.2.tar.gz", hash = "sha256:da1df14552555c5c7715d8ce71c08f404c988c58a1ecd38552d0da4fc261280d"},
+    {file = "rdflib-5.0.0-py3-none-any.whl", hash = "sha256:88208ea971a87886d60ae2b1a4b2cdc263527af0454c422118d43fe64b357877"},
+    {file = "rdflib-5.0.0.tar.gz", hash = "sha256:78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155"},
 ]
 rdflib-jsonld = [
-    {file = "rdflib-jsonld-0.4.0.tar.gz", hash = "sha256:144774786a2fc7de09b24a9309cbcccc78bc48b152536d2ea1c1df2ad715bc2d"},
+    {file = "rdflib-jsonld-0.5.0.tar.gz", hash = "sha256:4f7d55326405071c7bce9acf5484643bcb984eadb84a6503053367da207105ed"},
 ]
 regex = [
     {file = "regex-2020.4.4-cp27-cp27m-win32.whl", hash = "sha256:90742c6ff121a9c5b261b9b215cb476eea97df98ea82037ec8ac95d1be7a034f"},
