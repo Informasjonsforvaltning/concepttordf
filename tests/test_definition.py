@@ -5,8 +5,8 @@ from rdflib.compare import graph_diff, isomorphic
 from concepttordf import Concept, Definition
 
 
-def test_quoteFromSource_to_rdf_should_return_skos_definition() -> None:
-    """It returns a definition graph isomorphic to spec."""
+def test_triple_quote_string_in_text() -> None:
+    """It returns a single-quote string in label."""
     definition = Definition()
     definition.text = {
         "nb": """Denne inndelingen øker kvaliteten på saks- \
