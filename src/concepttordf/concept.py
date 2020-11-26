@@ -385,9 +385,9 @@ class Concept:
             if "name" in self.alternativeterm:
                 _name = self.alternativeterm["name"]
                 for key in _name:
-                    for l in _name[key]:
+                    for _l in _name[key]:
                         self._g.add(
-                            (altLabel, SKOSXL.literalForm, Literal(l, lang=key))
+                            (altLabel, SKOSXL.literalForm, Literal(_l, lang=key))
                         )
             if "modified" in self.alternativeterm:
                 self._g.add(
@@ -406,9 +406,13 @@ class Concept:
             if "name" in self.datastrukturterm:
                 _name = self.datastrukturterm["name"]
                 for key in _name:
-                    for l in _name[key]:
+                    for _l in _name[key]:
                         self._g.add(
-                            (datastrukturterm, SKOSXL.literalForm, Literal(l, lang=key))
+                            (
+                                datastrukturterm,
+                                SKOSXL.literalForm,
+                                Literal(_l, lang=key),
+                            )
                         )
             if "modified" in self.datastrukturterm:
                 self._g.add(
@@ -429,9 +433,9 @@ class Concept:
             if "name" in self.hiddenterm:
                 _name = self.hiddenterm["name"]
                 for key in _name:
-                    for l in _name[key]:
+                    for _l in _name[key]:
                         self._g.add(
-                            (hiddenLabel, SKOSXL.literalForm, Literal(l, lang=key))
+                            (hiddenLabel, SKOSXL.literalForm, Literal(_l, lang=key))
                         )
             if "modified" in self.hiddenterm:
                 self._g.add(
@@ -616,7 +620,13 @@ class Concept:
         if getattr(betydningsbeskrivelse, "text", None):
             _text = betydningsbeskrivelse.text
             for key in _text:
-                self._g.add((bsnode, RDFS.label, Literal(_text[key], lang=key),))
+                self._g.add(
+                    (
+                        bsnode,
+                        RDFS.label,
+                        Literal(_text[key], lang=key),
+                    )
+                )
 
     def _add_remark_to_bs_graph(
         self: Concept, betydningsbeskrivelse: Betydningsbeskrivelse, bsnode: BNode
@@ -639,7 +649,11 @@ class Concept:
             _scope = BNode()
             if "url" in betydningsbeskrivelse.scope:
                 self._g.add(
-                    (_scope, RDFS.seeAlso, URIRef(betydningsbeskrivelse.scope["url"]),)
+                    (
+                        _scope,
+                        RDFS.seeAlso,
+                        URIRef(betydningsbeskrivelse.scope["url"]),
+                    )
                 )
             if "text" in betydningsbeskrivelse.scope:
                 _text = betydningsbeskrivelse.scope["text"]
@@ -660,14 +674,32 @@ class Concept:
                 RelationToSource(betydningsbeskrivelse.relationtosource)
                 is RelationToSource.sitatFraKilde
             ):
-                self._g.add((bsnode, SKOSNO.forholdTilKilde, SKOSNO.sitatFraKilde,))
+                self._g.add(
+                    (
+                        bsnode,
+                        SKOSNO.forholdTilKilde,
+                        SKOSNO.sitatFraKilde,
+                    )
+                )
             elif (
                 RelationToSource(betydningsbeskrivelse.relationtosource)
                 is RelationToSource.basertPaKilde
             ):
-                self._g.add((bsnode, SKOSNO.forholdTilKilde, SKOSNO.basertPåKilde,))
+                self._g.add(
+                    (
+                        bsnode,
+                        SKOSNO.forholdTilKilde,
+                        SKOSNO.basertPåKilde,
+                    )
+                )
             else:
-                self._g.add((bsnode, SKOSNO.forholdTilKilde, SKOSNO.egendefinert,))
+                self._g.add(
+                    (
+                        bsnode,
+                        SKOSNO.forholdTilKilde,
+                        SKOSNO.egendefinert,
+                    )
+                )
 
     def _add_source_to_bs_graph(
         self: Concept, betydningsbeskrivelse: Betydningsbeskrivelse, bsnode: BNode
@@ -706,4 +738,10 @@ class Concept:
         if getattr(betydningsbeskrivelse, "example", None):
             _example = betydningsbeskrivelse.example
             for key in _example:
-                self._g.add((bsnode, SKOS.example, Literal(_example[key], lang=key),))
+                self._g.add(
+                    (
+                        bsnode,
+                        SKOS.example,
+                        Literal(_example[key], lang=key),
+                    )
+                )

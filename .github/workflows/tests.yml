@@ -13,6 +13,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x64
-    - run: pip install nox==2019.11.9
-    - run: pip install poetry==1.0.5
+    - run: python3 -m pip install --user pipx
+    - run: python3 -m pipx ensurepath
+    - run: pipx install nox==2020.8.22
+    - run: pipx install poetry==1.1.4
+    - run: pipx inject nox nox-poetry
     - run: nox
