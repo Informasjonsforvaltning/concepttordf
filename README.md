@@ -70,9 +70,15 @@ Will print the concept according to the specification:
 
 ## Development
 ### Requirements
+- [pipx](https://pipxproject.github.io/pipx/) (recommended)
 - [pyenv](https://github.com/pyenv/pyenv) (recommended)
 - [poetry](https://python-poetry.org/)
 - [nox](https://nox.thea.codes/en/stable/)
+```
+% pipx install poetry
+% pipx install nox
+% pipx inject nox nox-poetry
+```
 
 ### Install
 ```
