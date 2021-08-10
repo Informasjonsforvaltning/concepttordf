@@ -22,8 +22,8 @@ concept.publisher = "https://example.com/publishers/1"
 
 # get rdf representation in turtle (default)
 rdf = concept.to_rdf()
-print(rdf.decode())
+print(rdf)
 
 # get rdf representation in xml
 rdf = concept.to_rdf(format="xml")
-print(rdf.decode())
+print(rdf)

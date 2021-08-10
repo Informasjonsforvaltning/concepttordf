@@ -37,7 +37,7 @@ collection.members.append(c)
 
 # get rdf representation in turtle (default)
 rdf = collection.to_rdf()
-print(rdf.decode())
+print(rdf)
 ```
 Will print the concept according to the specification:
 ```
