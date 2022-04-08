@@ -10,6 +10,7 @@
 
 <http://example.com/collections/1>
         a               skos:Collection ;
+        dct:identifier "http://example.com/collections/1" ;
         rdfs:label      "Digdir sin begrepssamling"@nb,
                         "The concept collection of the Norwegian Digitalisation Agency"@en;
         dct:description "Begrepssamlingen inneholder testbegreper"@nb,
@@ -28,6 +29,7 @@
                         .
 <http://example.com/concepts/1>
         a                             skos:Concept ;
+        dct:identifier "http://example.com/concepts/1" ;
         skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
@@ -39,6 +41,7 @@
                                       .
 <http://example.com/concepts/2>
         a                             skos:Concept ;
+        dct:identifier "http://example.com/concepts/2" ;
         skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;
@@ -50,6 +53,7 @@
                                       .
 <http://example.com/concepts/3>
         a                             skos:Concept ;
+        dct:identifier "http://example.com/concepts/3" ;
         skosno:definisjon  [ a                       skosno:Definisjon ;
                                         rdfs:label              "an abstract or generic idea generalized from particular instances"@en,
                                                                 "mental forestilling om et konkret eller abstrakt fenomen i den virkelige verden"@nb;

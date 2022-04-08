@@ -10,6 +10,7 @@
 
 <http://example.com/collections/1>
         a               skos:Collection ;
+        dct:identifier  "http://example.com/collections/1" ;
         rdfs:label      "Digdir sin begrepssamling"@nb,
                         "The concept collection of the Norwegian Digitalisation Agency"@en;
         dct:description "Begrepssamlingen inneholder testbegreper"@nb,

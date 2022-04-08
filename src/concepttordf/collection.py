@@ -48,12 +48,14 @@ DCAT = Namespace("http://www.w3.org/ns/dcat#")
 class Collection:
     """A class representing a concept collection."""
 
+    # Types
     _identifier: str
     _name: dict
     _publisher: str
     _description: dict
     _contactpoint: Contact
     _members: List[Concept]
+    _dct_identifier: str
 
     def __init__(self) -> None:
         """Inits an object with default values."""
@@ -118,6 +120,18 @@ class Collection:
     def members(self, members: List[Concept]) -> None:
         self._members = members
 
+    @property
+    def dct_identifier(self) -> str:
+        """Get for dct_identifier."""
+        return self._dct_identifier
+
+    @dct_identifier.setter
+    def dct_identifier(self, dct_identifier: str) -> None:
+        """Set for dct_identifier."""
+        self._dct_identifier = dct_identifier
+
+    # ----------------------------------------------
+
     def to_rdf(self, format: str = "text/turtle", includeconcepts: bool = True) -> str:
         """Maps the collection to rdf.
 
@@ -128,13 +142,26 @@ class Collection:
         Returns:
             serialization as a string according to format
         """
+        return self._to_graph(includeconcepts=includeconcepts).serialize(format=format)
+
+    # ---
+
+    def _to_graph(self, includeconcepts: bool = True) -> Graph:
+        """Transforms the collection to an rdf graph.
+
+        Args:
+            includeconcepts: if true details of concepts are included
+
+        Returns:
+            an RDF graph representing the collection.
+        """
         self._add_collection_to_graph()
 
         if includeconcepts:
             for concept in self.members:
                 self._g += concept._to_graph()
 
-        return self._g.serialize(format=format)
+        return self._g
 
     # ---
 
@@ -148,6 +175,16 @@ class Collection:
         self._g.bind("dcat", DCAT)
 
         self._g.add((URIRef(self.identifier), RDF.type, SKOS.Collection))
+
+        # dct:identifier
+        if getattr(self, "dct_identifier", None):
+            self._g.add(
+                (
+                    URIRef(self.identifier),
+                    DCT.identifier,
+                    Literal(self.dct_identifier),
+                )
+            )
 
         # publisher
         self._g.add((URIRef(self.identifier), DCT.publisher, URIRef(self.publisher)))

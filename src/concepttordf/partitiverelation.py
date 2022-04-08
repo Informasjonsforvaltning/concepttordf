@@ -25,10 +25,12 @@ class PartitiveRelation(ConceptRelation):
 
     _criterium: dict
     _partconcepts: List[Concept]
+    _is_part_of_concepts: List[Concept]
 
     def __init__(self) -> None:
         """Inits an object with default values."""
         self._partconcepts = list()
+        self._is_part_of_concepts = list()
         super().__init__()
 
     @property
@@ -54,6 +56,15 @@ class PartitiveRelation(ConceptRelation):
         """
         return self._partconcepts
 
+    @property
+    def is_part_of_concepts(self) -> List[Concept]:
+        """Is_part_of_concepts attributes.
+
+        Returns:
+            a list of concepts that this concept is part of
+        """
+        return self._is_part_of_concepts
+
     # ---
 
     def _to_graph(self) -> Graph:
@@ -75,15 +86,17 @@ class PartitiveRelation(ConceptRelation):
                 self._g.add(
                     (
                         self._relation,
-                        SKOSNO.inndelingskriterium,
+                        DCT.description,
                         Literal(self.criterium[key], lang=key),
                     )
                 )
 
         # partconcepts
         if getattr(self, "partconcepts", None):
-            # breakpoint()
             for ac in self.partconcepts:
-                self._g.add(
-                    (self._relation, SKOSNO.underordnetBegrep, URIRef(ac.identifier))
-                )
+                self._g.add((self._relation, DCT.hasPart, URIRef(ac.identifier)))
+
+        # is_part_of_concepts
+        if getattr(self, "is_part_of_concepts", None):
+            for ac in self.is_part_of_concepts:
+                self._g.add((self._relation, DCT.isPartOf, URIRef(ac.identifier)))

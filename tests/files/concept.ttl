@@ -10,6 +10,7 @@
 
 <http://example.com/concepts/1>
         a                             skos:Concept ;
+        dct:identifier                 "http://example.com/concepts/1" ;
         skosno:definisjon             [ a                       skosno:Definisjon ;
                                         rdfs:label              "unit of knowledge created by a unique combination of characteristics"@en,
                                                                 "kunnskapsenhet som er dannet gjennom en unik kombinasjon av kjennetegn"@nb,
