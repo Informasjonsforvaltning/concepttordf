@@ -10,6 +10,7 @@ from .conceptrelation import ConceptRelation
 if TYPE_CHECKING:  # pragma: no cover
     from .concept import Concept
 
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
 SKOSNO = Namespace("https://data.norge.no/vocabulary/skosno#")
 DCT = Namespace("http://purl.org/dc/terms/")
 XSD = Namespace("http://www.w3.org/2001/XMLSchema#")
@@ -82,8 +83,5 @@ class AssociativeRelation(ConceptRelation):
 
         # associatedconcepts
         if getattr(self, "associatedconcepts", None):
-            # breakpoint()
             for ac in self.associatedconcepts:
-                self._g.add(
-                    (self._relation, SKOSNO.assosiertBegrep, URIRef(ac.identifier))
-                )
+                self._g.add((self._relation, SKOS.related, URIRef(ac.identifier)))

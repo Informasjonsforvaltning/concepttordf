@@ -11,23 +11,40 @@
 		},
 		"alternativeterm": {
 			"name": {
-				"en": ["superconcept", "totalconcept"],
-				"nb": ["superbegrep", "totalbegrep"],
-				"nn": ["superomgrep", "totalomgrep"]
+				"en": [
+					"superconcept",
+					"totalconcept"
+				],
+				"nb": [
+					"superbegrep",
+					"totalbegrep"
+				],
+				"nn": [
+					"superomgrep",
+					"totalomgrep"
+				]
 			},
 			"modified": "2020-03-02"
 		},
 		"hiddenterm": {
 			"name": {
-				"en": ["completeconcept"],
-				"nb": ["kompletbegrep"],
-				"nn": ["kompletomgrep"]
+				"en": [
+					"completeconcept"
+				],
+				"nb": [
+					"kompletbegrep"
+				],
+				"nn": [
+					"kompletomgrep"
+				]
 			},
 			"modified": "2020-03-03"
 		},
 		"datastrukturterm": {
 			"name": {
-				"en": ["completeConcept"]
+				"en": [
+					"completeConcept"
+				]
 			},
 			"modified": "2020-03-13"
 		},
@@ -37,9 +54,18 @@
 			"nn": "termonologi"
 		},
 		"bruksomrade": {
-			"en": ["cataloging", "philosophizing"],
-			"nb": ["katalogpraksis", "filosofiske diskusjoner"],
-			"nn": ["katalogpraksis", "filosofiske diskusjonar"]
+			"en": [
+				"cataloging",
+				"philosophizing"
+			],
+			"nb": [
+				"katalogpraksis",
+				"filosofiske diskusjoner"
+			],
+			"nn": [
+				"katalogpraksis",
+				"filosofiske diskusjonar"
+			]
 		},
 		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/555111290",
 		"contactpoint": {
@@ -75,7 +101,7 @@
 				"url": "https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4"
 			},
 			"relationtosource": "basedOnSource",
-			"source" : {
+			"source": {
 				"text": {
 					"en": "Thrustworthy source",
 					"nb": "Stolbar kilde",
@@ -110,7 +136,7 @@
 				"url": "https://fellesdatakatalog.digdir.no/concepts/8c1e2c85-f31e-4ebd-bbf3-a75508e755e4"
 			},
 			"relationtosource": "quoteFromSource",
-			"source" : {
+			"source": {
 				"text": {
 					"en": "Thrustworthy source",
 					"nb": "Stolbar kilde",
@@ -121,9 +147,16 @@
 			"modified": "2020-03-04"
 		},
 		"modified": "2020-03-05",
-		"seeAlso" : ["http://example.com/concepts/3", "http://example.com/concepts/5"],
-		"replaces": ["http://example.com/concepts/2"],
-		"replacedBy": ["http://example.com/concepts/1"],
+		"seeAlso": [
+			"http://example.com/concepts/3",
+			"http://example.com/concepts/5"
+		],
+		"replaces": [
+			"http://example.com/concepts/2"
+		],
+		"replacedBy": [
+			"http://example.com/concepts/1"
+		],
 		"related": {
 			"description": {
 				"en": "wtf!",
@@ -131,7 +164,10 @@
 				"nn": "kf!"
 			},
 			"modified": "2020-01-01",
-			"associatedconcepts": ["http://example.com/concepts/44", "http://example.com/concepts/54"]
+			"associatedconcepts": [
+				"http://example.com/concepts/44",
+				"http://example.com/concepts/54"
+			]
 		},
 		"generalizes": {
 			"criterium": {
@@ -140,16 +176,46 @@
 				"nn": "inndelingskriterium generisk"
 			},
 			"modified": "2020-01-02",
-			"genericconcepts": ["http://example.com/concepts/64", "http://example.com/concepts/74"]
+			"genericconcepts": [
+				"http://example.com/concepts/64",
+				"http://example.com/concepts/74"
+			]
 		},
-		"hasPart": {
+		"specializes": {
 			"criterium": {
-				"en": "criterium partitiv",
-				"nb": "inndelingskriterium partitiv",
-				"nn": "inndelingskriterium partitiv"
+				"en": "criterium specific",
+				"nb": "inndelingskriterium spesifikt",
+				"nn": "inndelingskriterium spesifikt"
+			},
+			"modified": "2020-01-02",
+			"specialized_concepts": [
+				"http://example.com/concepts/84",
+				"http://example.com/concepts/94"
+			]
+		},
+		"has_part": {
+			"criterium": {
+				"en": "criterium has part",
+				"nb": "inndelingskriterium har del",
+				"nn": "inndelingskriterium har del"
 			},
 			"modified": "2020-01-03",
-			"partconcepts": ["http://example.com/concepts/84", "http://example.com/concepts/94"]
+			"partconcepts": [
+				"http://example.com/concepts/104",
+				"http://example.com/concepts/114"
+			]
+		},
+		"is_part_of": {
+			"criterium": {
+				"en": "criterium is part of",
+				"nb": "inndelingskriterium er del av",
+				"nn": "inndelingskriterium er del av"
+			},
+			"modified": "2020-01-03",
+			"is_part_of_concepts": [
+				"http://example.com/concepts/124",
+				"http://example.com/concepts/134"
+			]
 		}
 	}
 }

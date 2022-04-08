@@ -17,14 +17,43 @@ from concepttordf.concept import (
 )
 
 
-# @pytest.mark.skip(reason="no way of currently testing this")
-def test_simple_concept_to_rdf_should_return_skos_concept() -> None:
-    """It returns a a simple concept graph isomorphic to spec."""
-    with open("./tests/concept.json") as json_file:
+def test_minimal_concept_to_rdf() -> None:
+    """Should return a minimal concept graph isomorphic to spec."""
+    with open("./tests/files/minimal_concept.json") as json_file:
         data = json.load(json_file)
         _concept = data["concept"]
     concept = Concept()
     concept.identifier = _concept["identifier"]
+    concept.dct_identifier = _concept["identifier"]
+    concept.term = _concept["term"]
+    # Definition
+    definition = Definition()
+    definition.text = _concept["definition"]["text"]
+    concept.definition = definition
+    # Publisher
+    concept.publisher = _concept["publisher"]
+
+    g1 = Graph()
+    g1.parse(data=concept.to_rdf(), format="text/turtle")
+    # _dump_turtle(g1)
+    g2 = Graph().parse("tests/files/minimal_concept.ttl", format="text/turtle")
+
+    _isomorphic = isomorphic(g1, g2)
+    if not _isomorphic:
+        _dump_diff(g1, g2)
+        pass
+    assert _isomorphic
+
+
+# @pytest.mark.skip(reason="no way of currently testing this")
+def test_simple_concept_to_rdf() -> None:
+    """Should return a simple concept graph isomorphic to spec."""
+    with open("./tests/files/concept.json") as json_file:
+        data = json.load(json_file)
+        _concept = data["concept"]
+    concept = Concept()
+    concept.identifier = _concept["identifier"]
+    concept.dct_identifier = _concept["identifier"]
     concept.term = _concept["term"]
     # Definition
     definition = Definition()
@@ -34,6 +63,7 @@ def test_simple_concept_to_rdf_should_return_skos_concept() -> None:
     alternativformulering = AlternativFormulering()
     alternativformulering.text = _concept["alternativformulering"]["text"]
     concept.alternativformulering = alternativformulering
+    # Publisher
     concept.publisher = _concept["publisher"]
     # Contactpoint
     contact = Contact()
@@ -43,7 +73,7 @@ def test_simple_concept_to_rdf_should_return_skos_concept() -> None:
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format="text/turtle")
     # _dump_turtle(g1)
-    g2 = Graph().parse("tests/concept.ttl", format="text/turtle")
+    g2 = Graph().parse("tests/files/concept.ttl", format="text/turtle")
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -52,13 +82,14 @@ def test_simple_concept_to_rdf_should_return_skos_concept() -> None:
     assert _isomorphic
 
 
-def test_concept_to_rdf_should_return_skos_concept() -> None:
-    """It returns a concept graph isomorphic to spec."""
-    with open("./tests/completeconcept.json") as json_file:
+def test_complete_concept_to_rdf() -> None:
+    """Should return a complete concept graph isomorphic to spec."""
+    with open("./tests/files/completeconcept.json") as json_file:
         data = json.load(json_file)
         _concept = data["concept"]
     concept = Concept()
     concept.identifier = _concept["identifier"]
+    concept.dct_identifier = _concept["identifier"]
     concept.term = _concept["term"]
     concept.alternativeterm = _concept["alternativeterm"]
     concept.hiddenterm = _concept["hiddenterm"]
@@ -117,14 +148,32 @@ def test_concept_to_rdf_should_return_skos_concept() -> None:
         _gc.identifier = uri
         concept.generalizes.genericconcepts.append(_gc)
     # --
+    generic = GenericRelation()
+    generic.criterium = _concept["specializes"]["criterium"]
+    generic.modified = _concept["specializes"]["modified"]
+    concept.specializes = generic
+    for uri in _concept["specializes"]["specialized_concepts"]:
+        _sc = Concept()
+        _sc.identifier = uri
+        concept.specializes.specialized_concepts.append(_sc)
+    # --
     part = PartitiveRelation()
-    part.criterium = _concept["hasPart"]["criterium"]
-    part.modified = _concept["hasPart"]["modified"]
-    concept.hasPart = part
-    for uri in _concept["hasPart"]["partconcepts"]:
+    part.criterium = _concept["has_part"]["criterium"]
+    part.modified = _concept["has_part"]["modified"]
+    concept.has_part = part
+    for uri in _concept["has_part"]["partconcepts"]:
         _pc = Concept()
         _pc.identifier = uri
-        concept.hasPart.partconcepts.append(_pc)
+        concept.has_part.partconcepts.append(_pc)
+    # --
+    whole = PartitiveRelation()
+    whole.criterium = _concept["is_part_of"]["criterium"]
+    whole.modified = _concept["is_part_of"]["modified"]
+    concept.is_part_of = whole
+    for uri in _concept["is_part_of"]["is_part_of_concepts"]:
+        _wc = Concept()
+        _wc.identifier = uri
+        concept.is_part_of.is_part_of_concepts.append(_wc)
     # --
     for c in _concept["seeAlso"]:
         seeAlsoConcept = Concept()
@@ -145,7 +194,7 @@ def test_concept_to_rdf_should_return_skos_concept() -> None:
     g1 = Graph()
     g1.parse(data=concept.to_rdf(), format="text/turtle")
     # _dump_turtle(g1)
-    g2 = Graph().parse("tests/completeconcept.ttl", format="text/turtle")
+    g2 = Graph().parse("tests/files/completeconcept.ttl", format="text/turtle")
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -162,6 +211,7 @@ def test_noSource_to_rdf_should_return_skos_definition() -> None:
 
     concept = Concept()
     concept.identifier = "http://example.com/concepts/1"
+    concept.dct_identifier = concept.identifier
     concept.definition = definition
 
     g1 = Graph()
@@ -178,8 +228,11 @@ def test_noSource_to_rdf_should_return_skos_definition() -> None:
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
     <http://example.com/concepts/1> a skos:Concept ;
-    skosno:definisjon [ a skosno:Definisjon ;
-            skosno:forholdTilKilde skosno:egendefinert ] .
+        dct:identifier    "http://example.com/concepts/1" ;
+        skosno:definisjon [ a skosno:Definisjon ;
+                            skosno:forholdTilKilde skosno:egendefinert
+                          ] ;
+        .
     """
     # -
     g2 = Graph().parse(data=src, format="text/turtle")
@@ -191,10 +244,9 @@ def test_noSource_to_rdf_should_return_skos_definition() -> None:
     assert _isomorphic
 
 
-# @pytest.mark.skip(reason="no way of currently testing this")
 def test_quoteFromSource_to_rdf_should_return_skos_definition() -> None:
     """It returns a definition graph isomorphic to spec."""
-    with open("./tests/definition.json") as json_file:
+    with open("./tests/files/definition.json") as json_file:
         data = json.load(json_file)
         _definition = data["definition"]
     definition = Definition()
@@ -203,6 +255,7 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition() -> None:
 
     concept = Concept()
     concept.identifier = "http://example.com/concepts/1"
+    concept.dct_identifier = concept.identifier
     concept.definition = definition
 
     g1 = Graph()
@@ -219,6 +272,7 @@ def test_quoteFromSource_to_rdf_should_return_skos_definition() -> None:
     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
     <http://example.com/concepts/1> a skos:Concept ;
+            dct:identifier "http://example.com/concepts/1" ;
             skosno:definisjon [ a skosno:Definisjon ;
             skosno:forholdTilKilde skosno:sitatFraKilde ;
             dct:source [ rdfs:label "Thrustworthy source"@en,
@@ -243,10 +297,7 @@ def test_serialization_formats_that_should_work() -> None:
     concept.identifier = "http://example.com/concepts/1"
     TURTLE = "text/turtle"
     XML = "application/rdf+xml"
-    # TODO: this is to avoid a bug in rdflib,
-    # ref https://github.com/RDFLib/rdflib/issues/1387
-    # JSONLD = "application/ld+json"
-    JSONLD = "json-ld"
+    JSONLD = "application/ld+json"
     NT = "application/n-triples"
     N3 = "text/n3"
 

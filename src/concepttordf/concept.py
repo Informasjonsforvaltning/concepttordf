@@ -55,6 +55,7 @@ class Concept:
         hiddenterm: a dictionary describing the hiddenLabel
     """
 
+    # Types
     _identifier: str
     _term: dict
     _alternativeterm: dict
@@ -73,7 +74,10 @@ class Concept:
     _replacedBy: List[Concept]
     _related: AssociativeRelation
     _generalizes: GenericRelation
-    _hasPart: PartitiveRelation
+    _specializes: GenericRelation
+    _has_part: PartitiveRelation
+    _is_part_of: PartitiveRelation
+    _dct_identifier: str
 
     def __init__(self) -> None:
         """Inits an object with default values."""
@@ -252,13 +256,41 @@ class Concept:
         self._generalizes = gr
 
     @property
-    def hasPart(self: Concept) -> PartitiveRelation:
-        """Haspart attribute."""
-        return self._hasPart
+    def specializes(self: Concept) -> GenericRelation:
+        """Specializes attribute."""
+        return self._specializes
 
-    @hasPart.setter
-    def hasPart(self: Concept, gr: PartitiveRelation) -> None:
-        self._hasPart = gr
+    @specializes.setter
+    def specializes(self: Concept, gr: GenericRelation) -> None:
+        self._specializes = gr
+
+    @property
+    def has_part(self: Concept) -> PartitiveRelation:
+        """Has part attribute."""
+        return self._has_part
+
+    @has_part.setter
+    def has_part(self: Concept, gr: PartitiveRelation) -> None:
+        self._has_part = gr
+
+    @property
+    def is_part_of(self: Concept) -> PartitiveRelation:
+        """Is part of attribute."""
+        return self._is_part_of
+
+    @is_part_of.setter
+    def is_part_of(self: Concept, gr: PartitiveRelation) -> None:
+        self._is_part_of = gr
+
+    @property
+    def dct_identifier(self) -> str:
+        """Get for dct_identifier."""
+        return self._dct_identifier
+
+    @dct_identifier.setter
+    def dct_identifier(self, dct_identifier: str) -> None:
+        """Set for dct_identifier."""
+        self._dct_identifier = dct_identifier
 
     # ----------------------------------------------
 
@@ -298,6 +330,9 @@ class Concept:
         self._g.bind("xkos", XKOS)
 
         self._g.add((URIRef(self.identifier), RDF.type, SKOS.Concept))
+
+        # dct:identifier
+        self._dct_identifier_to_graph()
 
         # prefLabel
         self._term_to_graph()
@@ -352,11 +387,27 @@ class Concept:
         # generalizes
         self._add_generalizes_to_graph()
 
-        # hasPart
-        self._add_hasPart_to_graph()
+        # specializes
+        self._add_specializes_to_graph()
+
+        # has_part
+        self._add_has_part_to_graph()
+
+        # is_part_of
+        self._add_is_part_of_to_graph()
 
     # ------------
     # Helper methods:
+
+    def _dct_identifier_to_graph(self: Concept) -> None:
+        if getattr(self, "dct_identifier", None):
+            self._g.add(
+                (
+                    URIRef(self.identifier),
+                    DCT.identifier,
+                    Literal(self.dct_identifier),
+                )
+            )
 
     def _term_to_graph(self: Concept) -> None:
         if getattr(self, "term", None):
@@ -543,7 +594,7 @@ class Concept:
             ar = BNode()
             for _s, p, o in _related._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
-            self._g.add((URIRef(self.identifier), SKOS.related, ar))
+            self._g.add((URIRef(self.identifier), SKOSNO.assosiativRelasjon, ar))
 
     def _add_generalizes_to_graph(self: Concept) -> None:
         if getattr(self, "generalizes", None):
@@ -551,15 +602,31 @@ class Concept:
             ar = BNode()
             for _s, p, o in _generalizes._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
-            self._g.add((URIRef(self.identifier), XKOS.generalizes, ar))
+            self._g.add((URIRef(self.identifier), SKOSNO.generiskRelasjon, ar))
 
-    def _add_hasPart_to_graph(self: Concept) -> None:
-        if getattr(self, "hasPart", None):
-            _hasPart = self.hasPart
+    def _add_specializes_to_graph(self: Concept) -> None:
+        if getattr(self, "specializes", None):
+            _specializes = self.specializes
             ar = BNode()
-            for _s, p, o in _hasPart._to_graph().triples((None, None, None)):
+            for _s, p, o in _specializes._to_graph().triples((None, None, None)):
                 self._g.add((ar, p, o))
-            self._g.add((URIRef(self.identifier), XKOS.hasPart, ar))
+            self._g.add((URIRef(self.identifier), SKOSNO.generiskRelasjon, ar))
+
+    def _add_has_part_to_graph(self: Concept) -> None:
+        if getattr(self, "has_part", None):
+            _has_part = self.has_part
+            ar = BNode()
+            for _s, p, o in _has_part._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), SKOSNO.partitivRelasjon, ar))
+
+    def _add_is_part_of_to_graph(self: Concept) -> None:
+        if getattr(self, "is_part_of", None):
+            _is_part_of = self.is_part_of
+            ar = BNode()
+            for _s, p, o in _is_part_of._to_graph().triples((None, None, None)):
+                self._g.add((ar, p, o))
+            self._g.add((URIRef(self.identifier), SKOSNO.partitivRelasjon, ar))
 
     # -
     def _add_betydningsbeskrivelse_to_concept(

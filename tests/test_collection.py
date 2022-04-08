@@ -7,15 +7,16 @@ from rdflib.compare import graph_diff, isomorphic
 from concepttordf import Collection, Concept, Contact, Definition
 
 
-def test_collection_to_rdf_should_return_skos_collection() -> None:
-    """It returns a collection graph isomorphic to spec."""
-    with open("./tests/collection.json") as json_file:
+def test_collection_to_rdf() -> None:
+    """Should return a collection graph isomorphic to spec."""
+    with open("./tests/files/collection.json") as json_file:
         data = json.load(json_file)
         _collection = data["collection"]
 
     # Create the collection:
     collection = Collection()
     collection.identifier = _collection["identifier"]
+    collection.dct_identifier = collection.identifier
     collection.name = _collection["name"]
     collection.description = _collection["description"]
     collection.publisher = _collection["publisher"]
@@ -32,6 +33,7 @@ def test_collection_to_rdf_should_return_skos_collection() -> None:
     for _concept in _collection["members"]:
         concept = Concept()
         concept.identifier = _concept["identifier"]
+        concept.dct_identifier = _concept["identifier"]
         concept.term = _concept["term"]
         concept.publisher = _concept["publisher"]
         definition = Definition()
@@ -46,7 +48,7 @@ def test_collection_to_rdf_should_return_skos_collection() -> None:
     g1 = Graph()
     g1.parse(data=data, format="text/turtle")
     # _dump_turtle(g1)
-    g2 = Graph().parse("tests/collection.ttl", format="text/turtle")
+    g2 = Graph().parse("tests/files/collection.ttl", format="text/turtle")
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -55,15 +57,16 @@ def test_collection_to_rdf_should_return_skos_collection() -> None:
     assert _isomorphic
 
 
-def test_collection_to_rdf_should_return_skos_collection_with_no_concepts() -> None:
-    """It returns a collection graph without concepts isomorphic to spec."""
-    with open("./tests/collection.json") as json_file:
+def test_collection_without_concepts_to_rdf() -> None:
+    """Should return a collection graph without concepts isomorphic to spec."""
+    with open("./tests/files/collection.json") as json_file:
         data = json.load(json_file)
         _collection = data["collection"]
 
     # Create the collection:
     collection = Collection()
     collection.identifier = _collection["identifier"]
+    collection.dct_identifier = collection.identifier
     collection.name = _collection["name"]
     collection.description = _collection["description"]
     collection.publisher = _collection["publisher"]
@@ -89,7 +92,9 @@ def test_collection_to_rdf_should_return_skos_collection_with_no_concepts() -> N
     g1 = Graph()
     g1.parse(data=data, format="text/turtle")
     # _dump_turtle(g1)
-    g2 = Graph().parse("tests/collection_excluding_concepts.ttl", format="text/turtle")
+    g2 = Graph().parse(
+        "tests/files/collection_excluding_concepts.ttl", format="text/turtle"
+    )
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:

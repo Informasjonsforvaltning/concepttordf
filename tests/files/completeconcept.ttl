@@ -20,6 +20,7 @@
 
 <http://example.com/concepts/4>
         a                             skos:Concept ;
+        dct:identifier                "http://example.com/concepts/4" ;
         skosno:definisjon             [ a                       skosno:Definisjon ;
                                         rdfs:label              "a concept where all attribtues has value"@en , "eit omgrep som har utfylt alle felt"@nn , "et begrep som har utfylt alle felter"@nb ;
                                         skosno:forholdTilKilde  skosno:basertPåKilde ;
@@ -81,19 +82,29 @@
         rdfs:seeAlso                  <http://example.com/concepts/3>, <http://example.com/concepts/5> ;
         dct:replaces                  <http://example.com/concepts/2> ;
         dct:replacedBy                <http://example.com/concepts/1> ;
-        skos:related                  [ a                       skosno:AssosiativRelasjon ;
+        skosno:assosiativRelasjon     [ a                       skosno:AssosiativRelasjon ;
+                                        skos:related <http://example.com/concepts/44>, <http://example.com/concepts/54> ;
                                         dct:modified            "2020-01-01"^^xsd:date ;
                                         dct:description         "hf!"@nb , "wtf!"@en , "kf!"@nn ;
-                                        skosno:assosiertBegrep  <http://example.com/concepts/44>, <http://example.com/concepts/54>
                                       ] ;
-        xkos:generalizes              [ a                       skosno:GeneriskRelasjon ;
+        skosno:generiskRelasjon       [ a                       skosno:GeneriskRelasjon ;
+                                        xkos:generalizes <http://example.com/concepts/64>, <http://example.com/concepts/74> ;
                                         dct:modified            "2020-01-02"^^xsd:date ;
                                         skosno:inndelingskriterium  "inndelingskriterium generisk"@nb , "criterium generic"@en , "inndelingskriterium generisk"@nn ;
-                                        skosno:overordnetBegrep  <http://example.com/concepts/64>, <http://example.com/concepts/74>
                                       ] ;
-        xkos:hasPart                  [ a                       skosno:PartitivRelasjon ;
+        skosno:generiskRelasjon       [ a                       skosno:GeneriskRelasjon ;
+                                        xkos:specializes <http://example.com/concepts/84>, <http://example.com/concepts/94> ;
+                                        dct:modified            "2020-01-02"^^xsd:date ;
+                                        skosno:inndelingskriterium  "inndelingskriterium spesifikt"@nb , "criterium specific"@en , "inndelingskriterium spesifikt"@nn ;
+                                      ] ;
+        skosno:partitivRelasjon       [ a                       skosno:PartitivRelasjon ;
+                                        dct:hasPart  <http://example.com/concepts/104>, <http://example.com/concepts/114> ;
                                         dct:modified            "2020-01-03"^^xsd:date ;
-                                        skosno:inndelingskriterium  "inndelingskriterium partitiv"@nb , "criterium partitiv"@en , "inndelingskriterium partitiv"@nn ;
-                                        skosno:underordnetBegrep  <http://example.com/concepts/84>, <http://example.com/concepts/94>
+                                        dct:description  "inndelingskriterium har del"@nb , "criterium has part"@en , "inndelingskriterium har del"@nn ;
+                                      ] ;
+        skosno:partitivRelasjon       [ a                       skosno:PartitivRelasjon ;
+                                        dct:isPartOf  <http://example.com/concepts/124>, <http://example.com/concepts/134> ;
+                                        dct:modified            "2020-01-03"^^xsd:date ;
+                                        dct:description  "inndelingskriterium er del av"@nb , "criterium is part of"@en , "inndelingskriterium er del av"@nn ;
                                       ]
         .

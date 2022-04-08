@@ -1,0 +1,20 @@
+{
+	"concept": {
+		"identifier": "http://example.com/concepts/1",
+		"term": {
+			"name": {
+				"en": "concept",
+				"nb": "begrep",
+				"nn": "omgrep"
+			}
+		},
+		"definition": {
+			"text": {
+				"en": "unit of knowledge created by a unique combination of characteristics",
+				"nb": "kunnskapsenhet som er dannet gjennom en unik kombinasjon av kjennetegn",
+				"nn": "kunnskapseining som er danna gjennom ein unik kombinasjon av kjenneteikn"
+			}
+		},
+		"publisher": "https://data.brreg.no/enhetsregisteret/api/enheter/961181399"
+	}
+}

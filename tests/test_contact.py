@@ -7,9 +7,9 @@ from rdflib.compare import graph_diff, isomorphic
 from concepttordf.contact import Contact
 
 
-def test_contact_to_rdf_should_return_skos_contact() -> None:
-    """It returns a contact graph isomorphic to spec."""
-    with open("./tests/contact.json") as json_file:
+def test_contact_to_rdf() -> None:
+    """Should return a skos contact graph isomorphic to spec."""
+    with open("./tests/files/contact.json") as json_file:
         data = json.load(json_file)
         _contact = data["contact"]
     contact = Contact()
@@ -21,7 +21,7 @@ def test_contact_to_rdf_should_return_skos_contact() -> None:
 
     g1 = Graph()
     g1.parse(data=contact.to_rdf(), format="text/turtle")
-    g2 = Graph().parse("tests/contact.ttl", format="text/turtle")
+    g2 = Graph().parse("tests/files/contact.ttl", format="text/turtle")
 
     _isomorphic = isomorphic(g1, g2)
     if not _isomorphic:
@@ -30,9 +30,9 @@ def test_contact_to_rdf_should_return_skos_contact() -> None:
     assert _isomorphic
 
 
-def test_contact_without_id_to_rdf_should_return_skos_contact() -> None:
-    """It returns a contact graph without id isomorphic to spec."""
-    with open("./tests/contact.json") as json_file:
+def test_contact_without_id_to_rdf() -> None:
+    """Should return a skos contact graph without id isomorphic to spec."""
+    with open("./tests/files/contact.json") as json_file:
         data = json.load(json_file)
         _contact = data["contact"]
     contact = Contact()
@@ -43,7 +43,7 @@ def test_contact_without_id_to_rdf_should_return_skos_contact() -> None:
 
     g1 = Graph()
     g1.parse(data=contact.to_rdf(), format="text/turtle")
-    g2 = Graph().parse("tests/contact.ttl", format="text/turtle")
+    g2 = Graph().parse("tests/files/contact.ttl", format="text/turtle")
 
     assert len(g1) == len(g2)
 

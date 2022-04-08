@@ -10,6 +10,7 @@ from .conceptrelation import ConceptRelation
 if TYPE_CHECKING:  # pragma: no cover
     from .concept import Concept
 
+XKOS = Namespace("http://rdf-vocabulary.ddialliance.org/xkos#")
 SKOSNO = Namespace("https://data.norge.no/vocabulary/skosno#")
 DCT = Namespace("http://purl.org/dc/terms/")
 XSD = Namespace("http://www.w3.org/2001/XMLSchema#")
@@ -25,10 +26,12 @@ class GenericRelation(ConceptRelation):
 
     _criterium: dict
     _genericconcepts: List[Concept]
+    _specialized_concepts: List[Concept]
 
     def __init__(self) -> None:
         """Inits an object with default values."""
         self._genericconcepts = list()
+        self._specialized_concepts = list()
         super().__init__()
 
     @property
@@ -50,9 +53,18 @@ class GenericRelation(ConceptRelation):
         """Generic concepts attributes.
 
         Returns:
-            a list of related concepts
+            a list of generic concepts
         """
         return self._genericconcepts
+
+    @property
+    def specialized_concepts(self) -> List[Concept]:
+        """Specialized concepts attributes.
+
+        Returns:
+            a list of specialized concepts
+        """
+        return self._specialized_concepts
 
     # ---
 
@@ -82,8 +94,10 @@ class GenericRelation(ConceptRelation):
 
         # genericconcepts
         if getattr(self, "genericconcepts", None):
-            # breakpoint()
-            for ac in self.genericconcepts:
-                self._g.add(
-                    (self._relation, SKOSNO.overordnetBegrep, URIRef(ac.identifier))
-                )
+            for gc in self.genericconcepts:
+                self._g.add((self._relation, XKOS.generalizes, URIRef(gc.identifier)))
+
+        # specialized_concepts
+        if getattr(self, "specialized_concepts", None):
+            for sc in self.specialized_concepts:
+                self._g.add((self._relation, XKOS.specializes, URIRef(sc.identifier)))
