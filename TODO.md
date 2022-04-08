@@ -1,3 +1,5 @@
+# TODOs
+
 - [x] Add option to get collection including all details of members
 - [x] Add function for adding concept to collection
 - [x] Use definition class in other classes
