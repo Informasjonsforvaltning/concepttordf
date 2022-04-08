@@ -1,19 +1,26 @@
-![Tests](https://github.com/Informasjonsforvaltning/concepttordf/workflows/Tests/badge.svg)
+
+# concepttordf
+
+[!Tests](https://github.com/Informasjonsforvaltning/concepttordf/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/Informasjonsforvaltning/concepttordf/branch/master/graph/badge.svg)](https://codecov.io/gh/Informasjonsforvaltning/concepttordf)
 [![PyPI](https://img.shields.io/pypi/v/concepttordf.svg)](https://pypi.org/project/concepttordf/)
 [![Read the Docs](https://readthedocs.org/projects/concepttordf/badge/)](https://concepttordf.readthedocs.io/)
-# concepttordf
 
 A small Python library for mapping a concept collection to the [skos-ap-no specification](https://doc.difi.no/data/begrep-skos-ap-no/).
 
 ## Usage
+
 ### Install
-```
+
+```Shell
 % pip install concepttordf
 ```
+
 ### Getting started
+
 To create a SKOS-AP-NO concept collection:
-```
+
+```Shell
 from concepttordf import Collection, Concept, Definition
 
 # Create collection object
@@ -39,8 +46,10 @@ collection.members.append(c)
 rdf = collection.to_rdf()
 print(rdf)
 ```
+
 Will print the concept according to the specification:
-```
+
+```Shell
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix ns1: <https://data.norge.no/vocabulary/skosno#> .
@@ -69,37 +78,49 @@ Will print the concept according to the specification:
 ```
 
 ## Development
+
 ### Requirements
+
 - [pipx](https://pipxproject.github.io/pipx/) (recommended)
 - [pyenv](https://github.com/pyenv/pyenv) (recommended)
 - [poetry](https://python-poetry.org/)
 - [nox](https://nox.thea.codes/en/stable/)
-```
+
+```Shell
 % pipx install poetry
 % pipx install nox
 % pipx inject nox nox-poetry
 ```
 
-### Install
-```
+### Install dev tools
+
+```Shell
 % git clone https://github.com/Informasjonsforvaltning/concepttordf.git
 % cd concepttordf
 % pyenv install 3.8.2
-% pyenv install 3.7.6
-% pyenv local 3.8.2 3.7.6
+% pyenv install 3.9.6
+% pyenv local 3.8.2 3.9.6
 % poetry install
 ```
+
 ### Run all tests
-```
+
+```Shell
 % nox
 ```
+
 ### Run all tests with coverage reporting
-```
+
+```Shell
 % nox -rs tests
 ```
+
 ### Debugging
+
 You can enter into [Pdb](https://docs.python.org/3/library/pdb.html) by passing `--pdb` to pytest:
-```
+
+```Shell
 nox -rs tests -- --pdb
 ```
+
 You can set breakpoints directly in code by using the function `breakpoint()`.
