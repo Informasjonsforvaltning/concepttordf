@@ -121,7 +121,7 @@ class Contact:
         if getattr(self, "identifier", None):
             _self = URIRef(self.identifier)
         else:
-            _self = BNode()
+            _self = BNode()  # type: ignore
 
         self._g.add((_self, RDF.type, VCARD.Organization))
 

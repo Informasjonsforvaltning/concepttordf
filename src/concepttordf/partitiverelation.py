@@ -84,4 +84,6 @@ class PartitiveRelation(ConceptRelation):
         if getattr(self, "partconcepts", None):
             # breakpoint()
             for ac in self.partconcepts:
-                self._g.add((self._relation, SKOSNO.underordnetBegrep, URIRef(ac)))
+                self._g.add(
+                    (self._relation, SKOSNO.underordnetBegrep, URIRef(ac.identifier))
+                )

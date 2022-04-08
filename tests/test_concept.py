@@ -103,22 +103,28 @@ def test_concept_to_rdf_should_return_skos_concept() -> None:
     related.description = _concept["related"]["description"]
     related.modified = _concept["related"]["modified"]
     concept.related = related
-    for ac in _concept["related"]["associatedconcepts"]:
-        concept.related.associatedconcepts.append(ac)
+    for uri in _concept["related"]["associatedconcepts"]:
+        _ac = Concept()
+        _ac.identifier = uri
+        concept.related.associatedconcepts.append(_ac)
     # --
     generic = GenericRelation()
     generic.criterium = _concept["generalizes"]["criterium"]
     generic.modified = _concept["generalizes"]["modified"]
     concept.generalizes = generic
-    for gc in _concept["generalizes"]["genericconcepts"]:
-        concept.generalizes.genericconcepts.append(gc)
+    for uri in _concept["generalizes"]["genericconcepts"]:
+        _gc = Concept()
+        _gc.identifier = uri
+        concept.generalizes.genericconcepts.append(_gc)
     # --
     part = PartitiveRelation()
     part.criterium = _concept["hasPart"]["criterium"]
     part.modified = _concept["hasPart"]["modified"]
     concept.hasPart = part
-    for pc in _concept["hasPart"]["partconcepts"]:
-        concept.hasPart.partconcepts.append(pc)
+    for uri in _concept["hasPart"]["partconcepts"]:
+        _pc = Concept()
+        _pc.identifier = uri
+        concept.hasPart.partconcepts.append(_pc)
     # --
     for c in _concept["seeAlso"]:
         seeAlsoConcept = Concept()
