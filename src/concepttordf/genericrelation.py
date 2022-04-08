@@ -84,4 +84,6 @@ class GenericRelation(ConceptRelation):
         if getattr(self, "genericconcepts", None):
             # breakpoint()
             for ac in self.genericconcepts:
-                self._g.add((self._relation, SKOSNO.overordnetBegrep, URIRef(ac)))
+                self._g.add(
+                    (self._relation, SKOSNO.overordnetBegrep, URIRef(ac.identifier))
+                )

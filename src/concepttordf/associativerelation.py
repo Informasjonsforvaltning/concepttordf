@@ -84,4 +84,6 @@ class AssociativeRelation(ConceptRelation):
         if getattr(self, "associatedconcepts", None):
             # breakpoint()
             for ac in self.associatedconcepts:
-                self._g.add((self._relation, SKOSNO.assosiertBegrep, URIRef(ac)))
+                self._g.add(
+                    (self._relation, SKOSNO.assosiertBegrep, URIRef(ac.identifier))
+                )
