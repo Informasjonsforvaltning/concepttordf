@@ -4,10 +4,10 @@ on:
     types: [published]
 jobs:
   release:
-      uses: Informasjonsforvaltning/workflows/.github/workflows/release-nox.yaml@main
-      with:
-        python_version: '3.10'
-        python_architecture: x64
-      secrets:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    uses: Informasjonsforvaltning/workflows/.github/workflows/release-poetry.yaml@main
+    with:
+      python_version: '3.10'
+      python_architecture: x64
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
