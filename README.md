@@ -26,8 +26,8 @@ from concepttordf import Collection, Concept, Definition
 # Create collection object
 collection = Collection()
 collection.identifier = "http://example.com/collections/1"
-collection.name = {"en": "A concept collection"}
-collection.name = {"nb": "En begrepssamling"}
+collection.name = {"en": "A concept collection",
+                   "nb": "En begrepssamling"}
 collection.publisher = "https://example.com/publishers/1"
 
 # Create a concept:
@@ -63,7 +63,8 @@ Will print the concept according to the specification:
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://example.com/collections/1> a skos:Collection ;
-    rdfs:label "En begrepssamling"@nb ;
+    rdfs:label "En begrepssamling"@nb,
+        "A concept collection"@en ;
     dct:publisher <https://example.com/publishers/1> ;
     skos:member <http://example.com/concepts/1> .
 
