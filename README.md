@@ -1,6 +1,12 @@
 
 # concepttordf
 
+> ⚠️ This repository is archived
+> 
+> This codebase is no longer in use and is not under active development.
+> If you are interested in reviving or contributing to this project, please contact us at fellesdatakatalog@digdir.no.
+
+
 [!Tests](https://github.com/Informasjonsforvaltning/concepttordf/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/Informasjonsforvaltning/concepttordf/branch/master/graph/badge.svg)](https://codecov.io/gh/Informasjonsforvaltning/concepttordf)
 [![PyPI](https://img.shields.io/pypi/v/concepttordf.svg)](https://pypi.org/project/concepttordf/)
