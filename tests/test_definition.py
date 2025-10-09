@@ -1,4 +1,5 @@
 """Test cases for the definition module."""
+
 from rdflib import Graph
 from rdflib.compare import graph_diff, isomorphic
 
@@ -47,6 +48,61 @@ def test_triple_quote_string_in_text() -> None:
     assert _isomorphic
 
 
+def test_definition_to_rdf() -> None:
+    """Test that Definition.to_rdf() returns valid RDF."""
+    definition = Definition()
+    definition.text = {"nb": "En test definisjon"}
+    definition.remark = {"nb": "En test merknad"}
+    definition.scope = {"nb": "En test omfang"}
+    definition.source = {"nb": "En test kilde"}
+    definition.example = {"nb": "En test eksempel"}
+
+    g1 = Graph()
+    g1.parse(data=definition.to_rdf(), format="text/turtle")
+
+    src = """
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
+
+    [] a skosno:Definisjon ;
+        skosno:tekst "En test definisjon"@nb ;
+        skosno:merknad "En test merknad"@nb ;
+        skosno:omfang "En test omfang"@nb ;
+        skosno:kilde "En test kilde"@nb ;
+        skosno:eksempel "En test eksempel"@nb .
+    """
+
+    g2 = Graph().parse(data=src, format="text/turtle")
+
+    _isomorphic = isomorphic(g1, g2)
+    if not _isomorphic:
+        _dump_diff(g1, g2)
+    assert _isomorphic
+
+
+def test_definition_to_graph() -> None:
+    """Test that Definition._to_graph() returns a Graph object."""
+    definition = Definition()
+    definition.text = {"nb": "En test definisjon"}
+
+    g1 = definition._to_graph()
+
+    src = """
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix skosno: <https://data.norge.no/vocabulary/skosno#> .
+
+    [] a skosno:Definisjon ;
+        skosno:tekst "En test definisjon"@nb .
+    """
+
+    g2 = Graph().parse(data=src, format="text/turtle")
+
+    _isomorphic = isomorphic(g1, g2)
+    if not _isomorphic:
+        _dump_diff(g1, g2)
+    assert _isomorphic
+
+
 # ---------------------------------------------------------------------- #
 # Util for displaying debug information
 
@@ -62,6 +118,6 @@ def _dump_diff(g1: Graph, g2: Graph) -> None:
 
 
 def _dump_turtle(g: Graph) -> None:
-    for _l in g.serialize(format="text/turtle").splitlines():
+    for _l in g.serialize(format="text/turtle", base="").splitlines():
         if _l:
             print(_l)

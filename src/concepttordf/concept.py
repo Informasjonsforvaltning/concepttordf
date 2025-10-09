@@ -18,6 +18,7 @@ Example:
     >>> bool(concept.to_rdf())
     True
 """
+
 from __future__ import annotations
 
 from datetime import date
@@ -292,8 +293,6 @@ class Concept:
         """Set for dct_identifier."""
         self._dct_identifier = dct_identifier
 
-    # ----------------------------------------------
-
     def _to_graph(self) -> Graph:
         """Transforms the concept to an rdf graph.
 
@@ -302,6 +301,11 @@ class Concept:
         """
         self._add_concept_to_graph()
 
+        print("--------------SERIALIZE------------------")
+
+        print(self._g.serialize(format="text/turtle"))
+
+        print("--------------END SERIALIZE------------------")
         return self._g
 
     def to_rdf(self: Concept, format: str = "text/turtle") -> str:
@@ -314,8 +318,6 @@ class Concept:
             a serialization of the RDF graph
         """
         return self._to_graph().serialize(format=format)
-
-    # ----------------------------------------------
 
     def _add_concept_to_graph(self: Concept) -> None:
         """Adds the concept to the Graph _g."""
@@ -396,7 +398,6 @@ class Concept:
         # is_part_of
         self._add_is_part_of_to_graph()
 
-    # ------------
     # Helper methods:
 
     def _dct_identifier_to_graph(self: Concept) -> None:
@@ -679,7 +680,6 @@ class Concept:
                     _betydningsbeskrivelse,
                 )
             )
-        # ---
 
     def _add_text_to_bs_graph(
         self: Concept, betydningsbeskrivelse: Betydningsbeskrivelse, bsnode: BNode

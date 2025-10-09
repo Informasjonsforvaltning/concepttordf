@@ -1,4 +1,5 @@
 """Concept module for mapping class associative relation to rdf."""
+
 from __future__ import annotations
 
 from typing import List, TYPE_CHECKING
@@ -55,15 +56,12 @@ class AssociativeRelation(ConceptRelation):
         """
         return self._associatedconcepts
 
-    # ---
-
     def _to_graph(self) -> Graph:
 
         self._add_relation_to_graph()
 
         return self._g
 
-    # ---
     def _add_relation_to_graph(self) -> None:
 
         super(AssociativeRelation, self)._add_relation_to_graph()

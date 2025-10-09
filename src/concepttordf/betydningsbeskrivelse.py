@@ -1,5 +1,6 @@
 """Concept module for mapping abstract class Betydningsbeskrivelse to rdf."""
-from abc import ABC
+
+from abc import ABC, abstractmethod
 from datetime import date
 from enum import Enum
 
@@ -25,9 +26,9 @@ class Betydningsbeskrivelse(ABC):
         example:
     """
 
+    @abstractmethod
     def __init__(self) -> None:
         """Inits an object with default values."""
-        pass
 
     @property
     def text(self) -> dict:
@@ -119,3 +120,11 @@ class Betydningsbeskrivelse(ABC):
     @example.setter
     def example(self, example: dict) -> None:
         self._example = example
+
+    @abstractmethod
+    def to_rdf(self) -> str:
+        """Convert the object to RDF format.
+
+        Returns:
+            RDF representation as a string
+        """

@@ -30,6 +30,7 @@ Example:
     >>> bool(collection.to_rdf())
     True
 """
+
 from typing import List
 
 from rdflib import BNode, Graph, Literal, Namespace, RDF, RDFS, URIRef
@@ -130,8 +131,6 @@ class Collection:
         """Set for dct_identifier."""
         self._dct_identifier = dct_identifier
 
-    # ----------------------------------------------
-
     def to_rdf(self, format: str = "text/turtle", includeconcepts: bool = True) -> str:
         """Maps the collection to rdf.
 
@@ -142,9 +141,9 @@ class Collection:
         Returns:
             serialization as a string according to format
         """
-        return self._to_graph(includeconcepts=includeconcepts).serialize(format=format)
-
-    # ---
+        return self._to_graph(includeconcepts=includeconcepts).serialize(
+            format=format, base=""
+        )
 
     def _to_graph(self, includeconcepts: bool = True) -> Graph:
         """Transforms the collection to an rdf graph.
@@ -162,8 +161,6 @@ class Collection:
                 self._g += concept._to_graph()
 
         return self._g
-
-    # ---
 
     def _add_collection_to_graph(self) -> None:
         """Adds the collection to the Graph _g."""
