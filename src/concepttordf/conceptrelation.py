@@ -1,4 +1,5 @@
 """Concept module for mapping abstract class ConceptRelation to rdf."""
+
 from abc import ABC
 from datetime import date
 
@@ -40,7 +41,6 @@ class ConceptRelation(ABC):
         """
         self._modified = modified
 
-    # ---
     def _add_relation_to_graph(self) -> None:
 
         # modified

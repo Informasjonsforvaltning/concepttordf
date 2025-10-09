@@ -1,4 +1,3 @@
-
 # concepttordf
 
 [!Tests](https://github.com/Informasjonsforvaltning/concepttordf/workflows/Tests/badge.svg)
@@ -98,9 +97,10 @@ Will print the concept according to the specification:
 ```Shell
 % git clone https://github.com/Informasjonsforvaltning/concepttordf.git
 % cd concepttordf
-% pyenv install 3.8.2
-% pyenv install 3.9.6
-% pyenv local 3.8.2 3.9.6
+% pyenv install 3.10.12
+% pyenv install 3.11.9
+% pyenv install 3.12.7
+% pyenv local 3.10.12 3.11.9 3.12.7
 % poetry install
 ```
 

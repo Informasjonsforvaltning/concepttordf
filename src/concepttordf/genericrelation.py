@@ -1,4 +1,5 @@
 """Concept module for mapping class GenericRelation to rdf."""
+
 from __future__ import annotations
 
 from typing import List, TYPE_CHECKING
@@ -66,15 +67,12 @@ class GenericRelation(ConceptRelation):
         """
         return self._specialized_concepts
 
-    # ---
-
     def _to_graph(self) -> Graph:
 
         self._add_relation_to_graph()
 
         return self._g
 
-    # ---
     def _add_relation_to_graph(self) -> None:
 
         super(GenericRelation, self)._add_relation_to_graph()

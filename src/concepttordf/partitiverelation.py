@@ -1,4 +1,5 @@
 """Concept module for mapping class partitive relation to rdf."""
+
 from __future__ import annotations
 
 from typing import List, TYPE_CHECKING
@@ -65,15 +66,12 @@ class PartitiveRelation(ConceptRelation):
         """
         return self._is_part_of_concepts
 
-    # ---
-
     def _to_graph(self) -> Graph:
 
         self._add_relation_to_graph()
 
         return self._g
 
-    # ---
     def _add_relation_to_graph(self) -> None:
 
         super(PartitiveRelation, self)._add_relation_to_graph()

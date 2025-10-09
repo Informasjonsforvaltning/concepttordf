@@ -1,4 +1,5 @@
 """Sphinx configuration."""
+
 project = "concepttordf"
 author = "Stig B. Dørmænen"
 copyright = f"2020, {author}"

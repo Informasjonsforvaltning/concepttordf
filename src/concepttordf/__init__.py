@@ -40,6 +40,7 @@ Example:
     True
 
 """
+
 try:
     from importlib.metadata import version, PackageNotFoundError  # type: ignore
 except ImportError:  # pragma: no cover

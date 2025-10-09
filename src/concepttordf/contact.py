@@ -13,6 +13,7 @@ Example:
     >>> bool(contact.to_rdf())
     True
 """
+
 from __future__ import annotations
 
 from rdflib import BNode, Graph, Literal, Namespace, RDF, URIRef
@@ -110,9 +111,7 @@ class Contact:
         Returns:
             a rdf serialization as a string according to format.
         """
-        return self._to_graph().serialize(format=format)
-
-    # -----
+        return self._to_graph().serialize(format=format, base="")
 
     def _add_contact_to_graph(self: Contact) -> None:
         """Adds the concept to the Graph _g."""
