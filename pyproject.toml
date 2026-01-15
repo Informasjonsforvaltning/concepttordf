@@ -15,7 +15,7 @@ license = "Apache-2.0"
 name = "concepttordf"
 readme = "README.md"
 repository = "https://github.com/Informasjonsforvaltning/concepttordf"
-version = "3.0.0"
+version = "3.0.1"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
@@ -46,6 +46,7 @@ safety = "^3.0.0"
 marshmallow = "^3.20.0"
 sphinx-autodoc-typehints = "^3.0.0"
 xdoctest = "^1.0.2"
+pip-audit = "^2.10.0"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
