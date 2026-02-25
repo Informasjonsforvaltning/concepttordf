@@ -50,6 +50,13 @@ nox -rs lint
 nox -rs mypy
 ```
 
+### Audit dependencies for vulnerabilities
+
+```
+nox -rs safety
+pip-audit
+```
+
 ## Architecture
 
 Source code is in `src/concepttordf/`. The library models SKOS concepts as Python objects that serialize to RDF graphs.
