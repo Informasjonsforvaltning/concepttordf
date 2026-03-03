@@ -15,7 +15,7 @@ license = "Apache-2.0"
 name = "concepttordf"
 readme = "README.md"
 repository = "https://github.com/Informasjonsforvaltning/concepttordf"
-version = "3.0.1"
+version = "3.0.2"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
