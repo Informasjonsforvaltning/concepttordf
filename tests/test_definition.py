@@ -9,10 +9,8 @@ from concepttordf import Concept, Definition
 def test_triple_quote_string_in_text() -> None:
     """It returns a single-quote string in label."""
     definition = Definition()
-    definition.text = {
-        "nb": """Denne inndelingen øker kvaliteten på saks- \
-        og utgiftsbehandling og reduserer muligheten for misbruk."""
-    }
+    definition.text = {"nb": """Denne inndelingen øker kvaliteten på saks- \
+        og utgiftsbehandling og reduserer muligheten for misbruk."""}
 
     concept = Concept()
     concept.identifier = "http://example.com/concepts/1"
