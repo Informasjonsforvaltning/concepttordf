@@ -34,7 +34,6 @@ from .definition import Definition
 from .genericrelation import GenericRelation
 from .partitiverelation import PartitiveRelation
 
-
 DCT = Namespace("http://purl.org/dc/terms/")
 SKOSXL = Namespace("http://www.w3.org/2008/05/skos-xl#")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
