@@ -49,12 +49,10 @@ def lint(session: Session) -> None:
 
 
 @session(python="3.12")
-def safety(session: Session) -> None:
-    """Scan dependencies for insecure packages."""
-    session.install("poetry-plugin-export")
-    session.install("safety")
-    requirements = session.poetry.export_requirements()
-    session.run("safety", "check", "--full-report", f"--file={requirements}")
+def audit(session: Session) -> None:
+    """Run pip-audit security audit."""
+    session.install("pip-audit")
+    session.run("pip-audit")
 
 
 @session(python=["3.12"])
