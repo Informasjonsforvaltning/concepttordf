@@ -20,7 +20,7 @@ version = "3.1.4"
 [tool.poetry.dependencies]
 python = ">=3.12,<3.13"
 rdflib = "^7.6.0"
-setuptools = "^82.0.1"
+setuptools = ">=82.0.1,<84.0.0"
 
 [tool.poetry.group.dev.dependencies]
 Pygments = "^2.20.0"
